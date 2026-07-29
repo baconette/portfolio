@@ -1,0 +1,14 @@
+{
+  "name": "design-token-pipeline",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Style Dictionary build that transforms design-system/tokens.json (DTCG) into CSS custom properties.",
+  "type": "module",
+  "scripts": {
+    "build": "style-dictionary build --config sd.config.mjs",
+    "build:watch": "style-dictionary build --config sd.config.mjs --watch"
+  },
+  "devDependencies": {
+    "style-dictionary": "^5.5.0"
+  }
+}
