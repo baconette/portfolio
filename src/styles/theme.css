@@ -121,17 +121,43 @@
     --color-alpha-white: rgb(255 255 255);
     --color-alpha-black: rgb(0 0 0);
 
-    --color-brand-50: rgb(249 245 255);
-    --color-brand-100: rgb(244 235 255);
-    --color-brand-200: rgb(233 215 254);
-    --color-brand-300: rgb(214 187 251);
-    --color-brand-400: rgb(182 146 246);
-    --color-brand-500: rgb(158 119 237);
-    --color-brand-600: rgb(127 86 217);
-    --color-brand-700: rgb(105 65 198);
-    --color-brand-800: rgb(83 56 158);
-    --color-brand-900: rgb(66 48 125);
-    --color-brand-950: rgb(44 28 95);
+    --color-brand-50: rgb(247 252 222);
+    --color-brand-100: rgb(245 253 203);
+    --color-brand-200: rgb(243 254 184);
+    --color-brand-300: rgb(240 254 163);
+    --color-brand-400: rgb(238 253 141);
+    --color-brand-500: rgb(235 252 114);
+    --color-brand-600: rgb(156 169 43);
+    --color-brand-700: rgb(107 117 0);
+    --color-brand-800: rgb(66 73 0);
+    --color-brand-900: rgb(33 37 0);
+    --color-brand-950: rgb(6 7 0);
+
+    /* NEUTRAL (light-neutral primitive — powers all default --color-neutral-* text/border/bg tokens) */
+    --color-neutral-50: rgb(251 248 243);
+    --color-neutral-100: rgb(248 244 236);
+    --color-neutral-200: rgb(245 239 228);
+    --color-neutral-300: rgb(241 234 220);
+    --color-neutral-400: rgb(237 228 211);
+    --color-neutral-500: rgb(230 220 200);
+    --color-neutral-600: rgb(155 147 130);
+    --color-neutral-700: rgb(107 100 87);
+    --color-neutral-800: rgb(68 62 52);
+    --color-neutral-900: rgb(35 31 22);
+    --color-neutral-950: rgb(8 5 2);
+
+    /* DARK-NEUTRAL (separate olive-black primitive for dark surfaces — page bg, cards, dark sections) */
+    --color-dark-neutral-50: rgb(246 250 242);
+    --color-dark-neutral-100: rgb(210 217 205);
+    --color-dark-neutral-200: rgb(174 183 167);
+    --color-dark-neutral-300: rgb(135 146 127);
+    --color-dark-neutral-400: rgb(94 107 85);
+    --color-dark-neutral-500: rgb(40 53 29);
+    --color-dark-neutral-600: rgb(27 38 18);
+    --color-dark-neutral-700: rgb(19 29 11);
+    --color-dark-neutral-800: rgb(13 20 7);
+    --color-dark-neutral-900: rgb(7 13 4);
+    --color-dark-neutral-950: rgb(4 7 2);
 
     /* LIGHT MODE VARIABLES */
 

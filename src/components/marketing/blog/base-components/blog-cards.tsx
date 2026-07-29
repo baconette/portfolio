@@ -459,8 +459,10 @@ export const CardFullWidthImage01Vertical = ({ article }: { article: Article }) 
         </a>
 
         <div className="flex flex-col gap-5 px-5 pt-5 pb-6 md:p-6">
-            <div className="flex flex-col gap-2">
-                <span className="text-sm font-semibold text-brand-secondary">{article.category.name}</span>
+            <div className="flex flex-col gap-3">
+                <Badge color="brand" size="md">
+                    {article.category.name}
+                </Badge>
                 <div className="flex flex-col gap-1">
                     <a
                         href={article.href}

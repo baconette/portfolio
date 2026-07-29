@@ -29,7 +29,7 @@ function toArticle(page: PageObjectResponse): Article {
     const excerpt = props.Excerpt?.type === "rich_text" ? plainText(props.Excerpt.rich_text) : "";
     const slug = props.Slug?.type === "rich_text" ? plainText(props.Slug.rich_text) : "";
     const cover = props.Cover?.type === "url" ? (props.Cover.url ?? "") : "";
-    const status = props.Status?.type === "select" ? (props.Status.select?.name ?? "") : "";
+    const type = props.Type?.type === "select" ? (props.Type.select?.name ?? "") : "";
     const industry = props.Industry?.type === "multi_select" ? props.Industry.multi_select : [];
 
     return {
@@ -38,7 +38,7 @@ function toArticle(page: PageObjectResponse): Article {
         thumbnailUrl: cover,
         title,
         summary: excerpt,
-        category: { href: "#", name: status },
+        category: { href: "#", name: type },
         author: AUTHOR,
         publishedAt: "",
         readingTime: "",
