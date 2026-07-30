@@ -1,0 +1,2948 @@
+{
+  "$schema": "https://www.designtokens.org/schemas/2025.10/format.json",
+  "$description": "Erika Aldrich Murga — portfolio design system foundations (DTCG 2025.10). Colors authored in OKLCH (preserved in $extensions), values as sRGB+hex. Mobile/Web modes expressed as sibling tokens.",
+  "color": {
+    "$type": "color",
+    "primitive": {
+      "$description": "Raw color ramps — 11 even-lightness OKLCH steps per family. Hidden from pickers in Figma; semantic tokens alias these.",
+      "lime": {
+        "50": {
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.949,
+              0.9961,
+              0.6745
+            ],
+            "hex": "#F2FEAC"
+          },
+          "$description": "lime 50 — even-lightness ramp step.",
+          "$extensions": {
+            "com.erikamurga.designsystem": {
+              "oklch": "oklch(0.970 0.1045 115.4)"
+            }
+          }
+        },
+        "100": {
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.8471,
+              0.9137,
+              0.2275
+            ],
+            "hex": "#D8E93A"
+          },
+          "$description": "lime 100 — even-lightness ramp step.",
+          "$extensions": {
+            "com.erikamurga.designsystem": {
+              "oklch": "oklch(0.893 0.1869 115.4)"
+            }
+          }
+        },
+        "200": {
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.749,
+              0.8118,
+              0.1961
+            ],
+            "hex": "#BFCF32"
+          },
+          "$description": "lime 200 — even-lightness ramp step.",
+          "$extensions": {
+            "com.erikamurga.designsystem": {
+              "oklch": "oklch(0.816 0.1708 115.4)"
+            }
+          }
+        },
+        "300": {
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.6549,
+              0.7098,
+              0.1686
+            ],
+            "hex": "#A7B52B"
+          },
+          "$description": "lime 300 — even-lightness ramp step.",
+          "$extensions": {
+            "com.erikamurga.designsystem": {
+              "oklch": "oklch(0.739 0.1547 115.4)"
+            }
+          }
+        },
+        "400": {
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.5647,
+              0.6118,
+              0.1373
+            ],
+            "hex": "#909C23"
+          },
+          "$description": "lime 400 — even-lightness ramp step.",
+          "$extensions": {
+            "com.erikamurga.designsystem": {
+              "oklch": "oklch(0.662 0.1386 115.4)"
+            }
+          }
+        },
+        "500": {
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.4745,
+              0.5176,
+              0.1098
+            ],
+            "hex": "#79841C"
+          },
+          "$description": "lime 500 — even-lightness ramp step.",
+          "$extensions": {
+            "com.erikamurga.designsystem": {
+              "oklch": "oklch(0.585 0.1225 115.4)"
+            }
+          }
+        },
+        "600": {
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.3882,
+              0.4235,
+              0.0824
+            ],
+            "hex": "#636C15"
+          },
+          "$description": "lime 600 — even-lightness ramp step.",
+          "$extensions": {
+            "com.erikamurga.designsystem": {
+              "oklch": "oklch(0.508 0.1064 115.4)"
+            }
+          }
+        },
+        "700": {
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.3059,
+              0.3373,
+              0.0588
+            ],
+            "hex": "#4E560F"
+          },
+          "$description": "lime 700 — even-lightness ramp step.",
+          "$extensions": {
+            "com.erikamurga.designsystem": {
+              "oklch": "oklch(0.431 0.0903 115.4)"
+            }
+          }
+        },
+        "800": {
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.2275,
+              0.251,
+              0.0314
+            ],
+            "hex": "#3A4008"
+          },
+          "$description": "lime 800 — even-lightness ramp step.",
+          "$extensions": {
+            "com.erikamurga.designsystem": {
+              "oklch": "oklch(0.354 0.0743 115.4)"
+            }
+          }
+        },
+        "900": {
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.1529,
+              0.1686,
+              0.0157
+            ],
+            "hex": "#272B04"
+          },
+          "$description": "lime 900 — even-lightness ramp step.",
+          "$extensions": {
+            "com.erikamurga.designsystem": {
+              "oklch": "oklch(0.277 0.0583 115.4)"
+            }
+          }
+        },
+        "950": {
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.0824,
+              0.0941,
+              0.0039
+            ],
+            "hex": "#151801"
+          },
+          "$description": "lime 950 — even-lightness ramp step.",
+          "$extensions": {
+            "com.erikamurga.designsystem": {
+              "oklch": "oklch(0.200 0.0426 115.4)"
+            }
+          }
+        },
+        "$description": "Chartreuse — primary brand signal.",
+        "brand": {
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.9216,
+              0.9882,
+              0.4471
+            ],
+            "hex": "#EBFC72"
+          },
+          "$description": "Pinned brand chartreuse (#EBFC72). Sits between lime/50 and lime/100; the exact signature color. Fills only — never text on light.",
+          "$extensions": {
+            "com.erikamurga.designsystem": {
+              "oklch": "oklch(0.952 0.1626 115.4)"
+            }
+          }
+        }
+      },
+      "olive": {
+        "50": {
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.9176,
+              0.9882,
+              0.8667
+            ],
+            "hex": "#EAFCDD"
+          },
+          "$description": "olive 50 — even-lightness ramp step.",
+          "$extensions": {
+            "com.erikamurga.designsystem": {
+              "oklch": "oklch(0.970 0.0450 131.7)"
+            }
+          }
+        },
+        "100": {
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.8196,
+              0.8863,
+              0.7686
+            ],
+            "hex": "#D1E2C4"
+          },
+          "$description": "olive 100 — even-lightness ramp step.",
+          "$extensions": {
+            "com.erikamurga.designsystem": {
+              "oklch": "oklch(0.893 0.0450 131.7)"
+            }
+          }
+        },
+        "200": {
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.7216,
+              0.7882,
+              0.6706
+            ],
+            "hex": "#B8C9AB"
+          },
+          "$description": "olive 200 — even-lightness ramp step.",
+          "$extensions": {
+            "com.erikamurga.designsystem": {
+              "oklch": "oklch(0.816 0.0450 131.7)"
+            }
+          }
+        },
+        "300": {
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.6275,
+              0.6941,
+              0.5804
+            ],
+            "hex": "#A0B194"
+          },
+          "$description": "olive 300 — even-lightness ramp step.",
+          "$extensions": {
+            "com.erikamurga.designsystem": {
+              "oklch": "oklch(0.739 0.0450 131.7)"
+            }
+          }
+        },
+        "400": {
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.5373,
+              0.6,
+              0.4863
+            ],
+            "hex": "#89997C"
+          },
+          "$description": "olive 400 — even-lightness ramp step.",
+          "$extensions": {
+            "com.erikamurga.designsystem": {
+              "oklch": "oklch(0.662 0.0450 131.7)"
+            }
+          }
+        },
+        "500": {
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.4471,
+              0.5098,
+              0.4
+            ],
+            "hex": "#728266"
+          },
+          "$description": "olive 500 — even-lightness ramp step.",
+          "$extensions": {
+            "com.erikamurga.designsystem": {
+              "oklch": "oklch(0.585 0.0450 131.7)"
+            }
+          }
+        },
+        "600": {
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.3608,
+              0.4196,
+              0.3137
+            ],
+            "hex": "#5C6B50"
+          },
+          "$description": "olive 600 — even-lightness ramp step.",
+          "$extensions": {
+            "com.erikamurga.designsystem": {
+              "oklch": "oklch(0.508 0.0450 131.7)"
+            }
+          }
+        },
+        "700": {
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.2784,
+              0.3333,
+              0.2353
+            ],
+            "hex": "#47553C"
+          },
+          "$description": "olive 700 — even-lightness ramp step.",
+          "$extensions": {
+            "com.erikamurga.designsystem": {
+              "oklch": "oklch(0.431 0.0450 131.7)"
+            }
+          }
+        },
+        "800": {
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.2,
+              0.2549,
+              0.1569
+            ],
+            "hex": "#334128"
+          },
+          "$description": "olive 800 — even-lightness ramp step.",
+          "$extensions": {
+            "com.erikamurga.designsystem": {
+              "oklch": "oklch(0.354 0.0450 131.7)"
+            }
+          }
+        },
+        "900": {
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.1255,
+              0.1765,
+              0.0824
+            ],
+            "hex": "#202D15"
+          },
+          "$description": "olive 900 — even-lightness ramp step.",
+          "$extensions": {
+            "com.erikamurga.designsystem": {
+              "oklch": "oklch(0.277 0.0450 131.7)"
+            }
+          }
+        },
+        "950": {
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.0549,
+              0.102,
+              0.0157
+            ],
+            "hex": "#0E1A04"
+          },
+          "$description": "olive 950 — even-lightness ramp step.",
+          "$extensions": {
+            "com.erikamurga.designsystem": {
+              "oklch": "oklch(0.200 0.0450 131.7)"
+            }
+          }
+        },
+        "$description": "Deep olive — ink, dark surfaces, primary action."
+      },
+      "sand": {
+        "50": {
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.9961,
+              0.9569,
+              0.8784
+            ],
+            "hex": "#FEF4E0"
+          },
+          "$description": "sand 50 — even-lightness ramp step.",
+          "$extensions": {
+            "com.erikamurga.designsystem": {
+              "oklch": "oklch(0.970 0.0287 84.6)"
+            }
+          }
+        },
+        "100": {
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.9059,
+              0.8549,
+              0.7608
+            ],
+            "hex": "#E7DAC2"
+          },
+          "$description": "sand 100 — even-lightness ramp step.",
+          "$extensions": {
+            "com.erikamurga.designsystem": {
+              "oklch": "oklch(0.893 0.0350 84.6)"
+            }
+          }
+        },
+        "200": {
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.8039,
+              0.7608,
+              0.6667
+            ],
+            "hex": "#CDC2AA"
+          },
+          "$description": "sand 200 — even-lightness ramp step.",
+          "$extensions": {
+            "com.erikamurga.designsystem": {
+              "oklch": "oklch(0.816 0.0350 84.6)"
+            }
+          }
+        },
+        "300": {
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.7098,
+              0.6627,
+              0.5725
+            ],
+            "hex": "#B5A992"
+          },
+          "$description": "sand 300 — even-lightness ramp step.",
+          "$extensions": {
+            "com.erikamurga.designsystem": {
+              "oklch": "oklch(0.739 0.0350 84.6)"
+            }
+          }
+        },
+        "400": {
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.6157,
+              0.5725,
+              0.4824
+            ],
+            "hex": "#9D927B"
+          },
+          "$description": "sand 400 — even-lightness ramp step.",
+          "$extensions": {
+            "com.erikamurga.designsystem": {
+              "oklch": "oklch(0.662 0.0350 84.6)"
+            }
+          }
+        },
+        "500": {
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.5255,
+              0.4824,
+              0.3922
+            ],
+            "hex": "#867B64"
+          },
+          "$description": "sand 500 — even-lightness ramp step.",
+          "$extensions": {
+            "com.erikamurga.designsystem": {
+              "oklch": "oklch(0.585 0.0350 84.6)"
+            }
+          }
+        },
+        "600": {
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.4353,
+              0.3922,
+              0.3098
+            ],
+            "hex": "#6F644F"
+          },
+          "$description": "sand 600 — even-lightness ramp step.",
+          "$extensions": {
+            "com.erikamurga.designsystem": {
+              "oklch": "oklch(0.508 0.0350 84.6)"
+            }
+          }
+        },
+        "700": {
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.349,
+              0.3098,
+              0.2275
+            ],
+            "hex": "#594F3A"
+          },
+          "$description": "sand 700 — even-lightness ramp step.",
+          "$extensions": {
+            "com.erikamurga.designsystem": {
+              "oklch": "oklch(0.431 0.0350 84.6)"
+            }
+          }
+        },
+        "800": {
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.2667,
+              0.2275,
+              0.149
+            ],
+            "hex": "#443A26"
+          },
+          "$description": "sand 800 — even-lightness ramp step.",
+          "$extensions": {
+            "com.erikamurga.designsystem": {
+              "oklch": "oklch(0.354 0.0350 84.6)"
+            }
+          }
+        },
+        "900": {
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.1882,
+              0.1529,
+              0.0745
+            ],
+            "hex": "#302713"
+          },
+          "$description": "sand 900 — even-lightness ramp step.",
+          "$extensions": {
+            "com.erikamurga.designsystem": {
+              "oklch": "oklch(0.277 0.0350 84.6)"
+            }
+          }
+        },
+        "950": {
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.1137,
+              0.0824,
+              0.0118
+            ],
+            "hex": "#1D1503"
+          },
+          "$description": "sand 950 — even-lightness ramp step.",
+          "$extensions": {
+            "com.erikamurga.designsystem": {
+              "oklch": "oklch(0.200 0.0350 84.6)"
+            }
+          }
+        },
+        "$description": "Warm sand — page, surfaces, borders."
+      },
+      "sage": {
+        "50": {
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.898,
+              0.9922,
+              0.8824
+            ],
+            "hex": "#E5FDE1"
+          },
+          "$description": "sage 50 — even-lightness ramp step.",
+          "$extensions": {
+            "com.erikamurga.designsystem": {
+              "oklch": "oklch(0.970 0.0450 141.2)"
+            }
+          }
+        },
+        "100": {
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.8,
+              0.8941,
+              0.7843
+            ],
+            "hex": "#CCE4C8"
+          },
+          "$description": "sage 100 — even-lightness ramp step.",
+          "$extensions": {
+            "com.erikamurga.designsystem": {
+              "oklch": "oklch(0.893 0.0450 141.2)"
+            }
+          }
+        },
+        "200": {
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.702,
+              0.7961,
+              0.6902
+            ],
+            "hex": "#B3CBB0"
+          },
+          "$description": "sage 200 — even-lightness ramp step.",
+          "$extensions": {
+            "com.erikamurga.designsystem": {
+              "oklch": "oklch(0.816 0.0450 141.2)"
+            }
+          }
+        },
+        "300": {
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.6078,
+              0.698,
+              0.5961
+            ],
+            "hex": "#9BB298"
+          },
+          "$description": "sage 300 — even-lightness ramp step.",
+          "$extensions": {
+            "com.erikamurga.designsystem": {
+              "oklch": "oklch(0.739 0.0450 141.2)"
+            }
+          }
+        },
+        "400": {
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.5176,
+              0.6039,
+              0.502
+            ],
+            "hex": "#849A80"
+          },
+          "$description": "sage 400 — even-lightness ramp step.",
+          "$extensions": {
+            "com.erikamurga.designsystem": {
+              "oklch": "oklch(0.662 0.0450 141.2)"
+            }
+          }
+        },
+        "500": {
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.4275,
+              0.5137,
+              0.4157
+            ],
+            "hex": "#6D836A"
+          },
+          "$description": "sage 500 — even-lightness ramp step.",
+          "$extensions": {
+            "com.erikamurga.designsystem": {
+              "oklch": "oklch(0.585 0.0450 141.2)"
+            }
+          }
+        },
+        "600": {
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.3412,
+              0.4235,
+              0.3294
+            ],
+            "hex": "#576C54"
+          },
+          "$description": "sage 600 — even-lightness ramp step.",
+          "$extensions": {
+            "com.erikamurga.designsystem": {
+              "oklch": "oklch(0.508 0.0450 141.2)"
+            }
+          }
+        },
+        "700": {
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.2588,
+              0.3373,
+              0.2471
+            ],
+            "hex": "#42563F"
+          },
+          "$description": "sage 700 — even-lightness ramp step.",
+          "$extensions": {
+            "com.erikamurga.designsystem": {
+              "oklch": "oklch(0.431 0.0450 141.2)"
+            }
+          }
+        },
+        "800": {
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.1804,
+              0.2588,
+              0.1686
+            ],
+            "hex": "#2E422B"
+          },
+          "$description": "sage 800 — even-lightness ramp step.",
+          "$extensions": {
+            "com.erikamurga.designsystem": {
+              "oklch": "oklch(0.354 0.0450 141.2)"
+            }
+          }
+        },
+        "900": {
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.1059,
+              0.1804,
+              0.0941
+            ],
+            "hex": "#1B2E18"
+          },
+          "$description": "sage 900 — even-lightness ramp step.",
+          "$extensions": {
+            "com.erikamurga.designsystem": {
+              "oklch": "oklch(0.277 0.0450 141.2)"
+            }
+          }
+        },
+        "950": {
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.0353,
+              0.1059,
+              0.0275
+            ],
+            "hex": "#091B07"
+          },
+          "$description": "sage 950 — even-lightness ramp step.",
+          "$extensions": {
+            "com.erikamurga.designsystem": {
+              "oklch": "oklch(0.200 0.0450 141.2)"
+            }
+          }
+        },
+        "$description": "Muted sage — secondary decorative accent."
+      },
+      "brass": {
+        "50": {
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.9961,
+              0.9608,
+              0.8627
+            ],
+            "hex": "#FEF5DC"
+          },
+          "$description": "brass 50 — even-lightness ramp step.",
+          "$extensions": {
+            "com.erikamurga.designsystem": {
+              "oklch": "oklch(0.970 0.0338 89.2)"
+            }
+          }
+        },
+        "100": {
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.9412,
+              0.8549,
+              0.6392
+            ],
+            "hex": "#F0DAA3"
+          },
+          "$description": "brass 100 — even-lightness ramp step.",
+          "$extensions": {
+            "com.erikamurga.designsystem": {
+              "oklch": "oklch(0.893 0.0750 89.2)"
+            }
+          }
+        },
+        "200": {
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.8392,
+              0.7569,
+              0.5451
+            ],
+            "hex": "#D6C18B"
+          },
+          "$description": "brass 200 — even-lightness ramp step.",
+          "$extensions": {
+            "com.erikamurga.designsystem": {
+              "oklch": "oklch(0.816 0.0750 89.2)"
+            }
+          }
+        },
+        "300": {
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.7412,
+              0.6627,
+              0.451
+            ],
+            "hex": "#BDA973"
+          },
+          "$description": "brass 300 — even-lightness ramp step.",
+          "$extensions": {
+            "com.erikamurga.designsystem": {
+              "oklch": "oklch(0.739 0.0750 89.2)"
+            }
+          }
+        },
+        "400": {
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.6471,
+              0.5686,
+              0.3608
+            ],
+            "hex": "#A5915C"
+          },
+          "$description": "brass 400 — even-lightness ramp step.",
+          "$extensions": {
+            "com.erikamurga.designsystem": {
+              "oklch": "oklch(0.662 0.0750 89.2)"
+            }
+          }
+        },
+        "500": {
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.5569,
+              0.4784,
+              0.2706
+            ],
+            "hex": "#8E7A45"
+          },
+          "$description": "brass 500 — even-lightness ramp step.",
+          "$extensions": {
+            "com.erikamurga.designsystem": {
+              "oklch": "oklch(0.585 0.0750 89.2)"
+            }
+          }
+        },
+        "600": {
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.4667,
+              0.3882,
+              0.1843
+            ],
+            "hex": "#77632F"
+          },
+          "$description": "brass 600 — even-lightness ramp step.",
+          "$extensions": {
+            "com.erikamurga.designsystem": {
+              "oklch": "oklch(0.508 0.0750 89.2)"
+            }
+          }
+        },
+        "700": {
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.3804,
+              0.3059,
+              0.0941
+            ],
+            "hex": "#614E18"
+          },
+          "$description": "brass 700 — even-lightness ramp step.",
+          "$extensions": {
+            "com.erikamurga.designsystem": {
+              "oklch": "oklch(0.431 0.0750 89.2)"
+            }
+          }
+        },
+        "800": {
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.2863,
+              0.2235,
+              0.0314
+            ],
+            "hex": "#493908"
+          },
+          "$description": "brass 800 — even-lightness ramp step.",
+          "$extensions": {
+            "com.erikamurga.designsystem": {
+              "oklch": "oklch(0.354 0.0668 89.2)"
+            }
+          }
+        },
+        "900": {
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.1961,
+              0.149,
+              0.0157
+            ],
+            "hex": "#322604"
+          },
+          "$description": "brass 900 — even-lightness ramp step.",
+          "$extensions": {
+            "com.erikamurga.designsystem": {
+              "oklch": "oklch(0.277 0.0524 89.2)"
+            }
+          }
+        },
+        "950": {
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.1137,
+              0.0824,
+              0.0039
+            ],
+            "hex": "#1D1501"
+          },
+          "$description": "brass 950 — even-lightness ramp step.",
+          "$extensions": {
+            "com.erikamurga.designsystem": {
+              "oklch": "oklch(0.200 0.0383 89.2)"
+            }
+          }
+        },
+        "$description": "Bronze — links and warm metallic accent."
+      },
+      "success": {
+        "50": {
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.8824,
+              0.9961,
+              0.902
+            ],
+            "hex": "#E1FEE6"
+          },
+          "$description": "success 50 — even-lightness ramp step.",
+          "$extensions": {
+            "com.erikamurga.designsystem": {
+              "oklch": "oklch(0.970 0.0446 150.0)"
+            }
+          }
+        },
+        "100": {
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.6039,
+              0.9569,
+              0.6824
+            ],
+            "hex": "#9AF4AE"
+          },
+          "$description": "success 100 — even-lightness ramp step.",
+          "$extensions": {
+            "com.erikamurga.designsystem": {
+              "oklch": "oklch(0.893 0.1300 150.0)"
+            }
+          }
+        },
+        "200": {
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.5059,
+              0.8549,
+              0.5843
+            ],
+            "hex": "#81DA95"
+          },
+          "$description": "success 200 — even-lightness ramp step.",
+          "$extensions": {
+            "com.erikamurga.designsystem": {
+              "oklch": "oklch(0.816 0.1300 150.0)"
+            }
+          }
+        },
+        "300": {
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.4118,
+              0.7569,
+              0.4941
+            ],
+            "hex": "#69C17E"
+          },
+          "$description": "success 300 — even-lightness ramp step.",
+          "$extensions": {
+            "com.erikamurga.designsystem": {
+              "oklch": "oklch(0.739 0.1300 150.0)"
+            }
+          }
+        },
+        "400": {
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.3137,
+              0.6627,
+              0.4039
+            ],
+            "hex": "#50A967"
+          },
+          "$description": "success 400 — even-lightness ramp step.",
+          "$extensions": {
+            "com.erikamurga.designsystem": {
+              "oklch": "oklch(0.662 0.1300 150.0)"
+            }
+          }
+        },
+        "500": {
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.2118,
+              0.5686,
+              0.3137
+            ],
+            "hex": "#369150"
+          },
+          "$description": "success 500 — even-lightness ramp step.",
+          "$extensions": {
+            "com.erikamurga.designsystem": {
+              "oklch": "oklch(0.585 0.1300 150.0)"
+            }
+          }
+        },
+        "600": {
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.098,
+              0.4745,
+              0.2314
+            ],
+            "hex": "#19793B"
+          },
+          "$description": "success 600 — even-lightness ramp step.",
+          "$extensions": {
+            "com.erikamurga.designsystem": {
+              "oklch": "oklch(0.508 0.1288 150.0)"
+            }
+          }
+        },
+        "700": {
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.0706,
+              0.3765,
+              0.1765
+            ],
+            "hex": "#12602D"
+          },
+          "$description": "success 700 — even-lightness ramp step.",
+          "$extensions": {
+            "com.erikamurga.designsystem": {
+              "oklch": "oklch(0.431 0.1093 150.0)"
+            }
+          }
+        },
+        "800": {
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.0431,
+              0.2824,
+              0.1255
+            ],
+            "hex": "#0B4820"
+          },
+          "$description": "success 800 — even-lightness ramp step.",
+          "$extensions": {
+            "com.erikamurga.designsystem": {
+              "oklch": "oklch(0.354 0.0899 150.0)"
+            }
+          }
+        },
+        "900": {
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.0196,
+              0.1922,
+              0.0784
+            ],
+            "hex": "#053114"
+          },
+          "$description": "success 900 — even-lightness ramp step.",
+          "$extensions": {
+            "com.erikamurga.designsystem": {
+              "oklch": "oklch(0.277 0.0705 150.0)"
+            }
+          }
+        },
+        "950": {
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.0078,
+              0.1098,
+              0.0353
+            ],
+            "hex": "#021C09"
+          },
+          "$description": "success 950 — even-lightness ramp step.",
+          "$extensions": {
+            "com.erikamurga.designsystem": {
+              "oklch": "oklch(0.200 0.0513 150.0)"
+            }
+          }
+        },
+        "$description": "Success / positive feedback."
+      },
+      "warning": {
+        "50": {
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.9961,
+              0.9529,
+              0.898
+            ],
+            "hex": "#FEF3E5"
+          },
+          "$description": "warning 50 — even-lightness ramp step.",
+          "$extensions": {
+            "com.erikamurga.designsystem": {
+              "oklch": "oklch(0.970 0.0221 75.0)"
+            }
+          }
+        },
+        "100": {
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.9882,
+              0.8353,
+              0.6196
+            ],
+            "hex": "#FCD59E"
+          },
+          "$description": "warning 100 — even-lightness ramp step.",
+          "$extensions": {
+            "com.erikamurga.designsystem": {
+              "oklch": "oklch(0.893 0.0825 75.0)"
+            }
+          }
+        },
+        "200": {
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.9569,
+              0.7137,
+              0.3529
+            ],
+            "hex": "#F4B65A"
+          },
+          "$description": "warning 200 — even-lightness ramp step.",
+          "$extensions": {
+            "com.erikamurga.designsystem": {
+              "oklch": "oklch(0.816 0.1300 75.0)"
+            }
+          }
+        },
+        "300": {
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.8549,
+              0.6157,
+              0.2471
+            ],
+            "hex": "#DA9D3F"
+          },
+          "$description": "warning 300 — even-lightness ramp step.",
+          "$extensions": {
+            "com.erikamurga.designsystem": {
+              "oklch": "oklch(0.739 0.1300 75.0)"
+            }
+          }
+        },
+        "400": {
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.7529,
+              0.5255,
+              0.1373
+            ],
+            "hex": "#C08623"
+          },
+          "$description": "warning 400 — even-lightness ramp step.",
+          "$extensions": {
+            "com.erikamurga.designsystem": {
+              "oklch": "oklch(0.662 0.1285 75.0)"
+            }
+          }
+        },
+        "500": {
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.6392,
+              0.4431,
+              0.1098
+            ],
+            "hex": "#A3711C"
+          },
+          "$description": "warning 500 — even-lightness ramp step.",
+          "$extensions": {
+            "com.erikamurga.designsystem": {
+              "oklch": "oklch(0.585 0.1136 75.0)"
+            }
+          }
+        },
+        "600": {
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.5255,
+              0.3608,
+              0.0824
+            ],
+            "hex": "#865C15"
+          },
+          "$description": "warning 600 — even-lightness ramp step.",
+          "$extensions": {
+            "com.erikamurga.designsystem": {
+              "oklch": "oklch(0.508 0.0987 75.0)"
+            }
+          }
+        },
+        "700": {
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.4196,
+              0.2824,
+              0.0549
+            ],
+            "hex": "#6B480E"
+          },
+          "$description": "warning 700 — even-lightness ramp step.",
+          "$extensions": {
+            "com.erikamurga.designsystem": {
+              "oklch": "oklch(0.431 0.0838 75.0)"
+            }
+          }
+        },
+        "800": {
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.3137,
+              0.2118,
+              0.0314
+            ],
+            "hex": "#503608"
+          },
+          "$description": "warning 800 — even-lightness ramp step.",
+          "$extensions": {
+            "com.erikamurga.designsystem": {
+              "oklch": "oklch(0.354 0.0689 75.0)"
+            }
+          }
+        },
+        "900": {
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.2157,
+              0.1412,
+              0.0157
+            ],
+            "hex": "#372404"
+          },
+          "$description": "warning 900 — even-lightness ramp step.",
+          "$extensions": {
+            "com.erikamurga.designsystem": {
+              "oklch": "oklch(0.277 0.0541 75.0)"
+            }
+          }
+        },
+        "950": {
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.1255,
+              0.0745,
+              0.0039
+            ],
+            "hex": "#201301"
+          },
+          "$description": "warning 950 — even-lightness ramp step.",
+          "$extensions": {
+            "com.erikamurga.designsystem": {
+              "oklch": "oklch(0.200 0.0395 75.0)"
+            }
+          }
+        },
+        "$description": "Warning / caution feedback."
+      },
+      "error": {
+        "50": {
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.9961,
+              0.949,
+              0.9412
+            ],
+            "hex": "#FEF2F0"
+          },
+          "$description": "error 50 — even-lightness ramp step.",
+          "$extensions": {
+            "com.erikamurga.designsystem": {
+              "oklch": "oklch(0.970 0.0136 30.0)"
+            }
+          }
+        },
+        "100": {
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.9882,
+              0.8157,
+              0.7843
+            ],
+            "hex": "#FCD0C8"
+          },
+          "$description": "error 100 — even-lightness ramp step.",
+          "$extensions": {
+            "com.erikamurga.designsystem": {
+              "oklch": "oklch(0.893 0.0518 30.0)"
+            }
+          }
+        },
+        "200": {
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.9843,
+              0.6745,
+              0.6196
+            ],
+            "hex": "#FBAC9E"
+          },
+          "$description": "error 200 — even-lightness ramp step.",
+          "$extensions": {
+            "com.erikamurga.designsystem": {
+              "oklch": "oklch(0.816 0.0958 30.0)"
+            }
+          }
+        },
+        "300": {
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.9765,
+              0.5137,
+              0.4471
+            ],
+            "hex": "#F98372"
+          },
+          "$description": "error 300 — even-lightness ramp step.",
+          "$extensions": {
+            "com.erikamurga.designsystem": {
+              "oklch": "oklch(0.739 0.1470 30.0)"
+            }
+          }
+        },
+        "400": {
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.8745,
+              0.4157,
+              0.349
+            ],
+            "hex": "#DF6A59"
+          },
+          "$description": "error 400 — even-lightness ramp step.",
+          "$extensions": {
+            "com.erikamurga.designsystem": {
+              "oklch": "oklch(0.662 0.1500 30.0)"
+            }
+          }
+        },
+        "500": {
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.7725,
+              0.3216,
+              0.2627
+            ],
+            "hex": "#C55243"
+          },
+          "$description": "error 500 — even-lightness ramp step.",
+          "$extensions": {
+            "com.erikamurga.designsystem": {
+              "oklch": "oklch(0.585 0.1500 30.0)"
+            }
+          }
+        },
+        "600": {
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.6667,
+              0.2275,
+              0.1725
+            ],
+            "hex": "#AA3A2C"
+          },
+          "$description": "error 600 — even-lightness ramp step.",
+          "$extensions": {
+            "com.erikamurga.designsystem": {
+              "oklch": "oklch(0.508 0.1500 30.0)"
+            }
+          }
+        },
+        "700": {
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.5686,
+              0.1255,
+              0.0824
+            ],
+            "hex": "#912015"
+          },
+          "$description": "error 700 — even-lightness ramp step.",
+          "$extensions": {
+            "com.erikamurga.designsystem": {
+              "oklch": "oklch(0.431 0.1500 30.0)"
+            }
+          }
+        },
+        "800": {
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.4431,
+              0.0627,
+              0.0314
+            ],
+            "hex": "#711008"
+          },
+          "$description": "error 800 — even-lightness ramp step.",
+          "$extensions": {
+            "com.erikamurga.designsystem": {
+              "oklch": "oklch(0.354 0.1311 30.0)"
+            }
+          }
+        },
+        "900": {
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.3098,
+              0.0314,
+              0.0157
+            ],
+            "hex": "#4F0804"
+          },
+          "$description": "error 900 — even-lightness ramp step.",
+          "$extensions": {
+            "com.erikamurga.designsystem": {
+              "oklch": "oklch(0.277 0.1029 30.0)"
+            }
+          }
+        },
+        "950": {
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.1882,
+              0.0118,
+              0.0039
+            ],
+            "hex": "#300301"
+          },
+          "$description": "error 950 — even-lightness ramp step.",
+          "$extensions": {
+            "com.erikamurga.designsystem": {
+              "oklch": "oklch(0.200 0.0752 30.0)"
+            }
+          }
+        },
+        "$description": "Error / destructive feedback."
+      },
+      "info": {
+        "50": {
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.9333,
+              0.9647,
+              0.9961
+            ],
+            "hex": "#EEF6FE"
+          },
+          "$description": "info 50 — even-lightness ramp step.",
+          "$extensions": {
+            "com.erikamurga.designsystem": {
+              "oklch": "oklch(0.970 0.0140 245.0)"
+            }
+          }
+        },
+        "100": {
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.7529,
+              0.8784,
+              0.9882
+            ],
+            "hex": "#C0E0FC"
+          },
+          "$description": "info 100 — even-lightness ramp step.",
+          "$extensions": {
+            "com.erikamurga.designsystem": {
+              "oklch": "oklch(0.893 0.0515 245.0)"
+            }
+          }
+        },
+        "200": {
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.5686,
+              0.7882,
+              0.9804
+            ],
+            "hex": "#91C9FA"
+          },
+          "$description": "info 200 — even-lightness ramp step.",
+          "$extensions": {
+            "com.erikamurga.designsystem": {
+              "oklch": "oklch(0.816 0.0900 245.0)"
+            }
+          }
+        },
+        "300": {
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.4745,
+              0.6941,
+              0.8784
+            ],
+            "hex": "#79B1E0"
+          },
+          "$description": "info 300 — even-lightness ramp step.",
+          "$extensions": {
+            "com.erikamurga.designsystem": {
+              "oklch": "oklch(0.739 0.0900 245.0)"
+            }
+          }
+        },
+        "400": {
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.3843,
+              0.6,
+              0.7804
+            ],
+            "hex": "#6299C7"
+          },
+          "$description": "info 400 — even-lightness ramp step.",
+          "$extensions": {
+            "com.erikamurga.designsystem": {
+              "oklch": "oklch(0.662 0.0900 245.0)"
+            }
+          }
+        },
+        "500": {
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.2941,
+              0.5059,
+              0.6824
+            ],
+            "hex": "#4B81AE"
+          },
+          "$description": "info 500 — even-lightness ramp step.",
+          "$extensions": {
+            "com.erikamurga.designsystem": {
+              "oklch": "oklch(0.585 0.0900 245.0)"
+            }
+          }
+        },
+        "600": {
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.2039,
+              0.4157,
+              0.5882
+            ],
+            "hex": "#346A96"
+          },
+          "$description": "info 600 — even-lightness ramp step.",
+          "$extensions": {
+            "com.erikamurga.designsystem": {
+              "oklch": "oklch(0.508 0.0900 245.0)"
+            }
+          }
+        },
+        "700": {
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.1098,
+              0.3294,
+              0.4941
+            ],
+            "hex": "#1C547E"
+          },
+          "$description": "info 700 — even-lightness ramp step.",
+          "$extensions": {
+            "com.erikamurga.designsystem": {
+              "oklch": "oklch(0.431 0.0900 245.0)"
+            }
+          }
+        },
+        "800": {
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.0392,
+              0.2471,
+              0.3882
+            ],
+            "hex": "#0A3F63"
+          },
+          "$description": "info 800 — even-lightness ramp step.",
+          "$extensions": {
+            "com.erikamurga.designsystem": {
+              "oklch": "oklch(0.354 0.0822 245.0)"
+            }
+          }
+        },
+        "900": {
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.0157,
+              0.1647,
+              0.2706
+            ],
+            "hex": "#042A45"
+          },
+          "$description": "info 900 — even-lightness ramp step.",
+          "$extensions": {
+            "com.erikamurga.designsystem": {
+              "oklch": "oklch(0.277 0.0645 245.0)"
+            }
+          }
+        },
+        "950": {
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [
+              0.0039,
+              0.0941,
+              0.1647
+            ],
+            "hex": "#01182A"
+          },
+          "$description": "info 950 — even-lightness ramp step.",
+          "$extensions": {
+            "com.erikamurga.designsystem": {
+              "oklch": "oklch(0.200 0.0470 245.0)"
+            }
+          }
+        },
+        "$description": "Neutral system info feedback."
+      }
+    },
+    "background": {
+      "$description": "Semantic surface fills. Figma scope: FRAME_FILL, SHAPE_FILL.",
+      "page": {
+        "$value": "{color.primitive.sand.100}",
+        "$description": "App canvas behind everything — warm paper base for all pages and long-form reading."
+      },
+      "surface": {
+        "$value": "{color.primitive.sand.50}",
+        "$description": "Cards, panels, modals. Lighter than the page so they lift; pair with elevation and border/default."
+      },
+      "sunken": {
+        "$value": "{color.primitive.sand.200}",
+        "$description": "Recessed zones — alternating bands, wells, table stripes, code blocks. One step deeper than the page."
+      },
+      "input": {
+        "$value": "{color.primitive.sand.50}",
+        "$description": "Text inputs, textareas, selects. Pair with border/strong so the field edge meets 3:1."
+      },
+      "inverse": {
+        "$value": "{color.primitive.olive.900}",
+        "$description": "Dark feature sections and footer; pair with foreground/inverse and lime accents."
+      },
+      "brand": {
+        "$value": "{color.primitive.lime.brand}",
+        "$description": "Full-bleed brand bands, hero blocks, statement sections. Dark olive content only."
+      },
+      "brand-subtle": {
+        "$value": "{color.primitive.lime.50}",
+        "$description": "Soft lime wash for gentle emphasis blocks, callouts, active-nav background."
+      },
+      "accent": {
+        "$value": "{color.primitive.lime.brand}",
+        "$description": "Hero CTA fill and key attention moments — chartreuse with olive text."
+      },
+      "accent-hover": {
+        "$value": "{color.primitive.lime.100}",
+        "$description": "Hover state for the accent CTA."
+      },
+      "accent-pressed": {
+        "$value": "{color.primitive.lime.200}",
+        "$description": "Pressed state for the accent CTA."
+      },
+      "action": {
+        "$value": "{color.primitive.olive.900}",
+        "$description": "Primary button and filled-control fill at rest."
+      },
+      "action-hover": {
+        "$value": "{color.primitive.olive.800}",
+        "$description": "Primary control hover."
+      },
+      "action-pressed": {
+        "$value": "{color.primitive.olive.950}",
+        "$description": "Primary control pressed/active."
+      },
+      "disabled": {
+        "$value": "{color.primitive.sand.200}",
+        "$description": "Disabled button/control fill; pair with foreground/disabled."
+      },
+      "success": {
+        "$value": "{color.primitive.success.50}",
+        "$description": "Success banners, toasts, inline confirmation fills."
+      },
+      "warning": {
+        "$value": "{color.primitive.warning.50}",
+        "$description": "Caution banners and inline warning fills."
+      },
+      "error": {
+        "$value": "{color.primitive.error.50}",
+        "$description": "Error banners and form-error message fills."
+      },
+      "info": {
+        "$value": "{color.primitive.info.50}",
+        "$description": "Neutral / system info banners and tips."
+      },
+      "overlay": {
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.0549,
+            0.102,
+            0.0157
+          ],
+          "hex": "#0E1A04",
+          "alpha": 0.6
+        },
+        "$description": "Scrim behind modals, drawers, lightboxes — deep olive (olive/950) at 60%. Raw value: transparency can't alias."
+      }
+    },
+    "foreground": {
+      "$description": "Semantic text/icon colors. Figma scope: TEXT_FILL, SHAPE_FILL.",
+      "primary": {
+        "$value": "{color.primitive.olive.900}",
+        "$description": "Body copy and headings — main reading color (13:1 on card, 10.5:1 on page)."
+      },
+      "secondary": {
+        "$value": "{color.primitive.olive.800}",
+        "$description": "Supporting copy, subheads, deck text (AAA on page)."
+      },
+      "muted": {
+        "$value": "{color.primitive.olive.700}",
+        "$description": "Captions, metadata, helper text (AA on page)."
+      },
+      "disabled": {
+        "$value": "{color.primitive.sand.500}",
+        "$description": "Disabled labels only — never for essential info."
+      },
+      "link": {
+        "$value": "{color.primitive.brass.700}",
+        "$description": "Inline links — warm bronze; always underline, never color alone."
+      },
+      "link-hover": {
+        "$value": "{color.primitive.olive.900}",
+        "$description": "Link hover/focus — darkens to ink; pair with a lime underline."
+      },
+      "inverse": {
+        "$value": "{color.primitive.sand.50}",
+        "$description": "Text/icons on dark olive surfaces."
+      },
+      "on-action": {
+        "$value": "{color.primitive.sand.50}",
+        "$description": "Text/icons on primary (olive) buttons."
+      },
+      "on-accent": {
+        "$value": "{color.primitive.olive.900}",
+        "$description": "Text/icons on the lime CTA and lime brand bands."
+      },
+      "brand": {
+        "$value": "{color.primitive.olive.900}",
+        "$description": "Brand-colored text = the olive ink (chartreuse can't carry text on light)."
+      },
+      "success": {
+        "$value": "{color.primitive.success.700}",
+        "$description": "Success message text and icons (AAA)."
+      },
+      "warning": {
+        "$value": "{color.primitive.warning.700}",
+        "$description": "Warning message text and icons (AAA)."
+      },
+      "error": {
+        "$value": "{color.primitive.error.700}",
+        "$description": "Error message text and validation copy (AAA)."
+      },
+      "info": {
+        "$value": "{color.primitive.info.700}",
+        "$description": "Info / system message text and icons (AAA)."
+      }
+    },
+    "border": {
+      "$description": "Semantic border/stroke colors. Figma scope: STROKE_COLOR.",
+      "subtle": {
+        "$value": "{color.primitive.sand.200}",
+        "$description": "Hairline dividers inside components — list rows, table cells, menu items."
+      },
+      "default": {
+        "$value": "{color.primitive.sand.300}",
+        "$description": "Standard card outlines and section dividers on the page."
+      },
+      "strong": {
+        "$value": "{color.primitive.sand.600}",
+        "$description": "Functional edges needing 3:1 — input outlines, unchecked controls, segmented buttons."
+      },
+      "focus": {
+        "$value": "{color.primitive.olive.900}",
+        "$description": "Keyboard focus ring on light (2px ring + 2px offset). Use accent/brand on dark surfaces."
+      },
+      "brand": {
+        "$value": "{color.primitive.lime.600}",
+        "$description": "Brand underlines and accent rules that must read on light. True chartreuse only shows on dark."
+      },
+      "success": {
+        "$value": "{color.primitive.success.500}",
+        "$description": "Success input outlines and message rules."
+      },
+      "warning": {
+        "$value": "{color.primitive.warning.500}",
+        "$description": "Warning outlines and message rules."
+      },
+      "error": {
+        "$value": "{color.primitive.error.500}",
+        "$description": "Error input outlines and invalid-field borders."
+      },
+      "info": {
+        "$value": "{color.primitive.info.500}",
+        "$description": "Info message rules and neutral highlighted borders."
+      }
+    },
+    "accent": {
+      "$description": "Badge, icon, indicator, and data-mark fills. Figma scope: FRAME_FILL, SHAPE_FILL.",
+      "brand": {
+        "$value": "{color.primitive.lime.brand}",
+        "$description": "Chartreuse fills — badges, indicators, icon accents, large brand shapes. On dark or with dark text."
+      },
+      "brand-strong": {
+        "$value": "{color.primitive.lime.600}",
+        "$description": "When lime must read on a light background — small icons, dots, thin underlines, progress fills."
+      },
+      "sage": {
+        "$value": "{color.primitive.sage.500}",
+        "$description": "Calm decorative accent — tags, category chips, illustration fills for the service-design work."
+      },
+      "brass": {
+        "$value": "{color.primitive.brass.500}",
+        "$description": "Warm metallic accent — pull-quote marks, entrepreneurship/CPG section flavor."
+      },
+      "success": {
+        "$value": "{color.primitive.success.500}",
+        "$description": "Status dots, icon fills, chart markers — positive."
+      },
+      "warning": {
+        "$value": "{color.primitive.warning.500}",
+        "$description": "Status dots and markers — caution."
+      },
+      "error": {
+        "$value": "{color.primitive.error.500}",
+        "$description": "Status dots and markers — negative/destructive."
+      },
+      "info": {
+        "$value": "{color.primitive.info.500}",
+        "$description": "Status dots and markers — neutral/system."
+      }
+    }
+  },
+  "typography": {
+    "family": {
+      "$type": "fontFamily",
+      "display": {
+        "$value": "Bodoni Moda",
+        "$description": "Hero display face only. High-contrast Didone; self-hosted from Google Fonts."
+      },
+      "text": {
+        "$value": "Bricolage Grotesque",
+        "$description": "All headings, body, and UI. Contemporary grotesque; self-hosted from Google Fonts."
+      }
+    },
+    "weight": {
+      "$type": "fontWeight",
+      "regular": {
+        "$value": 400
+      },
+      "medium": {
+        "$value": 500
+      },
+      "semibold": {
+        "$value": 600
+      },
+      "bold": {
+        "$value": 700
+      },
+      "extrabold": {
+        "$value": 800
+      }
+    },
+    "scale": {
+      "$type": "typography",
+      "$description": "Type roles as Mobile/Web pairs. In Figma these collapse into the Dimensions collection's Mobile & Web modes; fontSize & lineHeight vary by mode, weight/family/tracking are constant.",
+      "display": {
+        "$description": "Hero statement only — one per page. Bodoni Moda.",
+        "web": {
+          "$value": {
+            "fontFamily": "{typography.family.display}",
+            "fontSize": {
+              "value": 3.5625,
+              "unit": "rem"
+            },
+            "fontWeight": "{typography.weight.extrabold}",
+            "letterSpacing": {
+              "value": -1.71,
+              "unit": "px"
+            },
+            "lineHeight": 1.053
+          }
+        },
+        "mobile": {
+          "$value": {
+            "fontFamily": "{typography.family.display}",
+            "fontSize": {
+              "value": 2.25,
+              "unit": "rem"
+            },
+            "fontWeight": "{typography.weight.extrabold}",
+            "letterSpacing": {
+              "value": -1.08,
+              "unit": "px"
+            },
+            "lineHeight": 1.083
+          }
+        }
+      },
+      "display-small": {
+        "$description": "Big section openers, pull-stats, oversized case-study titles.",
+        "web": {
+          "$value": {
+            "fontFamily": "{typography.family.text}",
+            "fontSize": {
+              "value": 2.5,
+              "unit": "rem"
+            },
+            "fontWeight": "{typography.weight.extrabold}",
+            "letterSpacing": {
+              "value": -1,
+              "unit": "px"
+            },
+            "lineHeight": 1.1
+          }
+        },
+        "mobile": {
+          "$value": {
+            "fontFamily": "{typography.family.text}",
+            "fontSize": {
+              "value": 1.75,
+              "unit": "rem"
+            },
+            "fontWeight": "{typography.weight.extrabold}",
+            "letterSpacing": {
+              "value": -0.7,
+              "unit": "px"
+            },
+            "lineHeight": 1.107
+          }
+        }
+      },
+      "heading-1": {
+        "$description": "Page titles and case-study titles.",
+        "web": {
+          "$value": {
+            "fontFamily": "{typography.family.text}",
+            "fontSize": {
+              "value": 1.75,
+              "unit": "rem"
+            },
+            "fontWeight": "{typography.weight.extrabold}",
+            "letterSpacing": {
+              "value": -0.56,
+              "unit": "px"
+            },
+            "lineHeight": 1.143
+          }
+        },
+        "mobile": {
+          "$value": {
+            "fontFamily": "{typography.family.text}",
+            "fontSize": {
+              "value": 1.5,
+              "unit": "rem"
+            },
+            "fontWeight": "{typography.weight.extrabold}",
+            "letterSpacing": {
+              "value": -0.48,
+              "unit": "px"
+            },
+            "lineHeight": 1.167
+          }
+        }
+      },
+      "heading-2": {
+        "$description": "Major section headers within a case study.",
+        "web": {
+          "$value": {
+            "fontFamily": "{typography.family.text}",
+            "fontSize": {
+              "value": 1.5,
+              "unit": "rem"
+            },
+            "fontWeight": "{typography.weight.bold}",
+            "letterSpacing": {
+              "value": -0.36,
+              "unit": "px"
+            },
+            "lineHeight": 1.208
+          }
+        },
+        "mobile": {
+          "$value": {
+            "fontFamily": "{typography.family.text}",
+            "fontSize": {
+              "value": 1.25,
+              "unit": "rem"
+            },
+            "fontWeight": "{typography.weight.bold}",
+            "letterSpacing": {
+              "value": -0.3,
+              "unit": "px"
+            },
+            "lineHeight": 1.2
+          }
+        }
+      },
+      "heading-3": {
+        "$description": "Subsections, card titles, list-group headers.",
+        "web": {
+          "$value": {
+            "fontFamily": "{typography.family.text}",
+            "fontSize": {
+              "value": 1.25,
+              "unit": "rem"
+            },
+            "fontWeight": "{typography.weight.semibold}",
+            "letterSpacing": {
+              "value": -0.2,
+              "unit": "px"
+            },
+            "lineHeight": 1.3
+          }
+        },
+        "mobile": {
+          "$value": {
+            "fontFamily": "{typography.family.text}",
+            "fontSize": {
+              "value": 1.125,
+              "unit": "rem"
+            },
+            "fontWeight": "{typography.weight.semibold}",
+            "letterSpacing": {
+              "value": -0.18,
+              "unit": "px"
+            },
+            "lineHeight": 1.278
+          }
+        }
+      },
+      "body-large": {
+        "$description": "Case-study lead/intro paragraphs and standfirsts.",
+        "web": {
+          "$value": {
+            "fontFamily": "{typography.family.text}",
+            "fontSize": {
+              "value": 1.125,
+              "unit": "rem"
+            },
+            "fontWeight": "{typography.weight.regular}",
+            "letterSpacing": {
+              "value": 0,
+              "unit": "px"
+            },
+            "lineHeight": 1.611
+          }
+        },
+        "mobile": {
+          "$value": {
+            "fontFamily": "{typography.family.text}",
+            "fontSize": {
+              "value": 1.0625,
+              "unit": "rem"
+            },
+            "fontWeight": "{typography.weight.regular}",
+            "letterSpacing": {
+              "value": 0,
+              "unit": "px"
+            },
+            "lineHeight": 1.588
+          }
+        }
+      },
+      "body": {
+        "$description": "Default reading text for all long-form content.",
+        "web": {
+          "$value": {
+            "fontFamily": "{typography.family.text}",
+            "fontSize": {
+              "value": 1,
+              "unit": "rem"
+            },
+            "fontWeight": "{typography.weight.regular}",
+            "letterSpacing": {
+              "value": 0,
+              "unit": "px"
+            },
+            "lineHeight": 1.625
+          }
+        },
+        "mobile": {
+          "$value": {
+            "fontFamily": "{typography.family.text}",
+            "fontSize": {
+              "value": 1,
+              "unit": "rem"
+            },
+            "fontWeight": "{typography.weight.regular}",
+            "letterSpacing": {
+              "value": 0,
+              "unit": "px"
+            },
+            "lineHeight": 1.562
+          }
+        }
+      },
+      "body-small": {
+        "$description": "Substantive captions, secondary columns, compact UI text.",
+        "web": {
+          "$value": {
+            "fontFamily": "{typography.family.text}",
+            "fontSize": {
+              "value": 0.875,
+              "unit": "rem"
+            },
+            "fontWeight": "{typography.weight.regular}",
+            "letterSpacing": {
+              "value": 0,
+              "unit": "px"
+            },
+            "lineHeight": 1.5
+          }
+        },
+        "mobile": {
+          "$value": {
+            "fontFamily": "{typography.family.text}",
+            "fontSize": {
+              "value": 0.875,
+              "unit": "rem"
+            },
+            "fontWeight": "{typography.weight.regular}",
+            "letterSpacing": {
+              "value": 0,
+              "unit": "px"
+            },
+            "lineHeight": 1.5
+          }
+        }
+      },
+      "label": {
+        "$description": "Buttons, input labels, nav items, tabs, chips.",
+        "web": {
+          "$value": {
+            "fontFamily": "{typography.family.text}",
+            "fontSize": {
+              "value": 0.875,
+              "unit": "rem"
+            },
+            "fontWeight": "{typography.weight.semibold}",
+            "letterSpacing": {
+              "value": 0.07,
+              "unit": "px"
+            },
+            "lineHeight": 1.214
+          }
+        },
+        "mobile": {
+          "$value": {
+            "fontFamily": "{typography.family.text}",
+            "fontSize": {
+              "value": 0.875,
+              "unit": "rem"
+            },
+            "fontWeight": "{typography.weight.semibold}",
+            "letterSpacing": {
+              "value": 0.07,
+              "unit": "px"
+            },
+            "lineHeight": 1.214
+          }
+        }
+      },
+      "caption": {
+        "$description": "Image captions, timestamps, metadata, helper text.",
+        "web": {
+          "$value": {
+            "fontFamily": "{typography.family.text}",
+            "fontSize": {
+              "value": 0.75,
+              "unit": "rem"
+            },
+            "fontWeight": "{typography.weight.medium}",
+            "letterSpacing": {
+              "value": 0.06,
+              "unit": "px"
+            },
+            "lineHeight": 1.417
+          }
+        },
+        "mobile": {
+          "$value": {
+            "fontFamily": "{typography.family.text}",
+            "fontSize": {
+              "value": 0.75,
+              "unit": "rem"
+            },
+            "fontWeight": "{typography.weight.medium}",
+            "letterSpacing": {
+              "value": 0.06,
+              "unit": "px"
+            },
+            "lineHeight": 1.417
+          }
+        }
+      },
+      "overline": {
+        "$description": "Eyebrows above titles, category/section markers, tags. UPPERCASE, wide-tracked.",
+        "web": {
+          "$value": {
+            "fontFamily": "{typography.family.text}",
+            "fontSize": {
+              "value": 0.75,
+              "unit": "rem"
+            },
+            "fontWeight": "{typography.weight.bold}",
+            "letterSpacing": {
+              "value": 0.96,
+              "unit": "px"
+            },
+            "lineHeight": 1.417
+          },
+          "$extensions": {
+            "com.erikamurga.designsystem": {
+              "textCase": "uppercase"
+            }
+          }
+        },
+        "mobile": {
+          "$value": {
+            "fontFamily": "{typography.family.text}",
+            "fontSize": {
+              "value": 0.75,
+              "unit": "rem"
+            },
+            "fontWeight": "{typography.weight.bold}",
+            "letterSpacing": {
+              "value": 0.96,
+              "unit": "px"
+            },
+            "lineHeight": 1.417
+          },
+          "$extensions": {
+            "com.erikamurga.designsystem": {
+              "textCase": "uppercase"
+            }
+          }
+        }
+      }
+    }
+  },
+  "spacing": {
+    "$type": "dimension",
+    "primitive": {
+      "100": {
+        "$value": {
+          "value": 4,
+          "unit": "px"
+        },
+        "$description": "4px spacing primitive."
+      },
+      "200": {
+        "$value": {
+          "value": 8,
+          "unit": "px"
+        },
+        "$description": "8px spacing primitive."
+      },
+      "300": {
+        "$value": {
+          "value": 12,
+          "unit": "px"
+        },
+        "$description": "12px spacing primitive."
+      },
+      "400": {
+        "$value": {
+          "value": 16,
+          "unit": "px"
+        },
+        "$description": "16px spacing primitive."
+      },
+      "500": {
+        "$value": {
+          "value": 20,
+          "unit": "px"
+        },
+        "$description": "20px spacing primitive."
+      },
+      "600": {
+        "$value": {
+          "value": 24,
+          "unit": "px"
+        },
+        "$description": "24px spacing primitive."
+      },
+      "700": {
+        "$value": {
+          "value": 32,
+          "unit": "px"
+        },
+        "$description": "32px spacing primitive."
+      },
+      "800": {
+        "$value": {
+          "value": 40,
+          "unit": "px"
+        },
+        "$description": "40px spacing primitive."
+      },
+      "900": {
+        "$value": {
+          "value": 48,
+          "unit": "px"
+        },
+        "$description": "48px spacing primitive."
+      },
+      "1000": {
+        "$value": {
+          "value": 64,
+          "unit": "px"
+        },
+        "$description": "64px spacing primitive."
+      },
+      "$description": "Raw 4px-base spacing scale (matches platform constraints)."
+    },
+    "inline": {
+      "gap-sm": {
+        "$description": "Micro gaps — icon-to-label, tight inline pairs, badge internals.",
+        "mobile": {
+          "$value": "{spacing.primitive.100}",
+          "$description": "Mobile: 4px"
+        },
+        "web": {
+          "$value": "{spacing.primitive.100}",
+          "$description": "Web: 4px"
+        }
+      },
+      "gap": {
+        "$description": "Within compact components — button icon/text, chip and tag internals.",
+        "mobile": {
+          "$value": "{spacing.primitive.200}",
+          "$description": "Mobile: 8px"
+        },
+        "web": {
+          "$value": "{spacing.primitive.200}",
+          "$description": "Web: 8px"
+        }
+      }
+    },
+    "component": {
+      "gap": {
+        "$description": "Between elements inside a component — stacked list-row content, form-row internals.",
+        "mobile": {
+          "$value": "{spacing.primitive.200}",
+          "$description": "Mobile: 8px"
+        },
+        "web": {
+          "$value": "{spacing.primitive.300}",
+          "$description": "Web: 12px"
+        }
+      },
+      "padding": {
+        "$description": "Internal padding of buttons, inputs, badges, small controls.",
+        "mobile": {
+          "$value": "{spacing.primitive.300}",
+          "$description": "Mobile: 12px"
+        },
+        "web": {
+          "$value": "{spacing.primitive.400}",
+          "$description": "Web: 16px"
+        }
+      }
+    },
+    "card": {
+      "padding": {
+        "$description": "Padding inside cards, panels, modals, bottom sheets.",
+        "mobile": {
+          "$value": "{spacing.primitive.400}",
+          "$description": "Mobile: 16px"
+        },
+        "web": {
+          "$value": "{spacing.primitive.600}",
+          "$description": "Web: 24px"
+        }
+      }
+    },
+    "content": {
+      "gap": {
+        "$description": "Vertical rhythm between stacked content blocks — paragraph/paragraph, label/field.",
+        "mobile": {
+          "$value": "{spacing.primitive.300}",
+          "$description": "Mobile: 12px"
+        },
+        "web": {
+          "$value": "{spacing.primitive.400}",
+          "$description": "Web: 16px"
+        }
+      },
+      "gap-lg": {
+        "$description": "Between distinct content groups within a section.",
+        "mobile": {
+          "$value": "{spacing.primitive.500}",
+          "$description": "Mobile: 20px"
+        },
+        "web": {
+          "$value": "{spacing.primitive.700}",
+          "$description": "Web: 32px"
+        }
+      }
+    },
+    "section": {
+      "gap": {
+        "$description": "Between major sections of a page — the primary scannability breaks.",
+        "mobile": {
+          "$value": "{spacing.primitive.700}",
+          "$description": "Mobile: 32px"
+        },
+        "web": {
+          "$value": "{spacing.primitive.900}",
+          "$description": "Web: 48px"
+        }
+      },
+      "padding": {
+        "$description": "Vertical padding of full-width section bands, including lime brand bands.",
+        "mobile": {
+          "$value": "{spacing.primitive.700}",
+          "$description": "Mobile: 32px"
+        },
+        "web": {
+          "$value": "{spacing.primitive.1000}",
+          "$description": "Web: 64px"
+        }
+      }
+    },
+    "page": {
+      "margin": {
+        "$description": "Left/right page gutters; matches layout/grid-margin.",
+        "mobile": {
+          "$value": "{spacing.primitive.400}",
+          "$description": "Mobile: 16px"
+        },
+        "web": {
+          "$value": "{spacing.primitive.700}",
+          "$description": "Web: 32px"
+        }
+      }
+    }
+  },
+  "radius": {
+    "$type": "dimension",
+    "primitive": {
+      "100": {
+        "$value": {
+          "value": 4,
+          "unit": "px"
+        },
+        "$description": "4px radius primitive."
+      },
+      "200": {
+        "$value": {
+          "value": 8,
+          "unit": "px"
+        },
+        "$description": "8px radius primitive."
+      },
+      "300": {
+        "$value": {
+          "value": 12,
+          "unit": "px"
+        },
+        "$description": "12px radius primitive."
+      },
+      "400": {
+        "$value": {
+          "value": 16,
+          "unit": "px"
+        },
+        "$description": "16px radius primitive."
+      },
+      "$description": "Raw radius scale.",
+      "pill": {
+        "$value": {
+          "value": 999,
+          "unit": "px"
+        },
+        "$description": "Fully-rounded primitive."
+      }
+    },
+    "none": {
+      "$value": {
+        "value": 0,
+        "unit": "px"
+      },
+      "$description": "Full-bleed elements — brand bands, edge-to-edge backgrounds, hero images."
+    },
+    "sm": {
+      "$value": "{radius.primitive.100}",
+      "$description": "Small controls — chips, tags, badges, checkboxes, inline code."
+    },
+    "md": {
+      "$value": "{radius.primitive.200}",
+      "$description": "Workhorse default — buttons, inputs, selects, small cards."
+    },
+    "lg": {
+      "$value": "{radius.primitive.300}",
+      "$description": "Cards, panels, content containers — case-study cards, elevated surfaces."
+    },
+    "xl": {
+      "$value": "{radius.primitive.400}",
+      "$description": "Prominent surfaces — modals, bottom sheets, feature cards, thumbnails."
+    },
+    "pill": {
+      "$value": "{radius.primitive.pill}",
+      "$description": "Fully rounded — pill buttons, filter chips, tags, avatars, status dots."
+    }
+  },
+  "elevation": {
+    "$type": "shadow",
+    "none": {
+      "$value": [
+        {
+          "color": {
+            "colorSpace": "srgb",
+            "components": [
+              0.0549,
+              0.102,
+              0.0157
+            ],
+            "hex": "#0E1A04",
+            "alpha": 0
+          },
+          "offsetX": {
+            "value": 0,
+            "unit": "px"
+          },
+          "offsetY": {
+            "value": 0,
+            "unit": "px"
+          },
+          "blur": {
+            "value": 0,
+            "unit": "px"
+          },
+          "spread": {
+            "value": 0,
+            "unit": "px"
+          }
+        }
+      ],
+      "$description": "Flat — no shadow. Default resting state for full-bleed and flush elements."
+    },
+    "low": {
+      "$value": [
+        {
+          "color": {
+            "colorSpace": "srgb",
+            "components": [
+              0.0549,
+              0.102,
+              0.0157
+            ],
+            "hex": "#0E1A04",
+            "alpha": 0.06
+          },
+          "offsetX": {
+            "value": 0,
+            "unit": "px"
+          },
+          "offsetY": {
+            "value": 1,
+            "unit": "px"
+          },
+          "blur": {
+            "value": 2,
+            "unit": "px"
+          },
+          "spread": {
+            "value": 0,
+            "unit": "px"
+          }
+        },
+        {
+          "color": {
+            "colorSpace": "srgb",
+            "components": [
+              0.0549,
+              0.102,
+              0.0157
+            ],
+            "hex": "#0E1A04",
+            "alpha": 0.1
+          },
+          "offsetX": {
+            "value": 0,
+            "unit": "px"
+          },
+          "offsetY": {
+            "value": 1,
+            "unit": "px"
+          },
+          "blur": {
+            "value": 3,
+            "unit": "px"
+          },
+          "spread": {
+            "value": 0,
+            "unit": "px"
+          }
+        }
+      ],
+      "$description": "Cards resting on the page — barely-there lift that separates a card from the sand background."
+    },
+    "medium": {
+      "$value": [
+        {
+          "color": {
+            "colorSpace": "srgb",
+            "components": [
+              0.0549,
+              0.102,
+              0.0157
+            ],
+            "hex": "#0E1A04",
+            "alpha": 0.06
+          },
+          "offsetX": {
+            "value": 0,
+            "unit": "px"
+          },
+          "offsetY": {
+            "value": 2,
+            "unit": "px"
+          },
+          "blur": {
+            "value": 4,
+            "unit": "px"
+          },
+          "spread": {
+            "value": 0,
+            "unit": "px"
+          }
+        },
+        {
+          "color": {
+            "colorSpace": "srgb",
+            "components": [
+              0.0549,
+              0.102,
+              0.0157
+            ],
+            "hex": "#0E1A04",
+            "alpha": 0.08
+          },
+          "offsetX": {
+            "value": 0,
+            "unit": "px"
+          },
+          "offsetY": {
+            "value": 4,
+            "unit": "px"
+          },
+          "blur": {
+            "value": 8,
+            "unit": "px"
+          },
+          "spread": {
+            "value": 0,
+            "unit": "px"
+          }
+        }
+      ],
+      "$description": "Floating elements — dropdowns, popovers, tooltips, hover-raised cards."
+    },
+    "high": {
+      "$value": [
+        {
+          "color": {
+            "colorSpace": "srgb",
+            "components": [
+              0.0549,
+              0.102,
+              0.0157
+            ],
+            "hex": "#0E1A04",
+            "alpha": 0.08
+          },
+          "offsetX": {
+            "value": 0,
+            "unit": "px"
+          },
+          "offsetY": {
+            "value": 4,
+            "unit": "px"
+          },
+          "blur": {
+            "value": 8,
+            "unit": "px"
+          },
+          "spread": {
+            "value": 0,
+            "unit": "px"
+          }
+        },
+        {
+          "color": {
+            "colorSpace": "srgb",
+            "components": [
+              0.0549,
+              0.102,
+              0.0157
+            ],
+            "hex": "#0E1A04",
+            "alpha": 0.12
+          },
+          "offsetX": {
+            "value": 0,
+            "unit": "px"
+          },
+          "offsetY": {
+            "value": 12,
+            "unit": "px"
+          },
+          "blur": {
+            "value": 24,
+            "unit": "px"
+          },
+          "spread": {
+            "value": 0,
+            "unit": "px"
+          }
+        }
+      ],
+      "$description": "Plane-breaking elements — modals, dialogs, bottom sheets, command palettes. Pair with background/overlay."
+    }
+  },
+  "layout": {
+    "$description": "Grid, margins, and max-widths. Web-first: content caps at max-width and centers. Dimensional tokens in rem; grid-columns is a count.",
+    "max-width": {
+      "$type": "dimension",
+      "$value": {
+        "value": 75,
+        "unit": "rem"
+      },
+      "$description": "Page-shell max width (web). Content centers; margins grow beyond it. Mobile = full width.",
+      "$extensions": {
+        "com.erikamurga.designsystem": {
+          "px": 1200
+        }
+      }
+    },
+    "max-width-prose": {
+      "$type": "dimension",
+      "$value": {
+        "value": 42.5,
+        "unit": "rem"
+      },
+      "$description": "Long-form reading column (web) — caps the measure at ~70 characters. Mobile = full width.",
+      "$extensions": {
+        "com.erikamurga.designsystem": {
+          "px": 680
+        }
+      }
+    },
+    "grid-columns": {
+      "$type": "number",
+      "$description": "Layout grid column count.",
+      "mobile": {
+        "$value": 4,
+        "$description": "Mobile: 4 columns."
+      },
+      "web": {
+        "$value": 12,
+        "$description": "Web: 12 columns."
+      }
+    },
+    "grid-margin": {
+      "$type": "dimension",
+      "$description": "Outer grid margins; matches spacing/page/margin.",
+      "mobile": {
+        "$value": {
+          "value": 1,
+          "unit": "rem"
+        },
+        "$description": "Mobile: 16px",
+        "$extensions": {
+          "com.erikamurga.designsystem": {
+            "px": 16
+          }
+        }
+      },
+      "web": {
+        "$value": {
+          "value": 2,
+          "unit": "rem"
+        },
+        "$description": "Web: 32px",
+        "$extensions": {
+          "com.erikamurga.designsystem": {
+            "px": 32
+          }
+        }
+      }
+    },
+    "grid-gutter": {
+      "$type": "dimension",
+      "$description": "Space between grid columns.",
+      "mobile": {
+        "$value": {
+          "value": 0.5,
+          "unit": "rem"
+        },
+        "$description": "Mobile: 8px",
+        "$extensions": {
+          "com.erikamurga.designsystem": {
+            "px": 8
+          }
+        }
+      },
+      "web": {
+        "$value": {
+          "value": 1.5,
+          "unit": "rem"
+        },
+        "$description": "Web: 24px",
+        "$extensions": {
+          "com.erikamurga.designsystem": {
+            "px": 24
+          }
+        }
+      }
+    }
+  }
+}

@@ -8,7 +8,9 @@
     "start": "next start",
     "lint": "eslint",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "tokens:changelog": "node design-system/changelog/sync.mjs",
+    "tokens:sync": "npm run tokens:changelog && npm run build --prefix design-system/pipeline"
   },
   "dependencies": {
     "@notionhq/client": "^5.23.2",
