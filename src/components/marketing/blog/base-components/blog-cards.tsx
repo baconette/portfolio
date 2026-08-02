@@ -449,7 +449,7 @@ export const Simple04Horizontal = ({ article }: { article: Article }) => (
 );
 
 export const CardFullWidthImage01Vertical = ({ article }: { article: Article }) => (
-    <article className="flex flex-col overflow-hidden rounded-2xl outline-1 -outline-offset-1 outline-secondary_alt">
+    <article className="flex flex-col overflow-hidden rounded-2xl bg-primary outline-1 -outline-offset-1 outline-secondary_alt">
         <a href={article.href} tabIndex={-1}>
             <img
                 src={article.thumbnailUrl}

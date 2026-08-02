@@ -17,7 +17,7 @@ export const FooterLarge01Brand = () => {
                                 <a
                                     key={link.name}
                                     href={link.href}
-                                    className="text-sm font-semibold text-footer-button-fg transition-colors hover:text-footer-button-fg_hover"
+                                    className="text-md font-semibold text-footer-button-fg transition-colors hover:text-footer-button-fg_hover"
                                     target={link.href.startsWith("http") ? "_blank" : undefined}
                                     rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}
                                 >
@@ -26,7 +26,7 @@ export const FooterLarge01Brand = () => {
                             ))}
                         </nav>
                     </div>
-                    <p className="text-sm text-quaternary_on-brand">© 2077 Erika Aldrich Murga. All rights reserved.</p>
+                    <p className="text-md text-footer-copy">© 2077 Erika Aldrich Murga. All rights reserved.</p>
                 </div>
             </div>
         </footer>
