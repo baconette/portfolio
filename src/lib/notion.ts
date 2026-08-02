@@ -115,3 +115,39 @@ export async function getHomepageContent(): Promise<HomepageContent> {
         subheading: subheading || FALLBACK_HOMEPAGE_CONTENT.subheading,
     };
 }
+
+export interface PageSeo {
+    title: string;
+    description: string;
+}
+
+/**
+ * Fetches SEO Title/SEO Description from the Portfolio CMS row matching the given Slug (Published only).
+ * Falls back to the provided defaults when Notion isn't configured, the row isn't found, or the fields are empty.
+ */
+export async function getPageSeo(slug: string, fallback: PageSeo): Promise<PageSeo> {
+    const notion = getClient();
+    if (!notion || !DATA_SOURCE_ID) return fallback;
+
+    const response: QueryDataSourceResponse = await notion.dataSources.query({
+        data_source_id: DATA_SOURCE_ID,
+        filter: {
+            and: [
+                { property: "Published", checkbox: { equals: true } },
+                { property: "Slug", rich_text: { equals: slug } },
+            ],
+        },
+    });
+
+    const page = response.results.find((p): p is PageObjectResponse => "properties" in p);
+    if (!page) return fallback;
+
+    const props = page.properties;
+    const seoTitle = props["SEO Title"]?.type === "rich_text" ? plainText(props["SEO Title"].rich_text) : "";
+    const seoDescription = props["SEO Description"]?.type === "rich_text" ? plainText(props["SEO Description"].rich_text) : "";
+
+    return {
+        title: seoTitle || fallback.title,
+        description: seoDescription || fallback.description,
+    };
+}

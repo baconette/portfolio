@@ -26,7 +26,7 @@ export const FooterLarge01Brand = () => {
                             ))}
                         </nav>
                     </div>
-                    <p className="text-md text-footer-copy">© 2077 Erika Aldrich Murga. All rights reserved.</p>
+                    <p className="text-md text-footer-copy">© {new Date().getFullYear()} Erika Aldrich Murga. All rights reserved.</p>
                 </div>
             </div>
         </footer>

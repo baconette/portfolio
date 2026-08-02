@@ -1,8 +1,17 @@
+import type { Metadata } from "next";
 import { NavbarSimple } from "@/components/marketing/header-navigation/navbar-simple";
 import { HeaderCenteredBrand } from "@/components/marketing/header-section/header-centered-brand";
 import { CardFullWidthImage01Vertical, type Article } from "@/components/marketing/blog/base-components/blog-cards";
 import { FooterLarge01Brand } from "@/components/marketing/footers/footer-large-01-brand";
-import { getPortfolioProjects } from "@/lib/notion";
+import { getPortfolioProjects, getPageSeo } from "@/lib/notion";
+
+export async function generateMetadata(): Promise<Metadata> {
+  const { title, description } = await getPageSeo("/work", {
+    title: "Work — Erika Aldrich Murga",
+    description: "Case studies and product work by Erika Aldrich Murga.",
+  });
+  return { title, description };
+}
 
 const sampleArticles: Article[] = [
   {
