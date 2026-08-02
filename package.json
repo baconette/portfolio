@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "postinstall": "npm install --prefix design-system/pipeline",
     "predev": "npm run build --prefix design-system/pipeline",
     "dev": "next dev",
     "prebuild": "npm run build --prefix design-system/pipeline",
