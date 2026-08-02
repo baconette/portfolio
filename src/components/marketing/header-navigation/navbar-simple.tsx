@@ -4,7 +4,6 @@ import { useState } from "react";
 import Link from "next/link";
 import { Menu01, XClose } from "@untitledui/icons";
 import { Button } from "@/components/base/buttons/button";
-import { UntitledLogo } from "@/components/foundations/logo/untitledui-logo";
 
 const navLinks = [
     { label: "Home", href: "/" },
@@ -17,10 +16,11 @@ export const NavbarSimple = () => {
     const [isOpen, setIsOpen] = useState(false);
 
     return (
-        <header className="relative z-20 border-b border-secondary bg-primary">
+        <header className="relative z-20 border-b border-secondary bg-brand">
             <div className="mx-auto flex h-18 w-full max-w-container items-center justify-between px-4 md:px-8">
                 <Link href="/" className="flex items-center">
-                    <UntitledLogo />
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img src="/monogram-fill-brass.svg" alt="" className="h-9 w-auto" />
                 </Link>
 
                 <div className="flex items-center gap-4">

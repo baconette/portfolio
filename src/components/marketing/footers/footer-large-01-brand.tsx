@@ -1,5 +1,3 @@
-import { UntitledLogo } from "@/components/foundations/logo/untitledui-logo";
-
 const SOCIAL_LINKS = [
     { name: "LinkedIn", href: "https://www.linkedin.com/in/baconandegg/" },
     { name: "GitHub", href: "https://github.com/baconette/" },
@@ -12,7 +10,8 @@ export const FooterLarge01Brand = () => {
             <div className="mx-auto max-w-container px-4 md:px-8">
                 <div className="flex flex-col justify-between gap-6 border-t border-brand_alt pt-8 md:flex-row md:items-center">
                     <div className="flex flex-wrap items-center gap-x-6 gap-y-3 md:gap-x-8">
-                        <UntitledLogo className="dark-mode" />
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img src="/sys-btn.svg" alt="" className="h-8 w-auto" />
                         <nav aria-label="Social links" className="flex flex-wrap items-center gap-x-6 gap-y-2">
                             {SOCIAL_LINKS.map((link) => (
                                 <a
