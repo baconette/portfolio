@@ -8,7 +8,7 @@ const SOCIAL_LINKS = [
 
 export const FooterLarge01Brand = () => {
     return (
-        <footer className="bg-brand-section py-12 md:pt-16">
+        <footer className="bg-utility-brass-500 py-12 md:pt-16">
             <div className="mx-auto max-w-container px-4 md:px-8">
                 <div className="flex flex-col justify-between gap-6 border-t border-brand_alt pt-8 md:flex-row md:items-center">
                     <div className="flex flex-wrap items-center gap-x-6 gap-y-3 md:gap-x-8">
