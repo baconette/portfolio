@@ -74,9 +74,9 @@ const colorClasses: Record<Theme, Record<Color, { root?: string; addon?: string;
             icon: "text-utility-red-500",
         },
         warning: {
-            root: "bg-utility-yellow-50 text-utility-yellow-700 ring-utility-yellow-200 hover:bg-utility-yellow-100",
-            addon: "bg-primary text-current ring-utility-yellow-200",
-            icon: "text-utility-yellow-500",
+            root: "bg-utility-amber-50 text-utility-amber-700 ring-utility-amber-200 hover:bg-utility-amber-100",
+            addon: "bg-primary text-current ring-utility-amber-200",
+            icon: "text-utility-amber-500",
         },
         success: {
             root: "bg-utility-green-50 text-utility-green-700 ring-utility-green-200 hover:bg-utility-green-100",
@@ -95,7 +95,7 @@ const colorClasses: Record<Theme, Record<Color, { root?: string; addon?: string;
             dot: "bg-utility-red-500 outline-3 -outline-offset-1 outline-utility-red-100",
         },
         warning: {
-            dot: "bg-utility-yellow-500 outline-3 -outline-offset-1 outline-utility-yellow-100",
+            dot: "bg-utility-amber-500 outline-3 -outline-offset-1 outline-utility-amber-100",
         },
         success: {
             dot: "bg-utility-green-500 outline-3 -outline-offset-1 outline-utility-green-100",

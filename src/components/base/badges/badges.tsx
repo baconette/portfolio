@@ -24,9 +24,9 @@ export const filledColors: Record<BadgeColors, { root: string; addon: string; ad
         addonButton: "hover:bg-utility-red-100 text-utility-red-400 hover:text-utility-red-500",
     },
     warning: {
-        root: "bg-utility-yellow-50 text-utility-yellow-700 ring-utility-yellow-200",
-        addon: "text-utility-yellow-500",
-        addonButton: "hover:bg-utility-yellow-100 text-utility-yellow-400 hover:text-utility-yellow-500",
+        root: "bg-utility-amber-50 text-utility-amber-700 ring-utility-amber-200",
+        addon: "text-utility-amber-500",
+        addonButton: "hover:bg-utility-amber-100 text-utility-amber-400 hover:text-utility-amber-500",
     },
     success: {
         root: "bg-utility-green-50 text-utility-green-700 ring-utility-green-200",
