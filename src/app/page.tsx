@@ -14,7 +14,7 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default function Home() {
   return (
-    <div className="flex flex-col">
+    <div className="flex min-h-screen flex-col">
       <NavbarExtraSimple />
       <HeaderCenteredBrand />
 

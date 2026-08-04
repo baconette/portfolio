@@ -57,7 +57,7 @@ export default async function Work() {
   const articles = projects.length > 0 ? projects : sampleArticles;
 
   return (
-    <div className="flex flex-col">
+    <div className="flex min-h-screen flex-col">
       <NavbarSimple />
       <HeaderCenteredBrand />
 

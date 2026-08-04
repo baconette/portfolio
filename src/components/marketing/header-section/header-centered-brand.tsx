@@ -5,7 +5,7 @@ export const HeaderCenteredBrand = async () => {
     const { heading, subheading } = await getHomepageContent();
 
     return (
-        <InteractiveMapBackground className="pt-[325px] pb-16 md:pb-24">
+        <InteractiveMapBackground className="flex-1 pt-[325px] pb-16 md:pb-24">
             <div className="relative z-10 mx-auto max-w-container px-4 md:px-8">
                 <div className="mx-auto flex w-full max-w-3xl flex-col items-center text-center">
                     <h1 className="font-heading text-display-2xl text-primary_on-brand">{heading}</h1>
