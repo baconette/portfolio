@@ -2,13 +2,11 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Menu01, XClose } from "@untitledui/icons";
-import { Button } from "@/components/base/buttons/button";
+import { cx } from "@/utils/cx";
 
 const navLinks = [
     { label: "Home", href: "/" },
     { label: "Work", href: "/work" },
-    { label: "About", href: "/about" },
     { label: "Contact", href: "/contact" },
 ];
 
@@ -23,8 +21,15 @@ export const NavbarSimple = () => {
                     <img src="/monogram-fill-brass.svg" alt="" className="h-9 w-auto" />
                 </Link>
 
-                <div className="flex items-center gap-4">
-                    <nav className="hidden items-center gap-6 md:flex">
+                <div className="group flex items-center gap-4">
+                    {/* Hidden by default; hovering the menu button reveals it inline on md+, and a click pins it
+                        open (also covers touch/keyboard, where hover isn't available). */}
+                    <nav
+                        className={cx(
+                            "hidden items-center gap-6 md:group-hover:flex",
+                            isOpen && "md:flex",
+                        )}
+                    >
                         {navLinks.map((link) => (
                             <Link key={link.href} href={link.href} className="text-sm font-semibold text-tertiary hover:text-tertiary_hover">
                                 {link.label}
@@ -32,17 +37,19 @@ export const NavbarSimple = () => {
                         ))}
                     </nav>
 
-                    <Button
-                        color="tertiary"
-                        size="md"
-                        className="md:hidden"
-                        iconLeading={isOpen ? XClose : Menu01}
+                    <button
+                        type="button"
+                        aria-expanded={isOpen}
                         aria-label={isOpen ? "Close menu" : "Open menu"}
-                        onPress={() => setIsOpen((prev) => !prev)}
-                    />
+                        onClick={() => setIsOpen((prev) => !prev)}
+                        className="flex size-10 shrink-0 items-end justify-center pb-[3px] bg-[url('/sys-btn.svg')] bg-contain bg-center bg-no-repeat text-[0.625rem] font-semibold lowercase text-brand-secondary outline-focus-ring focus-visible:outline-2 focus-visible:outline-offset-2"
+                    >
+                        menu
+                    </button>
                 </div>
             </div>
 
+            {/* Small viewports keep the stacked list below the header instead of the inline hover reveal. */}
             {isOpen && (
                 <nav className="flex flex-col gap-1 border-t border-secondary px-4 py-3 md:hidden">
                     {navLinks.map((link) => (

@@ -466,12 +466,11 @@ export const CardFullWidthImage01Vertical = ({ article }: { article: Article }) 
                 <div className="flex flex-col gap-1">
                     <a
                         href={article.href}
-                        className="flex justify-between gap-4 rounded-md text-lg font-semibold text-primary outline-focus-ring focus-visible:outline-2 focus-visible:outline-offset-2"
+                        className="rounded-md text-lg font-semibold text-primary outline-focus-ring focus-visible:outline-2 focus-visible:outline-offset-2"
                     >
                         {article.title}
-                        <ArrowUpRight className="mt-1 size-5 shrink-0 text-fg-quaternary" aria-hidden="true" />
                     </a>
-                    <p className="line-clamp-3 text-md text-tertiary md:line-clamp-4">{article.summary}</p>
+                    <p className="line-clamp-3 text-sm text-tertiary md:line-clamp-4">{article.summary}</p>
                 </div>
             </div>
         </div>

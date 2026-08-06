@@ -11,7 +11,7 @@ export const FooterLarge01Brand = () => {
                 <div className="flex flex-col justify-between gap-6 border-t border-brand_alt pt-8 md:flex-row md:items-center">
                     <div className="flex flex-wrap items-center gap-x-6 gap-y-3 md:gap-x-8">
                         {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img src="/sys-btn.svg" alt="" className="h-8 w-auto" />
+                        <img src="/sys-btn-color.svg" alt="" className="h-8 w-auto" />
                         <nav aria-label="Social links" className="flex flex-wrap items-center gap-x-6 gap-y-2">
                             {SOCIAL_LINKS.map((link) => (
                                 <a
