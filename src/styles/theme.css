@@ -373,7 +373,10 @@
     --color-bg-secondary_hover: var(--color-bg-tertiary);
     --color-bg-primary_hover: var(--color-bg-tertiary);
     --color-bg-active: var(--color-bg-tertiary);
-    --color-bg-brand-solid_hover: var(--color-brand-700);
+    /* Lighter, not darker: lime-brand is already high-luminance, so a token/tokens.json-correct hover
+       lightens further (accent-hover = lime-100) rather than darkening — darkening it toward the
+       brand ramp's dark end is what produced the on-brand-text contrast bug this pairing fixes. */
+    --color-bg-brand-solid_hover: var(--color-brand-100);
     --color-bg-error-primary: var(--color-utility-red-50);
     --color-bg-brand-secondary: var(--color-brand-50);
     --color-bg-secondary: var(--color-utility-neutral-100);
@@ -698,7 +701,7 @@
         --color-bg-secondary_hover: var(--color-bg-tertiary);
         --color-bg-primary_hover: var(--color-bg-tertiary);
         --color-bg-active: var(--color-bg-tertiary);
-        --color-bg-brand-solid_hover: var(--color-brand-500);
+        --color-bg-brand-solid_hover: var(--color-brand-100);
         --color-bg-error-primary: var(--color-utility-red-950);
         --color-bg-brand-secondary: var(--color-brand);
         --color-bg-secondary: var(--color-utility-neutral-100);
