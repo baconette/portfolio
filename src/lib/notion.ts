@@ -6,6 +6,8 @@ import type {
 } from "@notionhq/client/build/src/api-endpoints";
 import type { Article } from "@/components/marketing/blog/base-components/blog-cards";
 
+export type NotionBlockNode = BlockObjectResponse & { children?: NotionBlockNode[] };
+
 const DATA_SOURCE_ID = process.env.NOTION_PORTFOLIO_DATA_SOURCE_ID ?? "";
 
 const AUTHOR = {
@@ -35,7 +37,7 @@ function toArticle(page: PageObjectResponse): Article {
 
     return {
         id: page.id,
-        href: `/work/${slug}`,
+        href: slug,
         thumbnailUrl: cover,
         title,
         summary: excerpt,
@@ -150,4 +152,56 @@ export async function getPageSeo(slug: string, fallback: PageSeo): Promise<PageS
         title: seoTitle || fallback.title,
         description: seoDescription || fallback.description,
     };
+}
+
+async function fetchBlocksRecursive(notion: Client, blockId: string): Promise<NotionBlockNode[]> {
+    const nodes: NotionBlockNode[] = [];
+    let cursor: string | undefined;
+
+    do {
+        const response = await notion.blocks.children.list({ block_id: blockId, start_cursor: cursor });
+        for (const block of response.results) {
+            if (!("type" in block)) continue;
+            const node: NotionBlockNode = { ...(block as BlockObjectResponse) };
+            if (node.has_children) {
+                node.children = await fetchBlocksRecursive(notion, node.id);
+            }
+            nodes.push(node);
+        }
+        cursor = response.has_more ? (response.next_cursor ?? undefined) : undefined;
+    } while (cursor);
+
+    return nodes;
+}
+
+export interface CaseStudy {
+    title: string;
+    coverUrl: string;
+    blocks: NotionBlockNode[];
+}
+
+/** Fetches a Published Portfolio CMS case study's cover image and body content by its Slug (e.g. "/work/speed-scale"). */
+export async function getCaseStudy(slug: string): Promise<CaseStudy | null> {
+    const notion = getClient();
+    if (!notion || !DATA_SOURCE_ID) return null;
+
+    const response: QueryDataSourceResponse = await notion.dataSources.query({
+        data_source_id: DATA_SOURCE_ID,
+        filter: {
+            and: [
+                { property: "Published", checkbox: { equals: true } },
+                { property: "Slug", rich_text: { equals: slug } },
+            ],
+        },
+    });
+
+    const page = response.results.find((p): p is PageObjectResponse => "properties" in p);
+    if (!page) return null;
+
+    const props = page.properties;
+    const title = props.Title?.type === "title" ? plainText(props.Title.title) : "";
+    const coverUrl = props.Cover?.type === "url" ? (props.Cover.url ?? "") : "";
+    const blocks = await fetchBlocksRecursive(notion, page.id);
+
+    return { title, coverUrl, blocks };
 }
