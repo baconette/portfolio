@@ -17,8 +17,10 @@
   },
   "dependencies": {
     "@notionhq/client": "^5.23.2",
+    "@react-stately/utils": "^3.12.1",
     "@tailwindcss/typography": "^0.5.20",
     "@untitledui/icons": "^0.0.22",
+    "input-otp": "^1.4.2",
     "next": "16.2.10",
     "react": "19.2.4",
     "react-aria-components": "^1.20.0",
