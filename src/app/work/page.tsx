@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import { NavbarSimple } from "@/components/marketing/header-navigation/navbar-simple";
 import { HeaderCenteredBrand } from "@/components/marketing/header-section/header-centered-brand";
-import { CardFullWidthImage01Vertical, type Article } from "@/components/marketing/blog/base-components/blog-cards";
+import type { Article } from "@/components/marketing/blog/base-components/blog-cards";
 import { FooterLarge01Brand } from "@/components/marketing/footers/footer-large-01-brand";
 import { getPortfolioProjects, getPageSeo } from "@/lib/notion";
+import { WorkFilterGrid } from "./work-filter-grid";
 
 export async function generateMetadata(): Promise<Metadata> {
   const { title, description } = await getPageSeo("/work", {
@@ -63,11 +64,7 @@ export default async function Work() {
 
       <main className="bg-secondary">
         <div className="mx-auto w-full max-w-container px-4 py-16 md:px-8 md:py-24">
-          <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
-            {articles.map((article) => (
-              <CardFullWidthImage01Vertical key={article.id} article={article} />
-            ))}
-          </div>
+          <WorkFilterGrid articles={articles} />
         </div>
       </main>
 
