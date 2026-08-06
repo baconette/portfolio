@@ -471,23 +471,7 @@ export const CardFullWidthImage01Vertical = ({ article }: { article: Article }) 
                         {article.title}
                         <ArrowUpRight className="mt-1 size-5 shrink-0 text-fg-quaternary" aria-hidden="true" />
                     </a>
-                    <p className="line-clamp-2 text-md text-tertiary md:line-clamp-3">{article.summary}</p>
-                </div>
-            </div>
-
-            <div className="flex gap-2">
-                <a href={article.author.href} tabIndex={-1} className="flex">
-                    <Avatar border focusable alt={article.author.name} src={article.author.avatarUrl} size="md" />
-                </a>
-
-                <div>
-                    <a
-                        href={article.author.href}
-                        className="block rounded-xs text-sm font-semibold text-primary outline-focus-ring focus-visible:outline-2 focus-visible:outline-offset-2"
-                    >
-                        {article.author.name}
-                    </a>
-                    <time className="block text-sm text-tertiary">{article.publishedAt}</time>
+                    <p className="line-clamp-3 text-md text-tertiary md:line-clamp-4">{article.summary}</p>
                 </div>
             </div>
         </div>
