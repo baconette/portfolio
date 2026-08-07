@@ -91,7 +91,7 @@ const renderBlock = (block: NotionBlockNode): ReactNode => {
             );
         case "quote":
             return (
-                <blockquote key={block.id} className="border-l-2 border-brand pl-4 text-lg text-secondary italic">
+                <blockquote key={block.id} className="border-l-2 border-utility-sage-200 pl-4 text-xl text-secondary italic">
                     <RichText richText={block.quote.rich_text} />
                 </blockquote>
             );
