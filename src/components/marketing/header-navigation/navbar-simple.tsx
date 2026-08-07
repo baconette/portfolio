@@ -18,20 +18,20 @@ export const NavbarSimple = () => {
             <div className="mx-auto flex h-18 w-full max-w-container items-center justify-between px-4 md:px-8">
                 <Link href="/" className="flex items-center">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src="/monogram-fill-brass.svg" alt="" className="h-9 w-auto" />
+                    <img src="/monogram-fill-brass.svg" alt="" className="h-auto w-12" />
                 </Link>
 
-                <div className="group flex items-center gap-4">
+                <div className="group flex items-center gap-8">
                     {/* Hidden by default; hovering the menu button reveals it inline on md+, and a click pins it
                         open (also covers touch/keyboard, where hover isn't available). */}
                     <nav
                         className={cx(
-                            "hidden items-center gap-6 md:group-hover:flex",
+                            "hidden items-center gap-8 md:group-hover:flex",
                             isOpen && "md:flex",
                         )}
                     >
                         {navLinks.map((link) => (
-                            <Link key={link.href} href={link.href} className="text-sm font-semibold text-tertiary hover:text-tertiary_hover">
+                            <Link key={link.href} href={link.href} className="text-md font-semibold text-brand-secondary hover:text-brand-secondary_hover">
                                 {link.label}
                             </Link>
                         ))}
@@ -56,7 +56,7 @@ export const NavbarSimple = () => {
                         <Link
                             key={link.href}
                             href={link.href}
-                            className="rounded-lg px-3 py-2 text-sm font-semibold text-tertiary hover:bg-primary_hover hover:text-tertiary_hover"
+                            className="rounded-lg px-3 py-2 text-md font-semibold text-brand-secondary hover:bg-primary_hover hover:text-brand-secondary_hover"
                             onClick={() => setIsOpen(false)}
                         >
                             {link.label}
