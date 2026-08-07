@@ -2,7 +2,7 @@
 
 import { Resend } from "resend";
 
-const RECIPIENT_EMAIL = "erikagrijalvam@gmail.com";
+const RECIPIENT_EMAIL = "erika.aldrich.murga@gmail.com";
 
 export interface ContactFormState {
     status: "idle" | "success" | "error";
@@ -34,7 +34,7 @@ export async function sendContactMessage(_prevState: ContactFormState, formData:
     const resend = new Resend(apiKey);
 
     const { error } = await resend.emails.send({
-        from: "Portfolio Contact Form <onboarding@resend.dev>",
+        from: "Erika Aldrich Murga Portfolio <no-reply@erikamurga.com>",
         to: RECIPIENT_EMAIL,
         replyTo: email,
         subject: `New message from ${fullName}`,
