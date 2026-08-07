@@ -1,7 +1,6 @@
 const SOCIAL_LINKS = [
     { name: "LinkedIn", href: "https://www.linkedin.com/in/baconandegg/" },
     { name: "GitHub", href: "https://github.com/baconette/" },
-    { name: "Email", href: "mailto:erika.aldrich.murga@gmail.com" },
 ];
 
 export const FooterLarge01Brand = () => {
