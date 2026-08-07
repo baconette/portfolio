@@ -129,6 +129,24 @@ const renderBlock = (block: NotionBlockNode): ReactNode => {
                 </pre>
             );
         default:
+            // The installed @notionhq/client types don't include heading_4/heading_5 yet, even though
+            // Notion's API returns them — cast narrowly rather than widening NotionBlockNode itself.
+            if ((block.type as string) === "heading_4") {
+                const { rich_text } = (block as unknown as { heading_4: { rich_text: RichTextItemResponse[] } }).heading_4;
+                return (
+                    <h4 key={block.id} className="text-display-sm text-primary">
+                        <RichText richText={rich_text} />
+                    </h4>
+                );
+            }
+            if ((block.type as string) === "heading_5") {
+                const { rich_text } = (block as unknown as { heading_5: { rich_text: RichTextItemResponse[] } }).heading_5;
+                return (
+                    <h5 key={block.id} className="text-display-xs text-primary">
+                        <RichText richText={rich_text} />
+                    </h5>
+                );
+            }
             return null;
     }
 };
