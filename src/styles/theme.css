@@ -317,8 +317,8 @@
     --color-text-editor-icon-fg_active: var(--color-utility-neutral-500);
     --color-text-quaternary: var(--color-utility-olive-600);
     --color-text-brand-primary: var(--color-utility-olive-900);
-    --color-text-primary_on-brand: var(--color-utility-olive-900);
-    --color-text-secondary_on-brand: var(--color-utility-olive-900);
+    --color-text-primary_on-brand: var(--color-utility-brass-800);
+    --color-text-secondary_on-brand: var(--color-utility-brass-600);
     --color-text-tertiary_on-brand: var(--color-brand-100);
     --color-text-quaternary_on-brand: var(--color-utility-brass-50);
     --color-text-brand-tertiary_alt: var(--color-utility-olive-700);
@@ -559,6 +559,7 @@
         --color-utility-neutral-700: #B5A992;
         --color-utility-neutral-800: #CDC2AA;
         --color-utility-neutral-900: #E7DAC2;
+        --color-utility-neutral-950: #FEF4E0;
 
         --color-utility-red-50: #300301;
         --color-utility-red-100: #4F0804;
@@ -632,13 +633,13 @@
         --color-utility-brass-900: #322604;
         --color-utility-brass-950: #1D1501;
 
-        --color-text-primary: var(--color-utility-neutral-900);
-        --color-text-tertiary: var(--color-utility-neutral-700);
+        --color-text-primary: var(--color-utility-neutral-950);
+        --color-text-tertiary: var(--color-utility-neutral-200);
         --color-text-error-primary: var(--color-utility-red-400);
         --color-text-warning-primary: var(--color-utility-amber-400);
         --color-text-success-primary: var(--color-utility-green-400);
         --color-text-white: var(--color-utility-neutral-50);
-        --color-text-secondary: var(--color-utility-neutral-800);
+        --color-text-secondary: var(--color-utility-neutral-900);
         --color-text-secondary_hover: var(--color-utility-neutral-900);
         --color-text-tertiary_hover: var(--color-utility-neutral-800);
         --color-text-brand-secondary: var(--color-utility-brass-700);
@@ -646,10 +647,10 @@
         --color-text-brand-tertiary: var(--color-utility-neutral-400);
         --color-text-editor-icon-fg: var(--color-utility-neutral-400);
         --color-text-editor-icon-fg_active: var(--color-white);
-        --color-text-quaternary: var(--color-utility-neutral-600);
+        --color-text-quaternary: var(--color-utility-neutral-300);
         --color-text-brand-primary: var(--color-white);
-        --color-text-primary_on-brand: var(--color-utility-neutral-50);
-        --color-text-secondary_on-brand: var(--color-utility-neutral-300);
+        --color-text-primary_on-brand: var(--color-brand);
+        --color-text-secondary_on-brand: var(--color-brand-50);
         --color-text-tertiary_on-brand: var(--color-utility-neutral-400);
         --color-text-quaternary_on-brand: var(--color-utility-brass-700);
         --color-text-brand-tertiary_alt: var(--color-utility-neutral-50);
@@ -685,9 +686,9 @@
         --color-fg-brand-secondary_alt: var(--color-utility-neutral-600);
         --color-fg-brand-secondary_hover: var(--color-white);
 
-        --color-bg-primary: var(--color-utility-neutral-50);
-        --color-bg-tertiary: var(--color-utility-neutral-200);
-        --color-bg-brand-primary: var(--color-brand-500);
+        --color-bg-primary: var(--color-utility-olive-900);
+        --color-bg-tertiary: var(--color-utility-olive-700);
+        --color-bg-brand-primary: var(--color-utility-brass-800);
         --color-bg-error-secondary: var(--color-utility-red-600);
         --color-bg-warning-primary: var(--color-utility-amber-950);
         --color-bg-warning-secondary: var(--color-utility-amber-600);
@@ -703,9 +704,9 @@
         --color-bg-active: var(--color-bg-tertiary);
         --color-bg-brand-solid_hover: var(--color-brand-100);
         --color-bg-error-primary: var(--color-utility-red-950);
-        --color-bg-brand-secondary: var(--color-brand);
-        --color-bg-secondary: var(--color-utility-neutral-100);
-        --color-bg-quaternary: var(--color-utility-neutral-300);
+        --color-bg-brand-secondary: var(--color-utility-brass-600);
+        --color-bg-secondary: var(--color-utility-olive-800);
+        --color-bg-quaternary: var(--color-utility-olive-600);
         --color-bg-primary_alt: var(--color-bg-secondary);
         --color-bg-brand-primary_alt: var(--color-bg-secondary);
         --color-bg-secondary_alt: var(--color-bg-primary);
