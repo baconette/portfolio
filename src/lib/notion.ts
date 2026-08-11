@@ -1,3 +1,4 @@
+import { cache } from "react";
 import { Client } from "@notionhq/client";
 import type {
     BlockObjectResponse,
@@ -160,14 +161,17 @@ async function fetchBlocksRecursive(notion: Client, blockId: string): Promise<No
 
     do {
         const response = await notion.blocks.children.list({ block_id: blockId, start_cursor: cursor });
-        for (const block of response.results) {
-            if (!("type" in block)) continue;
-            const node: NotionBlockNode = { ...(block as BlockObjectResponse) };
-            if (node.has_children) {
-                node.children = await fetchBlocksRecursive(notion, node.id);
-            }
-            nodes.push(node);
-        }
+        const pageNodes = response.results.filter((block): block is BlockObjectResponse => "type" in block).map((block): NotionBlockNode => ({ ...block }));
+
+        await Promise.all(
+            pageNodes.map(async (node) => {
+                if (node.has_children) {
+                    node.children = await fetchBlocksRecursive(notion, node.id);
+                }
+            }),
+        );
+
+        nodes.push(...pageNodes);
         cursor = response.has_more ? (response.next_cursor ?? undefined) : undefined;
     } while (cursor);
 
@@ -180,8 +184,11 @@ export interface CaseStudy {
     blocks: NotionBlockNode[];
 }
 
-/** Fetches a Published Portfolio CMS case study's cover image and body content by its Slug (e.g. "/work/speed-scale"). */
-export async function getCaseStudy(slug: string): Promise<CaseStudy | null> {
+/**
+ * Fetches a Published Portfolio CMS case study's cover image and body content by its Slug (e.g. "/work/speed-scale").
+ * Wrapped in React's `cache()` so `generateMetadata` and the page component — which both need this — share one fetch per request.
+ */
+export const getCaseStudy = cache(async (slug: string): Promise<CaseStudy | null> => {
     const notion = getClient();
     if (!notion || !DATA_SOURCE_ID) return null;
 
@@ -204,4 +211,4 @@ export async function getCaseStudy(slug: string): Promise<CaseStudy | null> {
     const blocks = await fetchBlocksRecursive(notion, page.id);
 
     return { title, coverUrl, blocks };
-}
+});
