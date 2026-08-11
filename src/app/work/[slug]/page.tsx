@@ -29,7 +29,7 @@ export default async function CaseStudy({ params }: { params: Promise<{ slug: st
             <BackToPortfolio />
 
             <main className="flex-1 bg-primary">
-                <div className="mx-auto w-full max-w-3xl px-4 py-16 md:px-8 md:py-24">
+                <div className="mx-auto w-full max-w-3xl px-4 md:px-8">
                     <NotionContent blocks={caseStudy.blocks} />
                 </div>
             </main>

@@ -1,6 +1,55 @@
-import type { RichTextItemResponse } from "@notionhq/client/build/src/api-endpoints";
+import type { ApiColor, RichTextItemResponse } from "@notionhq/client/build/src/api-endpoints";
 import type { ReactNode } from "react";
 import type { NotionBlockNode } from "@/lib/notion";
+import { CaseStudyBrandSection } from "@/components/marketing/case-study-section/case-study-brand-section";
+import { CaseStudyDarkBrandSection } from "@/components/marketing/case-study-section/case-study-dark-brand-section";
+
+type BlockTheme = "default" | "brand" | "dark";
+
+/** A heading colored this way in Notion triggers the matching themed section, wrapping it and its following content. */
+const HEADING_COLOR_THEME: Partial<Record<ApiColor, { theme: "brand" | "dark"; stopAtDivider: boolean }>> = {
+    yellow_background: { theme: "brand", stopAtDivider: true },
+    green_background: { theme: "dark", stopAtDivider: false },
+};
+
+const HEADING_TYPES = new Set(["heading_1", "heading_2", "heading_3", "heading_4", "heading_5"]);
+const isHeadingBlock = (block: NotionBlockNode): boolean => HEADING_TYPES.has(block.type);
+
+/** Reads a heading block's color at any level, including heading_4/5 (not in the installed client types — see the cast note in renderBlock). */
+const headingColor = (block: NotionBlockNode): ApiColor | undefined => {
+    if (block.type === "heading_1") return block.heading_1.color;
+    if (block.type === "heading_2") return block.heading_2.color;
+    if (block.type === "heading_3") return block.heading_3.color;
+    if ((block.type as string) === "heading_4" || (block.type as string) === "heading_5") {
+        return (block as unknown as { [k: string]: { color: ApiColor } })[block.type].color;
+    }
+    return undefined;
+};
+
+/** Collects `blocks[start]` plus every following block up to (not including) the next heading_2, or a divider when `stopAtDivider` is set. */
+const collectThemedGroup = (blocks: NotionBlockNode[], start: number, stopAtDivider: boolean): { group: NotionBlockNode[]; next: number } => {
+    const group: NotionBlockNode[] = [blocks[start]];
+    let j = start + 1;
+    while (j < blocks.length && blocks[j].type !== "heading_2" && !(stopAtDivider && blocks[j].type === "divider")) {
+        group.push(blocks[j]);
+        j++;
+    }
+    return { group, next: j };
+};
+
+const primaryText = (theme: BlockTheme) => (theme === "brand" ? "text-primary_on-brand" : "text-primary");
+
+const bodyText = (theme: BlockTheme) => {
+    if (theme === "brand") return "text-primary_on-brand";
+    if (theme === "dark") return "text-primary";
+    return "text-tertiary";
+};
+
+const quoteText = (theme: BlockTheme) => {
+    if (theme === "brand") return "text-primary_on-brand";
+    if (theme === "dark") return "text-primary";
+    return "text-secondary";
+};
 
 const RichText = ({ richText }: { richText: RichTextItemResponse[] }) => (
     <>
@@ -23,12 +72,25 @@ const RichText = ({ richText }: { richText: RichTextItemResponse[] }) => (
     </>
 );
 
-const renderBlocks = (blocks: NotionBlockNode[]): ReactNode[] => {
+const renderBlocks = (blocks: NotionBlockNode[], theme: BlockTheme = "default", detectThemedHeadings = false): ReactNode[] => {
     const output: ReactNode[] = [];
     let i = 0;
 
     while (i < blocks.length) {
         const block = blocks[i];
+
+        if (detectThemedHeadings && isHeadingBlock(block)) {
+            const color = headingColor(block);
+            const themed = color ? HEADING_COLOR_THEME[color] : undefined;
+
+            if (themed) {
+                const { group, next } = collectThemedGroup(blocks, i, themed.stopAtDivider);
+                const ThemedSection = themed.theme === "brand" ? CaseStudyBrandSection : CaseStudyDarkBrandSection;
+                output.push(<ThemedSection key={block.id}>{renderBlocks(group, themed.theme, false)}</ThemedSection>);
+                i = next;
+                continue;
+            }
+        }
 
         if (block.type === "bulleted_list_item" || block.type === "numbered_list_item") {
             const type = block.type;
@@ -47,7 +109,7 @@ const renderBlocks = (blocks: NotionBlockNode[]): ReactNode[] => {
                                     item.type === "bulleted_list_item" ? item.bulleted_list_item.rich_text : item.type === "numbered_list_item" ? item.numbered_list_item.rich_text : []
                                 }
                             />
-                            {item.children && renderBlocks(item.children)}
+                            {item.children && renderBlocks(item.children, theme, false)}
                         </li>
                     ))}
                 </ListTag>,
@@ -55,43 +117,43 @@ const renderBlocks = (blocks: NotionBlockNode[]): ReactNode[] => {
             continue;
         }
 
-        output.push(renderBlock(block));
+        output.push(renderBlock(block, theme));
         i++;
     }
 
     return output;
 };
 
-const renderBlock = (block: NotionBlockNode): ReactNode => {
+const renderBlock = (block: NotionBlockNode, theme: BlockTheme = "default"): ReactNode => {
     switch (block.type) {
         case "heading_1":
             return (
-                <h1 key={block.id} className="text-display-xl text-primary">
+                <h1 key={block.id} className={`text-display-xl ${primaryText(theme)}`}>
                     <RichText richText={block.heading_1.rich_text} />
                 </h1>
             );
         case "heading_2":
             return (
-                <h2 key={block.id} className="text-display-lg text-primary">
+                <h2 key={block.id} className={`text-display-lg ${primaryText(theme)}`}>
                     <RichText richText={block.heading_2.rich_text} />
                 </h2>
             );
         case "heading_3":
             return (
-                <h3 key={block.id} className="text-display-md text-primary">
+                <h3 key={block.id} className={`text-display-md ${primaryText(theme)}`}>
                     <RichText richText={block.heading_3.rich_text} />
                 </h3>
             );
         case "paragraph":
             if (block.paragraph.rich_text.length === 0) return null;
             return (
-                <p key={block.id} className="text-md text-tertiary">
+                <p key={block.id} className={`text-md ${bodyText(theme)}`}>
                     <RichText richText={block.paragraph.rich_text} />
                 </p>
             );
         case "quote":
             return (
-                <blockquote key={block.id} className="border-l-[8px] border-utility-sage-200 pl-4 text-xl text-secondary italic">
+                <blockquote key={block.id} className={`border-l-[8px] border-utility-sage-200 pl-4 text-xl italic ${quoteText(theme)}`}>
                     <RichText richText={block.quote.rich_text} />
                 </blockquote>
             );
@@ -100,10 +162,10 @@ const renderBlock = (block: NotionBlockNode): ReactNode => {
         case "toggle":
             return (
                 <details key={block.id} className="rounded-lg border border-secondary_alt p-4">
-                    <summary className="cursor-pointer font-semibold text-primary">
+                    <summary className={`cursor-pointer font-semibold ${primaryText(theme)}`}>
                         <RichText richText={block.toggle.rich_text} />
                     </summary>
-                    <div className="mt-3 flex flex-col gap-3">{block.children && renderBlocks(block.children)}</div>
+                    <div className="mt-3 flex flex-col gap-3">{block.children && renderBlocks(block.children, theme, false)}</div>
                 </details>
             );
         case "image": {
@@ -113,7 +175,7 @@ const renderBlock = (block: NotionBlockNode): ReactNode => {
                 <figure key={block.id} className="flex flex-col gap-2">
                     <img src={src} alt="" className="w-full rounded-xl" />
                     {hasCaption && (
-                        <figcaption className="text-sm text-tertiary">
+                        <figcaption className={`text-sm ${bodyText(theme)}`}>
                             <RichText richText={block.image.caption} />
                         </figcaption>
                     )}
@@ -128,13 +190,39 @@ const renderBlock = (block: NotionBlockNode): ReactNode => {
                     </code>
                 </pre>
             );
+        case "table": {
+            const rows = (block.children ?? []).filter((row): row is NotionBlockNode & { type: "table_row" } => row.type === "table_row");
+            return (
+                <div key={block.id} className="overflow-x-auto">
+                    <table className="w-full border-collapse text-left text-md">
+                        <tbody>
+                            {rows.map((row, rowIndex) => {
+                                const isHeaderRow = block.table.has_column_header && rowIndex === 0;
+                                const CellTag = isHeaderRow ? "th" : "td";
+                                const cellColor = theme === "default" && !isHeaderRow ? bodyText(theme) : primaryText(theme);
+                                const cellWeight = isHeaderRow ? "font-semibold" : "";
+                                return (
+                                    <tr key={row.id} className="border-b border-secondary_alt">
+                                        {row.table_row.cells.map((cell, cellIndex) => (
+                                            <CellTag key={cellIndex} className={`px-3 py-2 align-top ${cellWeight} ${cellColor}`}>
+                                                <RichText richText={cell} />
+                                            </CellTag>
+                                        ))}
+                                    </tr>
+                                );
+                            })}
+                        </tbody>
+                    </table>
+                </div>
+            );
+        }
         default:
             // The installed @notionhq/client types don't include heading_4/heading_5 yet, even though
             // Notion's API returns them — cast narrowly rather than widening NotionBlockNode itself.
             if ((block.type as string) === "heading_4") {
                 const { rich_text } = (block as unknown as { heading_4: { rich_text: RichTextItemResponse[] } }).heading_4;
                 return (
-                    <h4 key={block.id} className="text-display-sm text-primary">
+                    <h4 key={block.id} className={`text-display-sm ${primaryText(theme)}`}>
                         <RichText richText={rich_text} />
                     </h4>
                 );
@@ -142,7 +230,7 @@ const renderBlock = (block: NotionBlockNode): ReactNode => {
             if ((block.type as string) === "heading_5") {
                 const { rich_text } = (block as unknown as { heading_5: { rich_text: RichTextItemResponse[] } }).heading_5;
                 return (
-                    <h5 key={block.id} className="text-display-xs text-primary">
+                    <h5 key={block.id} className={`text-display-xs ${primaryText(theme)}`}>
                         <RichText richText={rich_text} />
                     </h5>
                 );
@@ -151,4 +239,4 @@ const renderBlock = (block: NotionBlockNode): ReactNode => {
     }
 };
 
-export const NotionContent = ({ blocks }: { blocks: NotionBlockNode[] }) => <div className="flex flex-col gap-6">{renderBlocks(blocks)}</div>;
+export const NotionContent = ({ blocks }: { blocks: NotionBlockNode[] }) => <div className="flex flex-col gap-6">{renderBlocks(blocks, "default", true)}</div>;
