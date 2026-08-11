@@ -3,6 +3,7 @@ import type { ReactNode } from "react";
 import type { NotionBlockNode } from "@/lib/notion";
 import { CaseStudyBrandSection } from "@/components/marketing/case-study-section/case-study-brand-section";
 import { CaseStudyDarkBrandSection } from "@/components/marketing/case-study-section/case-study-dark-brand-section";
+import { CaseStudyWideSection } from "@/components/marketing/case-study-section/case-study-wide-section";
 
 type BlockTheme = "default" | "brand" | "dark";
 
@@ -10,6 +11,12 @@ type BlockTheme = "default" | "brand" | "dark";
 const HEADING_COLOR_THEME: Partial<Record<ApiColor, { theme: "brand" | "dark"; stopAtDivider: boolean }>> = {
     yellow_background: { theme: "brand", stopAtDivider: true },
     green_background: { theme: "dark", stopAtDivider: false },
+};
+
+/** A callout colored this way is a structural wrapper, not visible content — its children render wide instead of the callout box. */
+const CALLOUT_WIDE_COLUMNS: Partial<Record<ApiColor, 1 | 2>> = {
+    gray_background: 1,
+    brown_background: 2,
 };
 
 const HEADING_TYPES = new Set(["heading_1", "heading_2", "heading_3", "heading_4", "heading_5"]);
@@ -72,21 +79,49 @@ const RichText = ({ richText }: { richText: RichTextItemResponse[] }) => (
     </>
 );
 
-const renderBlocks = (blocks: NotionBlockNode[], theme: BlockTheme = "default", detectThemedHeadings = false): ReactNode[] => {
+const renderBlocks = (blocks: NotionBlockNode[], theme: BlockTheme = "default", detectSpecialBlocks = false): ReactNode[] => {
     const output: ReactNode[] = [];
     let i = 0;
 
     while (i < blocks.length) {
         const block = blocks[i];
 
-        if (detectThemedHeadings && isHeadingBlock(block)) {
+        // Wide-callout unwrapping applies at any nesting depth (unlike heading-section detection below,
+        // which is intentionally top-level-only to avoid re-triggering inside an already-themed section).
+        if (block.type === "callout") {
+            const columns = CALLOUT_WIDE_COLUMNS[block.callout.color];
+            if (columns) {
+                output.push(
+                    <CaseStudyWideSection key={block.id} columns={columns}>
+                        {block.children && renderBlocks(block.children, theme, false)}
+                    </CaseStudyWideSection>,
+                );
+                i++;
+                continue;
+            }
+        }
+
+        if (detectSpecialBlocks && isHeadingBlock(block)) {
             const color = headingColor(block);
             const themed = color ? HEADING_COLOR_THEME[color] : undefined;
 
             if (themed) {
                 const { group, next } = collectThemedGroup(blocks, i, themed.stopAtDivider);
-                const ThemedSection = themed.theme === "brand" ? CaseStudyBrandSection : CaseStudyDarkBrandSection;
-                output.push(<ThemedSection key={block.id}>{renderBlocks(group, themed.theme, false)}</ThemedSection>);
+                const content = renderBlocks(group, themed.theme, false);
+
+                if (themed.theme === "brand") {
+                    output.push(<CaseStudyBrandSection key={block.id}>{content}</CaseStudyBrandSection>);
+                } else {
+                    const nextBlock = blocks[next];
+                    const nextColor = nextBlock && isHeadingBlock(nextBlock) ? headingColor(nextBlock) : undefined;
+                    const isFollowedByBrand = nextColor ? HEADING_COLOR_THEME[nextColor]?.theme === "brand" : false;
+                    output.push(
+                        <CaseStudyDarkBrandSection key={block.id} marginBottom={!isFollowedByBrand}>
+                            {content}
+                        </CaseStudyDarkBrandSection>,
+                    );
+                }
+
                 i = next;
                 continue;
             }
@@ -213,6 +248,18 @@ const renderBlock = (block: NotionBlockNode, theme: BlockTheme = "default"): Rea
                             })}
                         </tbody>
                     </table>
+                </div>
+            );
+        }
+        case "column_list": {
+            const columns = (block.children ?? []).filter((c): c is NotionBlockNode & { type: "column" } => c.type === "column");
+            return (
+                <div key={block.id} className="flex flex-col gap-6 md:flex-row">
+                    {columns.map((column) => (
+                        <div key={column.id} className="flex flex-1 flex-col gap-6">
+                            {column.children && renderBlocks(column.children, theme, false)}
+                        </div>
+                    ))}
                 </div>
             );
         }
