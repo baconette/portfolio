@@ -34,6 +34,7 @@ const sampleArticle: Article = {
         { name: "UX Research", color: "brand", href: "#" },
         { name: "Onboarding", color: "gray", href: "#" },
     ],
+    roles: ["Lead UX Researcher"],
 };
 
 const meta = {

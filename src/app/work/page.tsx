@@ -26,6 +26,7 @@ const sampleArticles: Article[] = [
     publishedAt: "Jan 12, 2026",
     readingTime: "8 min read",
     tags: [{ name: "UX Research", color: "brand", href: "#" }],
+    roles: ["Lead UX Researcher"],
   },
   {
     id: "2",
@@ -38,6 +39,7 @@ const sampleArticles: Article[] = [
     publishedAt: "Feb 3, 2026",
     readingTime: "6 min read",
     tags: [{ name: "Design Systems", color: "brand", href: "#" }],
+    roles: ["Lead Product Designer"],
   },
   {
     id: "3",
@@ -50,6 +52,7 @@ const sampleArticles: Article[] = [
     publishedAt: "Mar 21, 2026",
     readingTime: "10 min read",
     tags: [{ name: "Product Strategy", color: "brand", href: "#" }],
+    roles: ["Product Strategist", "Product Owner"],
   },
 ];
 

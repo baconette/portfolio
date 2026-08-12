@@ -5,7 +5,6 @@ import { HeaderCenteredCaseStudy } from "@/components/marketing/header-section/h
 import { FooterLarge01Brand } from "@/components/marketing/footers/footer-large-01-brand";
 import { getCaseStudy, getPageSeo } from "@/lib/notion";
 import { NotionContent } from "./notion-content";
-import { BackToPortfolio } from "./back-to-portfolio";
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
     const { slug } = await params;
@@ -26,11 +25,10 @@ export default async function CaseStudy({ params }: { params: Promise<{ slug: st
         <div className="flex min-h-screen flex-col">
             <NavbarSimple />
             <HeaderCenteredCaseStudy coverUrl={caseStudy.coverUrl} title={caseStudy.title} />
-            <BackToPortfolio />
 
             <main className="flex-1 bg-primary">
                 <div className="mx-auto w-full max-w-3xl px-4 md:px-8">
-                    <NotionContent blocks={caseStudy.blocks} />
+                    <NotionContent blocks={caseStudy.blocks} roles={caseStudy.roles} />
                 </div>
             </main>
 

@@ -35,6 +35,7 @@ function toArticle(page: PageObjectResponse): Article {
     const cover = props.Cover?.type === "url" ? (props.Cover.url ?? "") : "";
     const type = props.Type?.type === "select" ? (props.Type.select?.name ?? "") : "";
     const industry = props.Industry?.type === "multi_select" ? props.Industry.multi_select : [];
+    const role = props.Role?.type === "multi_select" ? props.Role.multi_select : [];
 
     return {
         id: page.id,
@@ -47,6 +48,7 @@ function toArticle(page: PageObjectResponse): Article {
         publishedAt: "",
         readingTime: "",
         tags: industry.map((tag) => ({ name: tag.name, color: "brand" as const, href: "#" })),
+        roles: role.map((r) => r.name),
     };
 }
 
@@ -181,6 +183,7 @@ async function fetchBlocksRecursive(notion: Client, blockId: string): Promise<No
 export interface CaseStudy {
     title: string;
     coverUrl: string;
+    roles: string[];
     blocks: NotionBlockNode[];
 }
 
@@ -208,7 +211,8 @@ export const getCaseStudy = cache(async (slug: string): Promise<CaseStudy | null
     const props = page.properties;
     const title = props.Title?.type === "title" ? plainText(props.Title.title) : "";
     const coverUrl = props.Cover?.type === "url" ? (props.Cover.url ?? "") : "";
+    const roles = props.Role?.type === "multi_select" ? props.Role.multi_select.map((r) => r.name) : [];
     const blocks = await fetchBlocksRecursive(notion, page.id);
 
-    return { title, coverUrl, blocks };
+    return { title, coverUrl, roles, blocks };
 });

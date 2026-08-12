@@ -26,6 +26,7 @@ export type Article = {
     publishedAt: string;
     readingTime: string;
     tags: Array<{ name: string; color: BadgeColor<"color">; href: string }>;
+    roles: string[];
     isFeatured?: boolean;
 };
 
@@ -449,20 +450,17 @@ export const Simple04Horizontal = ({ article }: { article: Article }) => (
 );
 
 export const CardFullWidthImage01Vertical = ({ article }: { article: Article }) => (
-    <article className="flex flex-col overflow-hidden rounded-2xl bg-primary outline-1 -outline-offset-1 outline-secondary_alt">
+    <article className="flex flex-col overflow-hidden rounded-lg bg-primary outline-1 -outline-offset-1 outline-secondary_alt">
         <a href={article.href} tabIndex={-1}>
             <img
                 src={article.thumbnailUrl}
                 alt={article.title}
-                className="aspect-[1.5] w-full rounded-t-2xl object-cover outline-[0.5px] -outline-offset-[0.5px] outline-alpha-black/10 md:h-64"
+                className="aspect-[1.5] w-full rounded-t-lg object-cover outline-[0.5px] -outline-offset-[0.5px] outline-alpha-black/10 md:h-64"
             />
         </a>
 
         <div className="flex flex-col gap-5 px-5 pt-5 pb-6 md:p-6">
             <div className="flex flex-col gap-3">
-                <Badge color="brand" size="md">
-                    {article.category.name}
-                </Badge>
                 <div className="flex flex-col gap-1">
                     <a
                         href={article.href}
@@ -471,6 +469,15 @@ export const CardFullWidthImage01Vertical = ({ article }: { article: Article }) 
                         {article.title}
                     </a>
                     <p className="line-clamp-3 text-sm text-tertiary md:line-clamp-4">{article.summary}</p>
+                </div>
+
+                <div className="flex flex-wrap items-center gap-2">
+                    <span className="text-xs font-semibold text-tertiary uppercase">Role</span>
+                    {article.roles.map((role) => (
+                        <Badge key={role} color="brand" size="sm">
+                            {role}
+                        </Badge>
+                    ))}
                 </div>
             </div>
         </div>
