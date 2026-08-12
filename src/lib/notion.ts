@@ -60,8 +60,10 @@ export async function getPortfolioProjects(): Promise<Article[]> {
     const response: QueryDataSourceResponse = await notion.dataSources.query({
         data_source_id: DATA_SOURCE_ID,
         filter: {
-            property: "Published",
-            checkbox: { equals: true },
+            and: [
+                { property: "Published", checkbox: { equals: true } },
+                { property: "Slug", rich_text: { starts_with: "/work/" } },
+            ],
         },
         sorts: [{ property: "Order", direction: "ascending" }],
     });
@@ -118,6 +120,58 @@ export async function getHomepageContent(): Promise<HomepageContent> {
     return {
         heading: heading || FALLBACK_HOMEPAGE_CONTENT.heading,
         subheading: subheading || FALLBACK_HOMEPAGE_CONTENT.subheading,
+    };
+}
+
+export interface ContactContent {
+    heading: string;
+    body: string;
+}
+
+const FALLBACK_CONTACT_CONTENT: ContactContent = {
+    heading: "Get in touch",
+    body: "Have a project in mind or just want to say hello? Send a message below.",
+};
+
+/**
+ * Fetches the contact page copy from the Portfolio CMS row with Slug "/contact" (Published only).
+ * The H1/body text lives in that page's body content, not its properties.
+ */
+export async function getContactContent(): Promise<ContactContent> {
+    const notion = getClient();
+    if (!notion || !DATA_SOURCE_ID) return FALLBACK_CONTACT_CONTENT;
+
+    const response: QueryDataSourceResponse = await notion.dataSources.query({
+        data_source_id: DATA_SOURCE_ID,
+        filter: {
+            and: [
+                { property: "Published", checkbox: { equals: true } },
+                { property: "Slug", rich_text: { equals: "/contact" } },
+            ],
+        },
+    });
+
+    const page = response.results.find((p): p is PageObjectResponse => "properties" in p);
+    if (!page) return FALLBACK_CONTACT_CONTENT;
+
+    const blocks = await notion.blocks.children.list({ block_id: page.id });
+
+    let heading = "";
+    let body = "";
+    for (const block of blocks.results) {
+        if (!("type" in block)) continue;
+        const typedBlock = block as BlockObjectResponse;
+        if (typedBlock.type === "heading_1" && !heading) {
+            heading = plainText(typedBlock.heading_1.rich_text);
+        }
+        if (typedBlock.type === "paragraph" && !body) {
+            body = plainText(typedBlock.paragraph.rich_text);
+        }
+    }
+
+    return {
+        heading: heading || FALLBACK_CONTACT_CONTENT.heading,
+        body: body || FALLBACK_CONTACT_CONTENT.body,
     };
 }
 
@@ -183,7 +237,6 @@ async function fetchBlocksRecursive(notion: Client, blockId: string): Promise<No
 export interface CaseStudy {
     title: string;
     coverUrl: string;
-    roles: string[];
     blocks: NotionBlockNode[];
 }
 
@@ -211,8 +264,7 @@ export const getCaseStudy = cache(async (slug: string): Promise<CaseStudy | null
     const props = page.properties;
     const title = props.Title?.type === "title" ? plainText(props.Title.title) : "";
     const coverUrl = props.Cover?.type === "url" ? (props.Cover.url ?? "") : "";
-    const roles = props.Role?.type === "multi_select" ? props.Role.multi_select.map((r) => r.name) : [];
     const blocks = await fetchBlocksRecursive(notion, page.id);
 
-    return { title, coverUrl, roles, blocks };
+    return { title, coverUrl, blocks };
 });

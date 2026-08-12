@@ -1,7 +1,6 @@
 import type { ApiColor, RichTextItemResponse } from "@notionhq/client/build/src/api-endpoints";
 import type { ReactNode } from "react";
 import type { NotionBlockNode } from "@/lib/notion";
-import { Badge } from "@/components/base/badges/badges";
 import { CaseStudyBrandSection } from "@/components/marketing/case-study-section/case-study-brand-section";
 import { CaseStudyDarkBrandSection } from "@/components/marketing/case-study-section/case-study-dark-brand-section";
 import { CaseStudyWideSection } from "@/components/marketing/case-study-section/case-study-wide-section";
@@ -34,18 +33,6 @@ const headingColor = (block: NotionBlockNode): ApiColor | undefined => {
     return undefined;
 };
 
-/** Reads a heading block's plain text at any level, including heading_4/5 (see the cast note in renderBlock). */
-const headingPlainText = (block: NotionBlockNode): string => {
-    if (block.type === "heading_1") return block.heading_1.rich_text.map((t) => t.plain_text).join("");
-    if (block.type === "heading_2") return block.heading_2.rich_text.map((t) => t.plain_text).join("");
-    if (block.type === "heading_3") return block.heading_3.rich_text.map((t) => t.plain_text).join("");
-    if ((block.type as string) === "heading_4" || (block.type as string) === "heading_5") {
-        const { rich_text } = (block as unknown as { [k: string]: { rich_text: RichTextItemResponse[] } })[block.type];
-        return rich_text.map((t) => t.plain_text).join("");
-    }
-    return "";
-};
-
 /** Collects `blocks[start]` plus every following block up to (not including) the next heading_2, or a divider when `stopAtDivider` is set. */
 const collectThemedGroup = (blocks: NotionBlockNode[], start: number, stopAtDivider: boolean): { group: NotionBlockNode[]; next: number } => {
     const group: NotionBlockNode[] = [blocks[start]];
@@ -71,17 +58,6 @@ const quoteText = (theme: BlockTheme) => {
     return "text-secondary";
 };
 
-const RoleRow = ({ roles, theme }: { roles: string[]; theme: BlockTheme }) => (
-    <div className="flex flex-wrap items-center gap-2">
-        <span className={`text-md font-semibold uppercase ${bodyText(theme)}`}>Role</span>
-        {roles.map((role) => (
-            <Badge key={role} color="brand" size="md">
-                {role}
-            </Badge>
-        ))}
-    </div>
-);
-
 const RichText = ({ richText }: { richText: RichTextItemResponse[] }) => (
     <>
         {richText.map((item, i) => {
@@ -103,7 +79,7 @@ const RichText = ({ richText }: { richText: RichTextItemResponse[] }) => (
     </>
 );
 
-const renderBlocks = (blocks: NotionBlockNode[], theme: BlockTheme = "default", detectSpecialBlocks = false, roles: string[] = []): ReactNode[] => {
+const renderBlocks = (blocks: NotionBlockNode[], theme: BlockTheme = "default", detectSpecialBlocks = false): ReactNode[] => {
     const output: ReactNode[] = [];
     let i = 0;
 
@@ -128,21 +104,14 @@ const renderBlocks = (blocks: NotionBlockNode[], theme: BlockTheme = "default", 
         if (detectSpecialBlocks && isHeadingBlock(block)) {
             const color = headingColor(block);
             const themed = color ? HEADING_COLOR_THEME[color] : undefined;
-            const isOverview = headingPlainText(block).trim().toLowerCase() === "overview";
 
-            if (themed || isOverview) {
-                const sectionTheme = themed?.theme ?? "default";
-                const { group, next } = collectThemedGroup(blocks, i, themed?.stopAtDivider ?? false);
-                const content = renderBlocks(group, sectionTheme, false);
+            if (themed) {
+                const { group, next } = collectThemedGroup(blocks, i, themed.stopAtDivider);
+                const content = renderBlocks(group, themed.theme, false);
 
-                // Role badges land right after the section's last paragraph/bullet, before the wrapper (if any) closes.
-                if (isOverview && roles.length > 0) {
-                    content.push(<RoleRow key="role-row" roles={roles} theme={sectionTheme} />);
-                }
-
-                if (themed?.theme === "brand") {
+                if (themed.theme === "brand") {
                     output.push(<CaseStudyBrandSection key={block.id}>{content}</CaseStudyBrandSection>);
-                } else if (themed?.theme === "dark") {
+                } else {
                     const nextBlock = blocks[next];
                     const nextColor = nextBlock && isHeadingBlock(nextBlock) ? headingColor(nextBlock) : undefined;
                     const isFollowedByBrand = nextColor ? HEADING_COLOR_THEME[nextColor]?.theme === "brand" : false;
@@ -151,8 +120,6 @@ const renderBlocks = (blocks: NotionBlockNode[], theme: BlockTheme = "default", 
                             {content}
                         </CaseStudyDarkBrandSection>,
                     );
-                } else {
-                    output.push(...content);
                 }
 
                 i = next;
@@ -319,6 +286,4 @@ const renderBlock = (block: NotionBlockNode, theme: BlockTheme = "default"): Rea
     }
 };
 
-export const NotionContent = ({ blocks, roles }: { blocks: NotionBlockNode[]; roles: string[] }) => (
-    <div className="flex flex-col gap-6">{renderBlocks(blocks, "default", true, roles)}</div>
-);
+export const NotionContent = ({ blocks }: { blocks: NotionBlockNode[] }) => <div className="flex flex-col gap-6">{renderBlocks(blocks, "default", true)}</div>;

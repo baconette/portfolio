@@ -5,35 +5,53 @@ import Link from "next/link";
 import { cx } from "@/utils/cx";
 
 const navLinks = [
-    { label: "Home", href: "/" },
+    { label: "Profile", href: "/profile" },
     { label: "Work", href: "/work" },
     { label: "Contact", href: "/contact" },
 ];
 
+const AUTO_REVEAL_MS = 7000;
+
 export const NavbarSimple = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [isVisible, setIsVisible] = useState(true);
+    const [autoReveal, setAutoReveal] = useState(false);
     const lastScrollY = useRef(0);
+    const wasVisible = useRef(true);
+    const autoRevealTimeout = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
 
     useEffect(() => {
         lastScrollY.current = window.scrollY;
 
         const handleScroll = () => {
             const scrollY = window.scrollY;
+            let visible = wasVisible.current;
 
             if (scrollY <= 8) {
-                setIsVisible(true);
+                visible = true;
             } else if (scrollY > lastScrollY.current) {
-                setIsVisible(false);
+                visible = false;
             } else if (scrollY < lastScrollY.current) {
-                setIsVisible(true);
+                visible = true;
             }
 
+            // Reappearing after being hidden briefly shows the menu items, then hides them again.
+            if (visible && !wasVisible.current) {
+                setAutoReveal(true);
+                clearTimeout(autoRevealTimeout.current);
+                autoRevealTimeout.current = setTimeout(() => setAutoReveal(false), AUTO_REVEAL_MS);
+            }
+
+            setIsVisible(visible);
+            wasVisible.current = visible;
             lastScrollY.current = scrollY;
         };
 
         window.addEventListener("scroll", handleScroll, { passive: true });
-        return () => window.removeEventListener("scroll", handleScroll);
+        return () => {
+            window.removeEventListener("scroll", handleScroll);
+            clearTimeout(autoRevealTimeout.current);
+        };
     }, []);
 
     return (
@@ -55,7 +73,7 @@ export const NavbarSimple = () => {
                     <nav
                         className={cx(
                             "hidden items-center gap-8 md:group-hover:flex",
-                            isOpen && "md:flex",
+                            (isOpen || autoReveal) && "md:flex",
                         )}
                     >
                         {navLinks.map((link) => (

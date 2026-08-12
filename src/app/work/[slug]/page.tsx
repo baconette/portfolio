@@ -28,7 +28,7 @@ export default async function CaseStudy({ params }: { params: Promise<{ slug: st
 
             <main className="flex-1 bg-primary">
                 <div className="mx-auto w-full max-w-3xl px-4 md:px-8">
-                    <NotionContent blocks={caseStudy.blocks} roles={caseStudy.roles} />
+                    <NotionContent blocks={caseStudy.blocks} />
                 </div>
             </main>
 
