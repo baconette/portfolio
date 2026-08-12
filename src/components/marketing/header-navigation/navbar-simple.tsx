@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { cx } from "@/utils/cx";
 
@@ -12,9 +12,37 @@ const navLinks = [
 
 export const NavbarSimple = () => {
     const [isOpen, setIsOpen] = useState(false);
+    const [isVisible, setIsVisible] = useState(true);
+    const lastScrollY = useRef(0);
+
+    useEffect(() => {
+        lastScrollY.current = window.scrollY;
+
+        const handleScroll = () => {
+            const scrollY = window.scrollY;
+
+            if (scrollY <= 8) {
+                setIsVisible(true);
+            } else if (scrollY > lastScrollY.current) {
+                setIsVisible(false);
+            } else if (scrollY < lastScrollY.current) {
+                setIsVisible(true);
+            }
+
+            lastScrollY.current = scrollY;
+        };
+
+        window.addEventListener("scroll", handleScroll, { passive: true });
+        return () => window.removeEventListener("scroll", handleScroll);
+    }, []);
 
     return (
-        <header className="relative z-20 border-b border-secondary bg-brand">
+        <header
+            className={cx(
+                "sticky top-0 z-20 border-b border-secondary bg-brand transition-transform duration-300",
+                isVisible || isOpen ? "translate-y-0" : "-translate-y-full",
+            )}
+        >
             <div className="mx-auto flex h-18 w-full max-w-container items-center justify-between px-4 md:px-8">
                 <Link href="/" className="flex items-center">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
