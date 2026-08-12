@@ -23,7 +23,7 @@ export const WorkFilterGrid = ({ articles }: { articles: Article[] }) => {
 
     return (
         <Tabs>
-            <Tabs.List type="button-brand" size="md" aria-label="Filter case studies by type" className="mb-8 md:mb-12">
+            <Tabs.List type="button-brand" size="md" aria-label="Filter case studies by type" className="mb-8 flex-wrap gap-y-2 md:mb-12">
                 <Tabs.Item id="all" label="All" />
                 {categories.map((category) => (
                     <Tabs.Item key={category} id={category} label={category} />
