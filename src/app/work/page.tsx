@@ -63,7 +63,7 @@ export default async function Work() {
   return (
     <div className="flex min-h-screen flex-col">
       <NavbarSimple />
-      <HeaderCenteredBrand />
+      <HeaderCenteredBrand short />
 
       <main className="bg-secondary">
         <div className="mx-auto w-full max-w-container px-4 py-16 md:px-8 md:py-24">
