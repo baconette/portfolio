@@ -34,7 +34,6 @@ function toArticle(page: PageObjectResponse): Article {
     const slug = props.Slug?.type === "rich_text" ? plainText(props.Slug.rich_text) : "";
     const cover = props.Cover?.type === "url" ? (props.Cover.url ?? "") : "";
     const type = props.Type?.type === "select" ? (props.Type.select?.name ?? "") : "";
-    const industry = props.Industry?.type === "multi_select" ? props.Industry.multi_select : [];
     const role = props.Role?.type === "multi_select" ? props.Role.multi_select : [];
 
     return {
@@ -47,9 +46,54 @@ function toArticle(page: PageObjectResponse): Article {
         author: AUTHOR,
         publishedAt: "",
         readingTime: "",
-        tags: industry.map((tag) => ({ name: tag.name, color: "brand" as const, href: "#" })),
+        tags: [],
         roles: role.map((r) => r.name),
     };
+}
+
+function toPlayArticle(page: PageObjectResponse): Article {
+    const props = page.properties;
+
+    const title = props.Title?.type === "title" ? plainText(props.Title.title) : "";
+    const excerpt = props.Excerpt?.type === "rich_text" ? plainText(props.Excerpt.rich_text) : "";
+    const url = props.URL?.type === "url" ? (props.URL.url ?? "") : "";
+    const cover = props.Cover?.type === "url" ? (props.Cover.url ?? "") : "";
+    const type = props.Type?.type === "select" ? (props.Type.select?.name ?? "") : "";
+    const role = props.Role?.type === "multi_select" ? props.Role.multi_select : [];
+
+    return {
+        id: page.id,
+        href: url,
+        thumbnailUrl: cover,
+        title,
+        summary: excerpt,
+        category: { href: "#", name: type },
+        author: AUTHOR,
+        publishedAt: "",
+        readingTime: "",
+        tags: [],
+        roles: role.map((r) => r.name),
+    };
+}
+
+/** Fetches Published Play items (Slug "/play") from the Portfolio CMS, ordered by the Order property.
+ * Unlike case studies, each card links out via its URL property rather than an internal /work/{slug} page. */
+export async function getPlayProjects(): Promise<Article[]> {
+    const notion = getClient();
+    if (!notion || !DATA_SOURCE_ID) return [];
+
+    const response: QueryDataSourceResponse = await notion.dataSources.query({
+        data_source_id: DATA_SOURCE_ID,
+        filter: {
+            and: [
+                { property: "Published", checkbox: { equals: true } },
+                { property: "Slug", rich_text: { equals: "/play" } },
+            ],
+        },
+        sorts: [{ property: "Order", direction: "ascending" }],
+    });
+
+    return response.results.filter((page): page is PageObjectResponse => "properties" in page).map(toPlayArticle);
 }
 
 /** Fetches Published projects from the Portfolio CMS Notion database, ordered by the Order property. */
