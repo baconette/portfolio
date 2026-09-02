@@ -1,15 +1,22 @@
 "use client";
 
-import { useActionState } from "react";
+import { useActionState, useEffect } from "react";
 import { Button } from "@/components/base/buttons/button";
 import { Input } from "@/components/base/input/input";
 import { TextArea } from "@/components/base/textarea/textarea";
+import { trackEvent } from "@/lib/analytics";
 import { sendContactMessage, type ContactFormState } from "./actions";
 
 const initialState: ContactFormState = { status: "idle" };
 
 export const ContactForm = () => {
     const [state, formAction, isPending] = useActionState(sendContactMessage, initialState);
+
+    useEffect(() => {
+        if (state.status !== "idle") {
+            trackEvent("contact_form_submit", { result: state.status });
+        }
+    }, [state]);
 
     return (
         <form action={formAction} className="flex flex-col gap-5">

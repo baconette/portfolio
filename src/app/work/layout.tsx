@@ -3,12 +3,18 @@ import { NavbarSimple } from "@/components/marketing/header-navigation/navbar-si
 import { FooterLarge01Brand } from "@/components/marketing/footers/footer-large-01-brand";
 import { WORK_SESSION_COOKIE, verifySession } from "@/lib/work-auth";
 import { WorkPasswordForm } from "./work-password-form";
+import { WorkUnlockedTracker } from "./work-unlocked-tracker";
 
 export default async function WorkLayout({ children }: { children: React.ReactNode }) {
     const session = (await cookies()).get(WORK_SESSION_COOKIE)?.value;
 
     if (verifySession(session)) {
-        return children;
+        return (
+            <>
+                {children}
+                <WorkUnlockedTracker />
+            </>
+        );
     }
 
     return (

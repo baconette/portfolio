@@ -16,7 +16,7 @@ type VerticalTypes = "button-brand" | "button-gray" | "button-border" | "button-
 type TabTypeColors<T> = T extends "horizontal" ? HorizontalTypes : VerticalTypes;
 
 // Styles for different types of tab
-const getTabStyles = ({ isFocusVisible, isSelected, isHovered }: AriaTabRenderProps) => ({
+export const getTabStyles = ({ isFocusVisible, isSelected, isHovered }: AriaTabRenderProps) => ({
     "button-brand": cx(
         "outline-focus-ring *:data-icon:text-fg-quaternary",
         isFocusVisible && "outline-2 -outline-offset-2",

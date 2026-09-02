@@ -22,11 +22,11 @@ function getClient() {
     return new Client({ auth: process.env.NOTION_TOKEN });
 }
 
-function plainText(richText: Array<{ plain_text: string }> | undefined): string {
+export function plainText(richText: Array<{ plain_text: string }> | undefined): string {
     return richText?.map((t) => t.plain_text).join("") ?? "";
 }
 
-function toArticle(page: PageObjectResponse): Article {
+export function toArticle(page: PageObjectResponse): Article {
     const props = page.properties;
 
     const title = props.Title?.type === "title" ? plainText(props.Title.title) : "";
@@ -51,7 +51,7 @@ function toArticle(page: PageObjectResponse): Article {
     };
 }
 
-function toPlayArticle(page: PageObjectResponse): Article {
+export function toPlayArticle(page: PageObjectResponse): Article {
     const props = page.properties;
 
     const title = props.Title?.type === "title" ? plainText(props.Title.title) : "";

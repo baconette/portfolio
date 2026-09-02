@@ -451,9 +451,23 @@ export const Simple04Horizontal = ({ article }: { article: Article }) => (
     </article>
 );
 
-export const CardFullWidthImage01Vertical = ({ article, openInNewTab }: { article: Article; openInNewTab?: boolean }) => (
+export const CardFullWidthImage01Vertical = ({
+    article,
+    openInNewTab,
+    onArticleClick,
+}: {
+    article: Article;
+    openInNewTab?: boolean;
+    onArticleClick?: (article: Article) => void;
+}) => (
     <article className="flex flex-col overflow-hidden rounded-lg bg-primary outline-1 -outline-offset-1 outline-secondary_alt">
-        <a href={article.href} tabIndex={-1} target={openInNewTab ? "_blank" : undefined} rel={openInNewTab ? "noopener noreferrer" : undefined}>
+        <a
+            href={article.href}
+            tabIndex={-1}
+            target={openInNewTab ? "_blank" : undefined}
+            rel={openInNewTab ? "noopener noreferrer" : undefined}
+            onClick={onArticleClick ? () => onArticleClick(article) : undefined}
+        >
             <img
                 src={article.thumbnailUrl}
                 alt={article.title}
@@ -468,6 +482,7 @@ export const CardFullWidthImage01Vertical = ({ article, openInNewTab }: { articl
                         href={article.href}
                         target={openInNewTab ? "_blank" : undefined}
                         rel={openInNewTab ? "noopener noreferrer" : undefined}
+                        onClick={onArticleClick ? () => onArticleClick(article) : undefined}
                         className="rounded-md text-lg font-semibold text-primary outline-focus-ring focus-visible:outline-2 focus-visible:outline-offset-2"
                     >
                         {article.title}

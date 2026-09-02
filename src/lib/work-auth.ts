@@ -21,6 +21,15 @@ export function signSession(): string | null {
     return `${expiresAtMs}.${hmac(expiresAtMs, secret)}`;
 }
 
+export function passwordsMatch(submitted: string, expected: string): boolean {
+    const submittedBuf = Buffer.from(submitted);
+    const expectedBuf = Buffer.from(expected);
+    // Lengths must match for timingSafeEqual; a length mismatch alone is not a meaningful timing
+    // side-channel here since the password isn't secret-derived per-byte in a way worth padding for.
+    if (submittedBuf.length !== expectedBuf.length) return false;
+    return timingSafeEqual(submittedBuf, expectedBuf);
+}
+
 export function verifySession(cookieValue: string | undefined): boolean {
     const secret = process.env.WORK_AUTH_SECRET;
     if (!secret || !cookieValue) return false;

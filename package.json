@@ -13,9 +13,13 @@
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "tokens:changelog": "node design-system/changelog/sync.mjs",
-    "tokens:sync": "npm run tokens:changelog && npm run build --prefix design-system/pipeline"
+    "tokens:sync": "npm run tokens:changelog && npm run build --prefix design-system/pipeline",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage"
   },
   "dependencies": {
+    "@next/third-parties": "^16.3.4",
     "@notionhq/client": "^5.23.2",
     "@react-stately/utils": "^3.12.1",
     "@tailwindcss/typography": "^0.5.20",
@@ -38,6 +42,9 @@
     "@storybook/addon-vitest": "^10.5.5",
     "@storybook/nextjs-vite": "^10.5.5",
     "@tailwindcss/postcss": "^4",
+    "@testing-library/jest-dom": "^7.0.1",
+    "@testing-library/react": "^16.3.3",
+    "@testing-library/user-event": "^14.6.7",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
@@ -46,6 +53,7 @@
     "eslint": "^9",
     "eslint-config-next": "16.2.10",
     "eslint-plugin-storybook": "^10.5.5",
+    "jsdom": "^30.0.1",
     "playwright": "^1.62.0",
     "postcss": "^8.5.19",
     "storybook": "^10.5.5",

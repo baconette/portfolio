@@ -4,10 +4,15 @@ import { useMemo } from "react";
 import { Tabs } from "@/components/application/tabs/tabs";
 import { CardFullWidthImage01Vertical, type Article } from "@/components/marketing/blog/base-components/blog-cards";
 import { BadgeWithDot, type BadgeColor } from "@/components/base/badges/badges";
+import { trackEvent } from "@/lib/analytics";
 
 const STAGE_BADGE_COLOR: Record<string, BadgeColor<"pill-color">> = {
     Live: "success",
     UAT: "amber",
+};
+
+const handleArticleClick = (article: Article) => {
+    trackEvent("play_item_click", { slug: article.href, category: article.category.name });
 };
 
 const ArticleGrid = ({ articles }: { articles: Article[] }) => (
@@ -19,7 +24,7 @@ const ArticleGrid = ({ articles }: { articles: Article[] }) => (
                         {article.stage}
                     </BadgeWithDot>
                 )}
-                <CardFullWidthImage01Vertical article={article} openInNewTab />
+                <CardFullWidthImage01Vertical article={article} openInNewTab onArticleClick={handleArticleClick} />
             </div>
         ))}
     </div>
@@ -35,7 +40,7 @@ export const PlayFilterGrid = ({ articles }: { articles: Article[] }) => {
     }, [articles]);
 
     return (
-        <Tabs>
+        <Tabs onSelectionChange={(key) => trackEvent("play_filter_select", { category: String(key) })}>
             <Tabs.List type="button-brand" size="md" aria-label="Filter play items by type" className="mb-8 md:mb-12">
                 <Tabs.Item id="all" label="All" />
                 {categories.map((category) => (
