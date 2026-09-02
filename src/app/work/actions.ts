@@ -1,9 +1,8 @@
 "use server";
 
-import { timingSafeEqual } from "node:crypto";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
-import { WORK_SESSION_COOKIE, signSession } from "@/lib/work-auth";
+import { WORK_SESSION_COOKIE, passwordsMatch, signSession } from "@/lib/work-auth";
 
 export interface WorkAuthState {
     status: "idle" | "error";
@@ -11,15 +10,6 @@ export interface WorkAuthState {
 }
 
 const GENERIC_ERROR = "Something went wrong on our end, please try again later.";
-
-export function passwordsMatch(submitted: string, expected: string): boolean {
-    const submittedBuf = Buffer.from(submitted);
-    const expectedBuf = Buffer.from(expected);
-    // Lengths must match for timingSafeEqual; a length mismatch alone is not a meaningful timing
-    // side-channel here since the password isn't secret-derived per-byte in a way worth padding for.
-    if (submittedBuf.length !== expectedBuf.length) return false;
-    return timingSafeEqual(submittedBuf, expectedBuf);
-}
 
 export async function unlockWork(_prevState: WorkAuthState, formData: FormData): Promise<WorkAuthState> {
     const password = formData.get("password")?.toString() ?? "";
