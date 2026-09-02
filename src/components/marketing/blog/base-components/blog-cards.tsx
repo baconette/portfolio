@@ -28,6 +28,8 @@ export type Article = {
     tags: Array<{ name: string; color: BadgeColor<"color">; href: string }>;
     roles: string[];
     isFeatured?: boolean;
+    /** Notion "Stage" select value (e.g. "Live", "UAT") — only populated for Play items. */
+    stage?: string;
 };
 
 export const Simple01Vertical = ({ article, imageClassName }: { article: Article; imageClassName?: string }) => (

@@ -60,6 +60,7 @@ function toPlayArticle(page: PageObjectResponse): Article {
     const cover = props.Cover?.type === "url" ? (props.Cover.url ?? "") : "";
     const type = props.Type?.type === "select" ? (props.Type.select?.name ?? "") : "";
     const role = props.Role?.type === "multi_select" ? props.Role.multi_select : [];
+    const stage = props.Stage?.type === "select" ? (props.Stage.select?.name ?? undefined) : undefined;
 
     return {
         id: page.id,
@@ -73,6 +74,7 @@ function toPlayArticle(page: PageObjectResponse): Article {
         readingTime: "",
         tags: [],
         roles: role.map((r) => r.name),
+        stage,
     };
 }
 
