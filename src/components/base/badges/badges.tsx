@@ -33,6 +33,11 @@ export const filledColors: Record<BadgeColors, { root: string; addon: string; ad
         addon: "text-utility-green-500",
         addonButton: "hover:bg-utility-green-100 text-utility-green-400 hover:text-utility-green-500",
     },
+    amber: {
+        root: "bg-utility-amber-50 text-utility-amber-700 ring-utility-amber-200",
+        addon: "text-utility-amber-500",
+        addonButton: "hover:bg-utility-amber-100 text-utility-amber-400 hover:text-utility-amber-500",
+    },
     slate: {
         root: "bg-utility-slate-50 text-utility-slate-700 ring-utility-slate-200",
         addon: "text-utility-slate-500",

@@ -7,6 +7,7 @@ import { cx } from "@/utils/cx";
 const navLinks = [
     { label: "Profile", href: "/profile" },
     { label: "Work", href: "/work" },
+    { label: "Play", href: "/play" },
     { label: "Contact", href: "/contact" },
 ];
 

@@ -28,6 +28,8 @@ export type Article = {
     tags: Array<{ name: string; color: BadgeColor<"color">; href: string }>;
     roles: string[];
     isFeatured?: boolean;
+    /** Notion "Stage" select value (e.g. "Live", "UAT") — only populated for Play items. */
+    stage?: string;
 };
 
 export const Simple01Vertical = ({ article, imageClassName }: { article: Article; imageClassName?: string }) => (
@@ -449,9 +451,9 @@ export const Simple04Horizontal = ({ article }: { article: Article }) => (
     </article>
 );
 
-export const CardFullWidthImage01Vertical = ({ article }: { article: Article }) => (
+export const CardFullWidthImage01Vertical = ({ article, openInNewTab }: { article: Article; openInNewTab?: boolean }) => (
     <article className="flex flex-col overflow-hidden rounded-lg bg-primary outline-1 -outline-offset-1 outline-secondary_alt">
-        <a href={article.href} tabIndex={-1}>
+        <a href={article.href} tabIndex={-1} target={openInNewTab ? "_blank" : undefined} rel={openInNewTab ? "noopener noreferrer" : undefined}>
             <img
                 src={article.thumbnailUrl}
                 alt={article.title}
@@ -464,6 +466,8 @@ export const CardFullWidthImage01Vertical = ({ article }: { article: Article }) 
                 <div className="flex flex-col gap-1">
                     <a
                         href={article.href}
+                        target={openInNewTab ? "_blank" : undefined}
+                        rel={openInNewTab ? "noopener noreferrer" : undefined}
                         className="rounded-md text-lg font-semibold text-primary outline-focus-ring focus-visible:outline-2 focus-visible:outline-offset-2"
                     >
                         {article.title}
