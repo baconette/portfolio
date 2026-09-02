@@ -18,6 +18,7 @@ There is no test suite configured in this repo.
 Requires `.env.local` (gitignored) with:
 - `NOTION_TOKEN` — internal integration token for the Notion API (separate from any Claude-side Notion MCP connector — this is what the deployed app itself uses at runtime)
 - `NOTION_PORTFOLIO_DATA_SOURCE_ID` — data source ID for the "Portfolio CMS" Notion database
+- `NEXT_PUBLIC_GA_MEASUREMENT_ID` — GA4 Measurement ID (`G-XXXXXXXXXX`) for the site's Google Analytics property. Optional in local dev; when unset, no analytics script is injected and `trackEvent` calls in `src/lib/analytics.ts` no-op.
 
 Without these, Notion-backed pages fall back to hardcoded sample data (see Data layer below) rather than failing.
 

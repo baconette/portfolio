@@ -20,10 +20,10 @@ const CALLOUT_WIDE_COLUMNS: Partial<Record<ApiColor, 1 | 2>> = {
 };
 
 const HEADING_TYPES = new Set(["heading_1", "heading_2", "heading_3", "heading_4", "heading_5"]);
-const isHeadingBlock = (block: NotionBlockNode): boolean => HEADING_TYPES.has(block.type);
+export const isHeadingBlock = (block: NotionBlockNode): boolean => HEADING_TYPES.has(block.type);
 
 /** Reads a heading block's color at any level, including heading_4/5 (not in the installed client types — see the cast note in renderBlock). */
-const headingColor = (block: NotionBlockNode): ApiColor | undefined => {
+export const headingColor = (block: NotionBlockNode): ApiColor | undefined => {
     if (block.type === "heading_1") return block.heading_1.color;
     if (block.type === "heading_2") return block.heading_2.color;
     if (block.type === "heading_3") return block.heading_3.color;
@@ -34,7 +34,7 @@ const headingColor = (block: NotionBlockNode): ApiColor | undefined => {
 };
 
 /** Collects `blocks[start]` plus every following block up to (not including) the next heading_2, or a divider when `stopAtDivider` is set. */
-const collectThemedGroup = (blocks: NotionBlockNode[], start: number, stopAtDivider: boolean): { group: NotionBlockNode[]; next: number } => {
+export const collectThemedGroup = (blocks: NotionBlockNode[], start: number, stopAtDivider: boolean): { group: NotionBlockNode[]; next: number } => {
     const group: NotionBlockNode[] = [blocks[start]];
     let j = start + 1;
     while (j < blocks.length && blocks[j].type !== "heading_2" && !(stopAtDivider && blocks[j].type === "divider")) {

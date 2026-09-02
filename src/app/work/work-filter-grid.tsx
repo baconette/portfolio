@@ -3,11 +3,16 @@
 import { useMemo } from "react";
 import { Tabs } from "@/components/application/tabs/tabs";
 import { CardFullWidthImage01Vertical, type Article } from "@/components/marketing/blog/base-components/blog-cards";
+import { trackEvent } from "@/lib/analytics";
+
+const handleArticleClick = (article: Article) => {
+    trackEvent("case_study_click", { slug: article.href.replace("/work/", ""), category: article.category.name });
+};
 
 const ArticleGrid = ({ articles }: { articles: Article[] }) => (
     <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
         {articles.map((article) => (
-            <CardFullWidthImage01Vertical key={article.id} article={article} />
+            <CardFullWidthImage01Vertical key={article.id} article={article} onArticleClick={handleArticleClick} />
         ))}
     </div>
 );
@@ -22,8 +27,8 @@ export const WorkFilterGrid = ({ articles }: { articles: Article[] }) => {
     }, [articles]);
 
     return (
-        <Tabs>
-            <Tabs.List type="button-brand" size="md" aria-label="Filter case studies by type" className="mb-8 md:mb-12">
+        <Tabs onSelectionChange={(key) => trackEvent("work_filter_select", { category: String(key) })}>
+            <Tabs.List type="button-brand" size="md" aria-label="Filter case studies by type" className="mb-8 flex-wrap gap-y-2 md:mb-12">
                 <Tabs.Item id="all" label="All" />
                 {categories.map((category) => (
                     <Tabs.Item key={category} id={category} label={category} />

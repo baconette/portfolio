@@ -31,6 +31,19 @@ export default defineConfig({
           },
         },
       },
+      {
+        extends: true,
+        resolve: {
+          tsconfigPaths: true,
+        },
+        test: {
+          name: 'unit',
+          environment: 'jsdom',
+          include: ['src/**/*.test.{ts,tsx}'],
+          setupFiles: [path.join(dirname, 'vitest.setup.ts')],
+          globals: true,
+        },
+      },
     ],
   },
 });
