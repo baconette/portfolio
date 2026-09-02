@@ -12,7 +12,7 @@ export interface WorkAuthState {
 
 const GENERIC_ERROR = "Something went wrong on our end, please try again later.";
 
-function passwordsMatch(submitted: string, expected: string): boolean {
+export function passwordsMatch(submitted: string, expected: string): boolean {
     const submittedBuf = Buffer.from(submitted);
     const expectedBuf = Buffer.from(expected);
     // Lengths must match for timingSafeEqual; a length mismatch alone is not a meaningful timing
