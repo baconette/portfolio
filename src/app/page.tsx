@@ -4,8 +4,12 @@ import { NavbarSimple } from "@/components/marketing/header-navigation/navbar-si
 import { getNavLinks } from "@/components/marketing/header-navigation/nav-links";
 import { HeaderCenteredBrand } from "@/components/marketing/header-section/header-centered-brand";
 import { FooterLarge01Brand } from "@/components/marketing/footers/footer-large-01-brand";
-import { getPageSeo, isPagePublished } from "@/lib/notion";
+import { getHomepageContent, getPageSeo } from "@/lib/notion";
 import { HomepageIntroSection } from "./homepage-intro-section";
+
+/** Serve a cached page and re-fetch Notion in the background at most every 5 minutes, instead of
+ * hitting Notion on every single visitor request. */
+export const revalidate = 300;
 
 export async function generateMetadata(): Promise<Metadata> {
   const { title, description } = await getPageSeo("/", {
@@ -16,7 +20,8 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function Home() {
-  if (!(await isPagePublished("/"))) notFound();
+  const { published } = await getHomepageContent();
+  if (!published) notFound();
 
   const links = await getNavLinks();
 

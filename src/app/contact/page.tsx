@@ -3,8 +3,12 @@ import { notFound } from "next/navigation";
 import { NavbarSimple } from "@/components/marketing/header-navigation/navbar-simple";
 import { getNavLinks } from "@/components/marketing/header-navigation/nav-links";
 import { FooterLarge01Brand } from "@/components/marketing/footers/footer-large-01-brand";
-import { getContactContent, getPageSeo, isPagePublished } from "@/lib/notion";
+import { getContactContent, getPageSeo } from "@/lib/notion";
 import { ContactForm } from "./contact-form";
+
+/** Serve a cached page and re-fetch Notion in the background at most every 5 minutes, instead of
+ * hitting Notion on every single visitor request. */
+export const revalidate = 300;
 
 export async function generateMetadata(): Promise<Metadata> {
     const { title, description } = await getPageSeo("/contact", {
@@ -15,9 +19,9 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function Contact() {
-    if (!(await isPagePublished("/contact"))) notFound();
+    const { heading, body, published } = await getContactContent();
+    if (!published) notFound();
 
-    const { heading, body } = await getContactContent();
     const links = await getNavLinks();
 
     return (

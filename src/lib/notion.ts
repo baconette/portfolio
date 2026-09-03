@@ -79,8 +79,9 @@ export function toPlayArticle(page: PageObjectResponse): Article {
 }
 
 /** Fetches Published Play items (Slug starting with "/play/") from the Portfolio CMS, ordered by the Order property.
- * Unlike case studies, each card links out via its URL property rather than an internal /work/{slug} page. */
-export async function getPlayProjects(): Promise<Article[]> {
+ * Unlike case studies, each card links out via its URL property rather than an internal /work/{slug} page.
+ * Wrapped in React's `cache()` so repeated calls within one request share a single Notion fetch. */
+export const getPlayProjects = cache(async (): Promise<Article[]> => {
     const notion = getClient();
     if (!notion || !DATA_SOURCE_ID) return [];
 
@@ -96,10 +97,11 @@ export async function getPlayProjects(): Promise<Article[]> {
     });
 
     return response.results.filter((page): page is PageObjectResponse => "properties" in page).map(toPlayArticle);
-}
+});
 
-/** Fetches Published projects from the Portfolio CMS Notion database, ordered by the Order property. */
-export async function getPortfolioProjects(): Promise<Article[]> {
+/** Fetches Published projects from the Portfolio CMS Notion database, ordered by the Order property.
+ * Wrapped in React's `cache()` so repeated calls within one request share a single Notion fetch. */
+export const getPortfolioProjects = cache(async (): Promise<Article[]> => {
     const notion = getClient();
     if (!notion || !DATA_SOURCE_ID) return [];
 
@@ -115,7 +117,7 @@ export async function getPortfolioProjects(): Promise<Article[]> {
     });
 
     return response.results.filter((page): page is PageObjectResponse => "properties" in page).map(toArticle);
-}
+});
 
 export interface HomepageContent {
     heading: string;
@@ -124,9 +126,12 @@ export interface HomepageContent {
     sectionHeading: string;
     /** Paragraph blocks immediately following that Heading 3 — the intro section's body. */
     sectionParagraphs: string[];
+    /** False only when Notion is configured and the row genuinely isn't Published — callers should
+     * notFound() in that case. True when unconfigured too, so local dev keeps showing fallback content. */
+    published: boolean;
 }
 
-const FALLBACK_HOMEPAGE_CONTENT: HomepageContent = {
+const FALLBACK_HOMEPAGE_CONTENT: Omit<HomepageContent, "published"> = {
     heading: "Erika Aldrich Murga",
     subheading: "Product Strategy",
     sectionHeading: "",
@@ -136,12 +141,12 @@ const FALLBACK_HOMEPAGE_CONTENT: HomepageContent = {
 /**
  * Fetches the homepage hero copy and intro section from the Portfolio CMS row with Slug "/"
  * (Published only). The H1/H2 hero text and the Heading 3 + paragraphs intro section both live in
- * that page's body content, not its properties. Wrapped in React's `cache()` so the hero and intro
- * section components — which both need this — share one fetch per request.
+ * that page's body content, not its properties. Wrapped in React's `cache()` so the hero, intro
+ * section, and publish check — which all need this — share one fetch per request.
  */
 export const getHomepageContent = cache(async (): Promise<HomepageContent> => {
     const notion = getClient();
-    if (!notion || !DATA_SOURCE_ID) return FALLBACK_HOMEPAGE_CONTENT;
+    if (!notion || !DATA_SOURCE_ID) return { ...FALLBACK_HOMEPAGE_CONTENT, published: true };
 
     const response: QueryDataSourceResponse = await notion.dataSources.query({
         data_source_id: DATA_SOURCE_ID,
@@ -154,7 +159,7 @@ export const getHomepageContent = cache(async (): Promise<HomepageContent> => {
     });
 
     const page = response.results.find((p): p is PageObjectResponse => "properties" in p);
-    if (!page) return FALLBACK_HOMEPAGE_CONTENT;
+    if (!page) return { ...FALLBACK_HOMEPAGE_CONTENT, published: false };
 
     const blocks = await notion.blocks.children.list({ block_id: page.id });
 
@@ -189,26 +194,31 @@ export const getHomepageContent = cache(async (): Promise<HomepageContent> => {
         subheading: subheading || FALLBACK_HOMEPAGE_CONTENT.subheading,
         sectionHeading,
         sectionParagraphs,
+        published: true,
     };
 });
 
 export interface ContactContent {
     heading: string;
     body: string;
+    /** False only when Notion is configured and the row genuinely isn't Published — callers should
+     * notFound() in that case. True when unconfigured too, so local dev keeps showing fallback content. */
+    published: boolean;
 }
 
-const FALLBACK_CONTACT_CONTENT: ContactContent = {
+const FALLBACK_CONTACT_CONTENT: Omit<ContactContent, "published"> = {
     heading: "Get in touch",
     body: "Have a project in mind or just want to say hello? Send a message below.",
 };
 
 /**
  * Fetches the contact page copy from the Portfolio CMS row with Slug "/contact" (Published only).
- * The H1/body text lives in that page's body content, not its properties.
+ * The H1/body text lives in that page's body content, not its properties. Wrapped in React's
+ * `cache()` so the page component and the publish check share one fetch per request.
  */
-export async function getContactContent(): Promise<ContactContent> {
+export const getContactContent = cache(async (): Promise<ContactContent> => {
     const notion = getClient();
-    if (!notion || !DATA_SOURCE_ID) return FALLBACK_CONTACT_CONTENT;
+    if (!notion || !DATA_SOURCE_ID) return { ...FALLBACK_CONTACT_CONTENT, published: true };
 
     const response: QueryDataSourceResponse = await notion.dataSources.query({
         data_source_id: DATA_SOURCE_ID,
@@ -221,7 +231,7 @@ export async function getContactContent(): Promise<ContactContent> {
     });
 
     const page = response.results.find((p): p is PageObjectResponse => "properties" in p);
-    if (!page) return FALLBACK_CONTACT_CONTENT;
+    if (!page) return { ...FALLBACK_CONTACT_CONTENT, published: false };
 
     const blocks = await notion.blocks.children.list({ block_id: page.id });
 
@@ -241,8 +251,9 @@ export async function getContactContent(): Promise<ContactContent> {
     return {
         heading: heading || FALLBACK_CONTACT_CONTENT.heading,
         body: body || FALLBACK_CONTACT_CONTENT.body,
+        published: true,
     };
-}
+});
 
 export interface PageSeo {
     title: string;
@@ -252,8 +263,9 @@ export interface PageSeo {
 /**
  * Fetches SEO Title/SEO Description from the Portfolio CMS row matching the given Slug (Published only).
  * Falls back to the provided defaults when Notion isn't configured, the row isn't found, or the fields are empty.
+ * Wrapped in React's `cache()` so repeated calls for the same slug within one request share a fetch.
  */
-export async function getPageSeo(slug: string, fallback: PageSeo): Promise<PageSeo> {
+export const getPageSeo = cache(async (slug: string, fallback: PageSeo): Promise<PageSeo> => {
     const notion = getClient();
     if (!notion || !DATA_SOURCE_ID) return fallback;
 
@@ -278,15 +290,17 @@ export async function getPageSeo(slug: string, fallback: PageSeo): Promise<PageS
         title: seoTitle || fallback.title,
         description: seoDescription || fallback.description,
     };
-}
+});
 
 /**
  * Whether the Portfolio CMS row matching the given Slug is Published. Returns true when Notion
  * isn't configured — an unconfigured local dev environment should still render pages with their
  * fallback content rather than 404, matching every other helper in this file. Only gates pages once
- * Notion is actually connected and the row's Published checkbox says otherwise.
+ * Notion is actually connected and the row's Published checkbox says otherwise. Wrapped in React's
+ * `cache()` so repeated calls for the same slug within one request (e.g. a page's own gate plus the
+ * nav's publish check) share a single Notion fetch.
  */
-export async function isPagePublished(slug: string): Promise<boolean> {
+export const isPagePublished = cache(async (slug: string): Promise<boolean> => {
     const notion = getClient();
     if (!notion || !DATA_SOURCE_ID) return true;
 
@@ -301,7 +315,7 @@ export async function isPagePublished(slug: string): Promise<boolean> {
     });
 
     return response.results.some((p): p is PageObjectResponse => "properties" in p);
-}
+});
 
 async function fetchBlocksRecursive(notion: Client, blockId: string): Promise<NotionBlockNode[]> {
     const nodes: NotionBlockNode[] = [];
