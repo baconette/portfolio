@@ -159,6 +159,36 @@ describe("Notion fetch when configured", () => {
         expect(projects).toEqual([expect.objectContaining({ title: "Case Study", category: { href: "#", name: "Branding" } })]);
     });
 
+    it("getPlayProjects filters by Slug starting with /play/, matching each item's own slug rather than the /play index row", async () => {
+        const page = mockPage({
+            Title: { type: "title", title: [{ plain_text: "Play Item" }] },
+            Excerpt: { type: "rich_text", rich_text: [] },
+            URL: { type: "url", url: "https://example.com" },
+            Cover: { type: "url", url: "" },
+            Type: { type: "select", select: { name: "Experiment" } },
+            Role: { type: "multi_select", multi_select: [] },
+        } as unknown as PageObjectResponse["properties"]);
+
+        const query = vi.fn().mockResolvedValue({ results: [page] });
+        vi.doMock("@notionhq/client", () => ({
+            Client: class {
+                dataSources = { query };
+            },
+        }));
+
+        const { getPlayProjects } = await import("./notion");
+        const projects = await getPlayProjects();
+
+        expect(query).toHaveBeenCalledWith(
+            expect.objectContaining({
+                filter: expect.objectContaining({
+                    and: expect.arrayContaining([{ property: "Slug", rich_text: { starts_with: "/play/" } }]),
+                }),
+            }),
+        );
+        expect(projects).toEqual([expect.objectContaining({ title: "Play Item" })]);
+    });
+
     it("getHomepageContent extracts the H1/H2 hero and the H3 + paragraphs intro section", async () => {
         const page = mockPage({} as unknown as PageObjectResponse["properties"]);
         const query = vi.fn().mockResolvedValue({ results: [page] });

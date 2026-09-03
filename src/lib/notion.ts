@@ -78,7 +78,7 @@ export function toPlayArticle(page: PageObjectResponse): Article {
     };
 }
 
-/** Fetches Published Play items (Slug "/play") from the Portfolio CMS, ordered by the Order property.
+/** Fetches Published Play items (Slug starting with "/play/") from the Portfolio CMS, ordered by the Order property.
  * Unlike case studies, each card links out via its URL property rather than an internal /work/{slug} page. */
 export async function getPlayProjects(): Promise<Article[]> {
     const notion = getClient();
@@ -89,7 +89,7 @@ export async function getPlayProjects(): Promise<Article[]> {
         filter: {
             and: [
                 { property: "Published", checkbox: { equals: true } },
-                { property: "Slug", rich_text: { equals: "/play" } },
+                { property: "Slug", rich_text: { starts_with: "/play/" } },
             ],
         },
         sorts: [{ property: "Order", direction: "ascending" }],
