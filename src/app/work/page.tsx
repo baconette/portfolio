@@ -5,7 +5,8 @@ import { getNavLinks } from "@/components/marketing/header-navigation/nav-links"
 import { HeaderCenteredBrand } from "@/components/marketing/header-section/header-centered-brand";
 import type { Article } from "@/components/marketing/blog/base-components/blog-cards";
 import { FooterLarge01Brand } from "@/components/marketing/footers/footer-large-01-brand";
-import { getPortfolioProjects, getPageSeo, isPagePublished } from "@/lib/notion";
+import { getCaseStudy, getPortfolioProjects, getPageSeo, isPagePublished } from "@/lib/notion";
+import { NotionContent } from "@/app/work/[slug]/notion-content";
 import { WorkFilterGrid } from "./work-filter-grid";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -64,14 +65,20 @@ export default async function Work() {
   const projects = await getPortfolioProjects();
   const articles = projects.length > 0 ? projects : sampleArticles;
   const links = await getNavLinks();
+  const intro = await getCaseStudy("/work");
 
   return (
     <div className="flex min-h-screen flex-col">
       <NavbarSimple links={links} />
-      <HeaderCenteredBrand short />
+      <HeaderCenteredBrand short compact />
 
       <main className="bg-secondary">
         <div className="mx-auto w-full max-w-container px-4 py-16 md:px-8 md:py-24">
+          {intro && intro.blocks.length > 0 && (
+            <div className="mx-auto mb-8 max-w-3xl text-center md:mb-12 [&_p]:text-xl [&_p]:text-primary">
+              <NotionContent blocks={intro.blocks} />
+            </div>
+          )}
           <WorkFilterGrid articles={articles} />
         </div>
       </main>

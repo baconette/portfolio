@@ -99,6 +99,7 @@ describe("Notion fetch fallbacks when unconfigured", () => {
         expect(content.subheading).toBeTruthy();
         expect(content.sectionHeading).toBe("");
         expect(content.sectionParagraphs).toEqual([]);
+        expect(content.published).toBe(true);
     });
 
     it("getContactContent returns the hardcoded fallback copy", async () => {
@@ -106,6 +107,7 @@ describe("Notion fetch fallbacks when unconfigured", () => {
         const content = await getContactContent();
         expect(content.heading).toBeTruthy();
         expect(content.body).toBeTruthy();
+        expect(content.published).toBe(true);
     });
 
     it("getPageSeo returns the caller-supplied fallback", async () => {
@@ -216,6 +218,7 @@ describe("Notion fetch when configured", () => {
             subheading: "Hero subheading",
             sectionHeading: "Intro heading",
             sectionParagraphs: ["First paragraph.", "Second paragraph."],
+            published: true,
         });
     });
 

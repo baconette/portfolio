@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 
 type ShapeDef =
     | { type: "circle"; cx: number; cy: number; r: number; transform: string; fill: string }
@@ -314,10 +315,12 @@ export const InteractiveMapBackground = ({ children, className }: InteractiveMap
                     transformOrigin: "center center",
                 }}
             >
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
+                <Image
                     src="/about-map-background.png"
                     alt=""
+                    width={STAGE_WIDTH}
+                    height={STAGE_HEIGHT}
+                    priority
                     style={{
                         width: `${STAGE_WIDTH}px`,
                         height: `${STAGE_HEIGHT}px`,

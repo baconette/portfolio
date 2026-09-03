@@ -7,6 +7,10 @@ import { FooterLarge01Brand } from "@/components/marketing/footers/footer-large-
 import { getCaseStudy, getPageSeo } from "@/lib/notion";
 import { NotionContent } from "./notion-content";
 
+/** Serve a cached page per slug and re-fetch Notion in the background at most every 5 minutes,
+ * instead of hitting Notion on every single visitor request. */
+export const revalidate = 300;
+
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
     const { slug } = await params;
     const caseStudy = await getCaseStudy(`/work/${slug}`);
