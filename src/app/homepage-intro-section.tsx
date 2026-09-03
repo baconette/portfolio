@@ -14,8 +14,8 @@ export const HomepageIntroSection = async () => {
                     <p key={index}>{paragraph}</p>
                 ))}
             </div>
-            <Button href="/work" color="primary" size="lg" className="mt-8">
-                See Work
+            <Button href="/play" color="primary" size="lg" className="mt-8">
+                See Projects
             </Button>
         </section>
     );
