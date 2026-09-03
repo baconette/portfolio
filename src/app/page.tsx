@@ -3,6 +3,7 @@ import { NavbarExtraSimple } from "@/components/marketing/header-navigation/navb
 import { HeaderCenteredBrand } from "@/components/marketing/header-section/header-centered-brand";
 import { FooterLarge01Brand } from "@/components/marketing/footers/footer-large-01-brand";
 import { getPageSeo } from "@/lib/notion";
+import { HomepageIntroSection } from "./homepage-intro-section";
 
 export async function generateMetadata(): Promise<Metadata> {
   const { title, description } = await getPageSeo("/", {
@@ -17,6 +18,7 @@ export default function Home() {
     <div className="flex min-h-screen flex-col">
       <NavbarExtraSimple />
       <HeaderCenteredBrand />
+      <HomepageIntroSection />
 
       <FooterLarge01Brand />
     </div>
