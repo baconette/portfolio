@@ -1,3 +1,4 @@
+import { Button } from "@/components/base/buttons/button";
 import { getHomepageContent } from "@/lib/notion";
 
 export const HomepageIntroSection = async () => {
@@ -13,6 +14,9 @@ export const HomepageIntroSection = async () => {
                     <p key={index}>{paragraph}</p>
                 ))}
             </div>
+            <Button href="/work" color="primary" size="lg" className="mt-8">
+                See Work
+            </Button>
         </section>
     );
 };
