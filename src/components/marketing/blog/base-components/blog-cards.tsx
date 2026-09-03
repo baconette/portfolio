@@ -1,6 +1,7 @@
 "use client";
 
 import type { ComponentProps } from "react";
+import Image from "next/image";
 import { ArrowUpRight } from "@untitledui/icons";
 import { Avatar } from "@/components/base/avatar/avatar";
 import { BadgeGroup } from "@/components/base/badges/badge-groups";
@@ -467,12 +468,17 @@ export const CardFullWidthImage01Vertical = ({
             target={openInNewTab ? "_blank" : undefined}
             rel={openInNewTab ? "noopener noreferrer" : undefined}
             onClick={onArticleClick ? () => onArticleClick(article) : undefined}
+            className="relative block aspect-[1.5] w-full bg-secondary md:h-64"
         >
-            <img
-                src={article.thumbnailUrl}
-                alt={article.title}
-                className="aspect-[1.5] w-full rounded-t-lg object-cover outline-[0.5px] -outline-offset-[0.5px] outline-alpha-black/10 md:h-64"
-            />
+            {article.thumbnailUrl && (
+                <Image
+                    src={article.thumbnailUrl}
+                    alt={article.title}
+                    fill
+                    sizes="(min-width: 768px) 33vw, 100vw"
+                    className="rounded-t-lg object-cover outline-[0.5px] -outline-offset-[0.5px] outline-alpha-black/10"
+                />
+            )}
         </a>
 
         <div className="flex flex-col gap-5 px-5 pt-5 pb-6 md:p-6">
