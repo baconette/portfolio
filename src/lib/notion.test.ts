@@ -118,6 +118,11 @@ describe("Notion fetch fallbacks when unconfigured", () => {
         const { getCaseStudy } = await import("./notion");
         expect(await getCaseStudy("/work/missing")).toBeNull();
     });
+
+    it("isPagePublished returns true when Notion is unconfigured", async () => {
+        const { isPagePublished } = await import("./notion");
+        expect(await isPagePublished("/profile")).toBe(true);
+    });
 });
 
 describe("Notion fetch when configured", () => {
@@ -182,5 +187,37 @@ describe("Notion fetch when configured", () => {
             sectionHeading: "Intro heading",
             sectionParagraphs: ["First paragraph.", "Second paragraph."],
         });
+    });
+
+    it("isPagePublished returns true when a matching Published row is found", async () => {
+        const page = mockPage({} as unknown as PageObjectResponse["properties"]);
+        const query = vi.fn().mockResolvedValue({ results: [page] });
+        vi.doMock("@notionhq/client", () => ({
+            Client: class {
+                dataSources = { query };
+            },
+        }));
+
+        const { isPagePublished } = await import("./notion");
+        expect(await isPagePublished("/profile")).toBe(true);
+        expect(query).toHaveBeenCalledWith(
+            expect.objectContaining({
+                filter: expect.objectContaining({
+                    and: expect.arrayContaining([{ property: "Slug", rich_text: { equals: "/profile" } }]),
+                }),
+            }),
+        );
+    });
+
+    it("isPagePublished returns false when no matching Published row is found", async () => {
+        const query = vi.fn().mockResolvedValue({ results: [] });
+        vi.doMock("@notionhq/client", () => ({
+            Client: class {
+                dataSources = { query };
+            },
+        }));
+
+        const { isPagePublished } = await import("./notion");
+        expect(await isPagePublished("/profile")).toBe(false);
     });
 });

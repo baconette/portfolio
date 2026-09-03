@@ -1,5 +1,6 @@
 import { cookies } from "next/headers";
 import { NavbarSimple } from "@/components/marketing/header-navigation/navbar-simple";
+import { getNavLinks } from "@/components/marketing/header-navigation/nav-links";
 import { FooterLarge01Brand } from "@/components/marketing/footers/footer-large-01-brand";
 import { WORK_SESSION_COOKIE, verifySession } from "@/lib/work-auth";
 import { WorkPasswordForm } from "./work-password-form";
@@ -17,9 +18,11 @@ export default async function WorkLayout({ children }: { children: React.ReactNo
         );
     }
 
+    const links = await getNavLinks();
+
     return (
         <div className="flex min-h-screen flex-col">
-            <NavbarSimple />
+            <NavbarSimple links={links} />
 
             <main className="flex-1 bg-secondary">
                 <div className="mx-auto w-full max-w-md px-4 py-16 md:px-8 md:py-24">

@@ -280,6 +280,29 @@ export async function getPageSeo(slug: string, fallback: PageSeo): Promise<PageS
     };
 }
 
+/**
+ * Whether the Portfolio CMS row matching the given Slug is Published. Returns true when Notion
+ * isn't configured — an unconfigured local dev environment should still render pages with their
+ * fallback content rather than 404, matching every other helper in this file. Only gates pages once
+ * Notion is actually connected and the row's Published checkbox says otherwise.
+ */
+export async function isPagePublished(slug: string): Promise<boolean> {
+    const notion = getClient();
+    if (!notion || !DATA_SOURCE_ID) return true;
+
+    const response: QueryDataSourceResponse = await notion.dataSources.query({
+        data_source_id: DATA_SOURCE_ID,
+        filter: {
+            and: [
+                { property: "Published", checkbox: { equals: true } },
+                { property: "Slug", rich_text: { equals: slug } },
+            ],
+        },
+    });
+
+    return response.results.some((p): p is PageObjectResponse => "properties" in p);
+}
+
 async function fetchBlocksRecursive(notion: Client, blockId: string): Promise<NotionBlockNode[]> {
     const nodes: NotionBlockNode[] = [];
     let cursor: string | undefined;

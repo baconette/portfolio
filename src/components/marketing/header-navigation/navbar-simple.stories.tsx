@@ -11,6 +11,14 @@ const meta = {
         layout: "fullscreen",
     },
     tags: ["autodocs"],
+    args: {
+        links: [
+            { label: "Profile", href: "/profile" },
+            { label: "Work", href: "/work" },
+            { label: "Play", href: "/play" },
+            { label: "Contact", href: "/contact" },
+        ],
+    },
 } satisfies Meta<typeof NavbarSimple>;
 
 export default meta;

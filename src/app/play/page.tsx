@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
+import { notFound } from "next/navigation";
 import { NavbarSimple } from "@/components/marketing/header-navigation/navbar-simple";
+import { getNavLinks } from "@/components/marketing/header-navigation/nav-links";
 import { HeaderCenteredBrand } from "@/components/marketing/header-section/header-centered-brand";
 import { FooterLarge01Brand } from "@/components/marketing/footers/footer-large-01-brand";
-import { getPlayProjects } from "@/lib/notion";
+import { getPlayProjects, isPagePublished } from "@/lib/notion";
 import { PlayFilterGrid } from "./play-filter-grid";
 
 export const metadata: Metadata = {
@@ -11,11 +13,14 @@ export const metadata: Metadata = {
 };
 
 export default async function Play() {
+    if (!(await isPagePublished("/play"))) notFound();
+
     const projects = await getPlayProjects();
+    const links = await getNavLinks();
 
     return (
         <div className="flex min-h-screen flex-col">
-            <NavbarSimple />
+            <NavbarSimple links={links} />
             <HeaderCenteredBrand short />
 
             <main className="bg-secondary">
