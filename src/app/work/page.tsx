@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
+import { notFound } from "next/navigation";
 import { NavbarSimple } from "@/components/marketing/header-navigation/navbar-simple";
+import { getNavLinks } from "@/components/marketing/header-navigation/nav-links";
 import { HeaderCenteredBrand } from "@/components/marketing/header-section/header-centered-brand";
 import type { Article } from "@/components/marketing/blog/base-components/blog-cards";
 import { FooterLarge01Brand } from "@/components/marketing/footers/footer-large-01-brand";
-import { getPortfolioProjects, getPageSeo } from "@/lib/notion";
+import { getPortfolioProjects, getPageSeo, isPagePublished } from "@/lib/notion";
 import { WorkFilterGrid } from "./work-filter-grid";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -57,12 +59,15 @@ const sampleArticles: Article[] = [
 ];
 
 export default async function Work() {
+  if (!(await isPagePublished("/work"))) notFound();
+
   const projects = await getPortfolioProjects();
   const articles = projects.length > 0 ? projects : sampleArticles;
+  const links = await getNavLinks();
 
   return (
     <div className="flex min-h-screen flex-col">
-      <NavbarSimple />
+      <NavbarSimple links={links} />
       <HeaderCenteredBrand short />
 
       <main className="bg-secondary">

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Bodoni_Moda, Bricolage_Grotesque } from "next/font/google";
 import { GoogleAnalytics } from "@next/third-parties/google";
+import { AnalyticsPageview } from "./analytics-pageview";
 import "@/styles/globals.css";
 
 const bricolageGrotesque = Bricolage_Grotesque({
@@ -32,7 +33,12 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col">
         {children}
-        {gaId && <GoogleAnalytics gaId={gaId} />}
+        {gaId && (
+          <>
+            <GoogleAnalytics gaId={gaId} />
+            <AnalyticsPageview />
+          </>
+        )}
       </body>
     </html>
   );

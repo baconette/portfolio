@@ -92,11 +92,13 @@ describe("Notion fetch fallbacks when unconfigured", () => {
         expect(await getPlayProjects()).toEqual([]);
     });
 
-    it("getHomepageContent returns the hardcoded fallback copy", async () => {
+    it("getHomepageContent returns the hardcoded fallback copy and an empty intro section", async () => {
         const { getHomepageContent } = await import("./notion");
         const content = await getHomepageContent();
         expect(content.heading).toBeTruthy();
         expect(content.subheading).toBeTruthy();
+        expect(content.sectionHeading).toBe("");
+        expect(content.sectionParagraphs).toEqual([]);
     });
 
     it("getContactContent returns the hardcoded fallback copy", async () => {
@@ -115,6 +117,11 @@ describe("Notion fetch fallbacks when unconfigured", () => {
     it("getCaseStudy returns null", async () => {
         const { getCaseStudy } = await import("./notion");
         expect(await getCaseStudy("/work/missing")).toBeNull();
+    });
+
+    it("isPagePublished returns true when Notion is unconfigured", async () => {
+        const { isPagePublished } = await import("./notion");
+        expect(await isPagePublished("/profile")).toBe(true);
     });
 });
 
@@ -150,5 +157,97 @@ describe("Notion fetch when configured", () => {
             expect.objectContaining({ data_source_id: "test-data-source" }),
         );
         expect(projects).toEqual([expect.objectContaining({ title: "Case Study", category: { href: "#", name: "Branding" } })]);
+    });
+
+    it("getPlayProjects filters by Slug starting with /play/, matching each item's own slug rather than the /play index row", async () => {
+        const page = mockPage({
+            Title: { type: "title", title: [{ plain_text: "Play Item" }] },
+            Excerpt: { type: "rich_text", rich_text: [] },
+            URL: { type: "url", url: "https://example.com" },
+            Cover: { type: "url", url: "" },
+            Type: { type: "select", select: { name: "Experiment" } },
+            Role: { type: "multi_select", multi_select: [] },
+        } as unknown as PageObjectResponse["properties"]);
+
+        const query = vi.fn().mockResolvedValue({ results: [page] });
+        vi.doMock("@notionhq/client", () => ({
+            Client: class {
+                dataSources = { query };
+            },
+        }));
+
+        const { getPlayProjects } = await import("./notion");
+        const projects = await getPlayProjects();
+
+        expect(query).toHaveBeenCalledWith(
+            expect.objectContaining({
+                filter: expect.objectContaining({
+                    and: expect.arrayContaining([{ property: "Slug", rich_text: { starts_with: "/play/" } }]),
+                }),
+            }),
+        );
+        expect(projects).toEqual([expect.objectContaining({ title: "Play Item" })]);
+    });
+
+    it("getHomepageContent extracts the H1/H2 hero and the H3 + paragraphs intro section", async () => {
+        const page = mockPage({} as unknown as PageObjectResponse["properties"]);
+        const query = vi.fn().mockResolvedValue({ results: [page] });
+        const blocksList = vi.fn().mockResolvedValue({
+            results: [
+                { type: "heading_1", heading_1: { rich_text: [{ plain_text: "Hero heading" }] } },
+                { type: "heading_2", heading_2: { rich_text: [{ plain_text: "Hero subheading" }] } },
+                { type: "heading_3", heading_3: { rich_text: [{ plain_text: "Intro heading" }] } },
+                { type: "paragraph", paragraph: { rich_text: [{ plain_text: "First paragraph." }] } },
+                { type: "paragraph", paragraph: { rich_text: [{ plain_text: "Second paragraph." }] } },
+            ],
+        });
+        vi.doMock("@notionhq/client", () => ({
+            Client: class {
+                dataSources = { query };
+                blocks = { children: { list: blocksList } };
+            },
+        }));
+
+        const { getHomepageContent } = await import("./notion");
+        const content = await getHomepageContent();
+
+        expect(content).toEqual({
+            heading: "Hero heading",
+            subheading: "Hero subheading",
+            sectionHeading: "Intro heading",
+            sectionParagraphs: ["First paragraph.", "Second paragraph."],
+        });
+    });
+
+    it("isPagePublished returns true when a matching Published row is found", async () => {
+        const page = mockPage({} as unknown as PageObjectResponse["properties"]);
+        const query = vi.fn().mockResolvedValue({ results: [page] });
+        vi.doMock("@notionhq/client", () => ({
+            Client: class {
+                dataSources = { query };
+            },
+        }));
+
+        const { isPagePublished } = await import("./notion");
+        expect(await isPagePublished("/profile")).toBe(true);
+        expect(query).toHaveBeenCalledWith(
+            expect.objectContaining({
+                filter: expect.objectContaining({
+                    and: expect.arrayContaining([{ property: "Slug", rich_text: { equals: "/profile" } }]),
+                }),
+            }),
+        );
+    });
+
+    it("isPagePublished returns false when no matching Published row is found", async () => {
+        const query = vi.fn().mockResolvedValue({ results: [] });
+        vi.doMock("@notionhq/client", () => ({
+            Client: class {
+                dataSources = { query };
+            },
+        }));
+
+        const { isPagePublished } = await import("./notion");
+        expect(await isPagePublished("/profile")).toBe(false);
     });
 });

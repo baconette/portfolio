@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
+import { notFound } from "next/navigation";
 import { NavbarSimple } from "@/components/marketing/header-navigation/navbar-simple";
+import { getNavLinks } from "@/components/marketing/header-navigation/nav-links";
 import { FooterLarge01Brand } from "@/components/marketing/footers/footer-large-01-brand";
-import { getContactContent, getPageSeo } from "@/lib/notion";
+import { getContactContent, getPageSeo, isPagePublished } from "@/lib/notion";
 import { ContactForm } from "./contact-form";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -13,11 +15,14 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function Contact() {
+    if (!(await isPagePublished("/contact"))) notFound();
+
     const { heading, body } = await getContactContent();
+    const links = await getNavLinks();
 
     return (
         <div className="flex min-h-screen flex-col">
-            <NavbarSimple />
+            <NavbarSimple links={links} />
 
             <main className="flex-1 bg-secondary">
                 <div className="mx-auto w-full max-w-3xl px-4 py-16 md:px-8 md:py-24">

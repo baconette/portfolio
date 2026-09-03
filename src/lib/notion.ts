@@ -78,7 +78,7 @@ export function toPlayArticle(page: PageObjectResponse): Article {
     };
 }
 
-/** Fetches Published Play items (Slug "/play") from the Portfolio CMS, ordered by the Order property.
+/** Fetches Published Play items (Slug starting with "/play/") from the Portfolio CMS, ordered by the Order property.
  * Unlike case studies, each card links out via its URL property rather than an internal /work/{slug} page. */
 export async function getPlayProjects(): Promise<Article[]> {
     const notion = getClient();
@@ -89,7 +89,7 @@ export async function getPlayProjects(): Promise<Article[]> {
         filter: {
             and: [
                 { property: "Published", checkbox: { equals: true } },
-                { property: "Slug", rich_text: { equals: "/play" } },
+                { property: "Slug", rich_text: { starts_with: "/play/" } },
             ],
         },
         sorts: [{ property: "Order", direction: "ascending" }],
@@ -120,18 +120,26 @@ export async function getPortfolioProjects(): Promise<Article[]> {
 export interface HomepageContent {
     heading: string;
     subheading: string;
+    /** First Heading 3 block below the H1/H2 hero, if any — the intro section's heading. */
+    sectionHeading: string;
+    /** Paragraph blocks immediately following that Heading 3 — the intro section's body. */
+    sectionParagraphs: string[];
 }
 
 const FALLBACK_HOMEPAGE_CONTENT: HomepageContent = {
     heading: "Erika Aldrich Murga",
     subheading: "Product Strategy",
+    sectionHeading: "",
+    sectionParagraphs: [],
 };
 
 /**
- * Fetches the homepage hero copy from the Portfolio CMS row with Slug "/" (Published only).
- * The H1/H2 text lives in that page's body content, not its properties.
+ * Fetches the homepage hero copy and intro section from the Portfolio CMS row with Slug "/"
+ * (Published only). The H1/H2 hero text and the Heading 3 + paragraphs intro section both live in
+ * that page's body content, not its properties. Wrapped in React's `cache()` so the hero and intro
+ * section components — which both need this — share one fetch per request.
  */
-export async function getHomepageContent(): Promise<HomepageContent> {
+export const getHomepageContent = cache(async (): Promise<HomepageContent> => {
     const notion = getClient();
     if (!notion || !DATA_SOURCE_ID) return FALLBACK_HOMEPAGE_CONTENT;
 
@@ -152,6 +160,10 @@ export async function getHomepageContent(): Promise<HomepageContent> {
 
     let heading = "";
     let subheading = "";
+    let sectionHeading = "";
+    const sectionParagraphs: string[] = [];
+    let inSection = false;
+
     for (const block of blocks.results) {
         if (!("type" in block)) continue;
         const typedBlock = block as BlockObjectResponse;
@@ -161,13 +173,24 @@ export async function getHomepageContent(): Promise<HomepageContent> {
         if (typedBlock.type === "heading_2" && !subheading) {
             subheading = plainText(typedBlock.heading_2.rich_text);
         }
+        if (typedBlock.type === "heading_3" && !sectionHeading) {
+            sectionHeading = plainText(typedBlock.heading_3.rich_text);
+            inSection = true;
+            continue;
+        }
+        if (inSection && typedBlock.type === "paragraph") {
+            const text = plainText(typedBlock.paragraph.rich_text);
+            if (text) sectionParagraphs.push(text);
+        }
     }
 
     return {
         heading: heading || FALLBACK_HOMEPAGE_CONTENT.heading,
         subheading: subheading || FALLBACK_HOMEPAGE_CONTENT.subheading,
+        sectionHeading,
+        sectionParagraphs,
     };
-}
+});
 
 export interface ContactContent {
     heading: string;
@@ -255,6 +278,29 @@ export async function getPageSeo(slug: string, fallback: PageSeo): Promise<PageS
         title: seoTitle || fallback.title,
         description: seoDescription || fallback.description,
     };
+}
+
+/**
+ * Whether the Portfolio CMS row matching the given Slug is Published. Returns true when Notion
+ * isn't configured — an unconfigured local dev environment should still render pages with their
+ * fallback content rather than 404, matching every other helper in this file. Only gates pages once
+ * Notion is actually connected and the row's Published checkbox says otherwise.
+ */
+export async function isPagePublished(slug: string): Promise<boolean> {
+    const notion = getClient();
+    if (!notion || !DATA_SOURCE_ID) return true;
+
+    const response: QueryDataSourceResponse = await notion.dataSources.query({
+        data_source_id: DATA_SOURCE_ID,
+        filter: {
+            and: [
+                { property: "Published", checkbox: { equals: true } },
+                { property: "Slug", rich_text: { equals: slug } },
+            ],
+        },
+    });
+
+    return response.results.some((p): p is PageObjectResponse => "properties" in p);
 }
 
 async function fetchBlocksRecursive(notion: Client, blockId: string): Promise<NotionBlockNode[]> {

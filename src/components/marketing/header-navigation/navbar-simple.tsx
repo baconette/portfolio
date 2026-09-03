@@ -4,16 +4,9 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { cx } from "@/utils/cx";
 
-const navLinks = [
-    { label: "Profile", href: "/profile" },
-    { label: "Work", href: "/work" },
-    { label: "Play", href: "/play" },
-    { label: "Contact", href: "/contact" },
-];
-
 const AUTO_REVEAL_MS = 7000;
 
-export const NavbarSimple = () => {
+export const NavbarSimple = ({ links }: { links: { label: string; href: string }[] }) => {
     const [isOpen, setIsOpen] = useState(false);
     const [isVisible, setIsVisible] = useState(true);
     const [autoReveal, setAutoReveal] = useState(false);
@@ -77,7 +70,7 @@ export const NavbarSimple = () => {
                             (isOpen || autoReveal) && "md:flex",
                         )}
                     >
-                        {navLinks.map((link) => (
+                        {links.map((link) => (
                             <Link key={link.href} href={link.href} className="text-md font-semibold text-brand-secondary hover:text-brand-secondary_hover">
                                 {link.label}
                             </Link>
@@ -99,7 +92,7 @@ export const NavbarSimple = () => {
             {/* Small viewports keep the stacked list below the header instead of the inline hover reveal. */}
             {isOpen && (
                 <nav className="flex flex-col gap-1 border-t border-secondary px-4 py-3 md:hidden">
-                    {navLinks.map((link) => (
+                    {links.map((link) => (
                         <Link
                             key={link.href}
                             href={link.href}

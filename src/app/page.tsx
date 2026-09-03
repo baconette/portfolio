@@ -1,8 +1,11 @@
 import type { Metadata } from "next";
-import { NavbarExtraSimple } from "@/components/marketing/header-navigation/navbar-extrasimple";
+import { notFound } from "next/navigation";
+import { NavbarSimple } from "@/components/marketing/header-navigation/navbar-simple";
+import { getNavLinks } from "@/components/marketing/header-navigation/nav-links";
 import { HeaderCenteredBrand } from "@/components/marketing/header-section/header-centered-brand";
 import { FooterLarge01Brand } from "@/components/marketing/footers/footer-large-01-brand";
-import { getPageSeo } from "@/lib/notion";
+import { getPageSeo, isPagePublished } from "@/lib/notion";
+import { HomepageIntroSection } from "./homepage-intro-section";
 
 export async function generateMetadata(): Promise<Metadata> {
   const { title, description } = await getPageSeo("/", {
@@ -12,11 +15,16 @@ export async function generateMetadata(): Promise<Metadata> {
   return { title, description };
 }
 
-export default function Home() {
+export default async function Home() {
+  if (!(await isPagePublished("/"))) notFound();
+
+  const links = await getNavLinks();
+
   return (
     <div className="flex min-h-screen flex-col">
-      <NavbarExtraSimple />
-      <HeaderCenteredBrand />
+      <NavbarSimple links={links} />
+      <HeaderCenteredBrand short />
+      <HomepageIntroSection />
 
       <FooterLarge01Brand />
     </div>

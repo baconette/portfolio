@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { NavbarSimple } from "@/components/marketing/header-navigation/navbar-simple";
+import { getNavLinks } from "@/components/marketing/header-navigation/nav-links";
 import { HeaderCenteredCaseStudy } from "@/components/marketing/header-section/header-centered-casestudy";
 import { FooterLarge01Brand } from "@/components/marketing/footers/footer-large-01-brand";
 import { getCaseStudy, getPageSeo } from "@/lib/notion";
@@ -21,9 +22,11 @@ export default async function CaseStudy({ params }: { params: Promise<{ slug: st
     const caseStudy = await getCaseStudy(`/work/${slug}`);
     if (!caseStudy) notFound();
 
+    const links = await getNavLinks();
+
     return (
         <div className="flex min-h-screen flex-col">
-            <NavbarSimple />
+            <NavbarSimple links={links} />
             <HeaderCenteredCaseStudy coverUrl={caseStudy.coverUrl} title={caseStudy.title} />
 
             <main className="flex-1 bg-primary">
